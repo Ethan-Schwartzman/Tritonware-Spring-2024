@@ -7,6 +7,7 @@ public class AsteroidGenerator : MonoBehaviour
 {
     public static AsteroidGenerator Instance;
 
+    public Transform PlayerTransform;
     public Texture2D[] AsteroidTextures;
     public Asteroid AsteroidPrefab;
     public ObjectPool<Asteroid> AsteroidPool;
@@ -44,6 +45,28 @@ public class AsteroidGenerator : MonoBehaviour
 
     // Spawn the asteroid
     private void OnTakeFromPool(Asteroid asteroid) {
+        // Set asteroid scale
+        asteroid.transform.localScale = new Vector3(
+            Random.Range(0.8f, 3.0f), 
+            Random.Range(0.8f, 3.0f), 
+            1f
+        );
+
+        // Spawn asteroid in the general direction player is facing
+        float maxAngle = 30f;
+        float rotationAmount = Random.Range(-maxAngle, maxAngle);
+        Vector3 spawnDirection = Quaternion.AngleAxis(rotationAmount, Vector3.forward) * PlayerTransform.up;
+        float angleRad = Mathf.Deg2Rad * Vector3.SignedAngle(Vector3.right, spawnDirection, Vector3.forward);
+
+        // Set asteroid position
+        float spawnDistance = Random.Range(20f, 80f);
+        Vector3 spawnLocation = new Vector3(
+            PlayerTransform.position.x + (spawnDistance * Mathf.Cos(angleRad)),
+            PlayerTransform.position.y + (spawnDistance * Mathf.Sin(angleRad)),
+            PlayerTransform.position.z
+        );
+        asteroid.transform.position = spawnLocation;
+
         asteroid.gameObject.SetActive(true);
     }
 
@@ -59,7 +82,7 @@ public class AsteroidGenerator : MonoBehaviour
 
     private void ResetSpawnTimer() {
         lastSpawnTime = Time.time;
-        spawnCooldown = Random.Range(0f, 3f);
+        spawnCooldown = Random.Range(0f, 1f);
     }
 
     // Update is called once per frame
@@ -68,7 +91,6 @@ public class AsteroidGenerator : MonoBehaviour
         if(Time.time - lastSpawnTime >= spawnCooldown) {
             if(AsteroidPool.CountActive <= 100) {
                 Asteroid asteroid = AsteroidPool.Get();
-                Debug.Log("Spawned Asteroid");
             }
             ResetSpawnTimer();
         }
