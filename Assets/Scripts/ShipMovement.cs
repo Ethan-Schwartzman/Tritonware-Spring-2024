@@ -85,7 +85,7 @@ public class ShipMovement : MonoBehaviour {
         rb.AddTorque(GetTorque() * Time.deltaTime * rb.mass);
         rb.AddForce(GetThrust() * Time.deltaTime * rb.mass);
         rb.AddForce(GetLift() * Time.deltaTime * rb.mass);
-        Debug.Log(AngleOfAttack());
+        //Debug.Log(AngleOfAttack());
         DebugRenderer.lineRenderer1.SetPosition(0, transform.position);
         DebugRenderer.lineRenderer1.SetPosition(1, transform.position + (Vector3)GetLift() * 0.01f);
         DebugRenderer.lineRenderer2.SetPosition(0, transform.position);

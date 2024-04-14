@@ -7,13 +7,20 @@ public class Asteroid : MonoBehaviour
     private const float MAX_DISTANCE = 100;
 
     public Transform PlayerTransform;
+    private Rigidbody2D rb;
 
-    // Start is called before the first frame update
-    void Start()
+    public void SetVelocity(Vector2 v) {
+        rb.velocity = Vector2.zero;
+        rb.AddForce(v * 40, ForceMode2D.Impulse);
+    }
+
+    void Awake()
     {
         if(PlayerTransform == null) {
             Debug.LogError("null reference to PlayerTransform");
         }
+
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame

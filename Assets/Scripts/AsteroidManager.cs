@@ -30,7 +30,7 @@ public class AsteroidGenerator : MonoBehaviour
             OnTakeFromPool, 
             OnReleaseAsteroid, 
             OnDestroyAsteroid, 
-            false, 100, 1000
+            true, 100, 200
         );
 
         ResetSpawnTimer();
@@ -39,6 +39,7 @@ public class AsteroidGenerator : MonoBehaviour
     // Create the asteroid
     private Asteroid CreateAsteroid() {
         Asteroid asteroid = Instantiate(AsteroidPrefab, Vector3.zero, Quaternion.identity);
+        asteroid.transform.SetParent(this.transform);
         asteroid.gameObject.SetActive(false);
         return asteroid;
     }
@@ -59,7 +60,7 @@ public class AsteroidGenerator : MonoBehaviour
         float angleRad = Mathf.Deg2Rad * Vector3.SignedAngle(Vector3.right, spawnDirection, Vector3.forward);
 
         // Set asteroid position
-        float spawnDistance = Random.Range(20f, 80f);
+        float spawnDistance = Random.Range(40f, 80f);
         Vector3 spawnLocation = new Vector3(
             PlayerTransform.position.x + (spawnDistance * Mathf.Cos(angleRad)),
             PlayerTransform.position.y + (spawnDistance * Mathf.Sin(angleRad)),
@@ -68,6 +69,12 @@ public class AsteroidGenerator : MonoBehaviour
         asteroid.transform.position = spawnLocation;
 
         asteroid.gameObject.SetActive(true);
+
+        // Set asteroid velocity
+        asteroid.SetVelocity(new Vector2(
+            Random.Range(-10f, 10f),
+            Random.Range(-10f, 10f)
+        ));
     }
 
     // Return the asteroid to the pool
@@ -82,7 +89,7 @@ public class AsteroidGenerator : MonoBehaviour
 
     private void ResetSpawnTimer() {
         lastSpawnTime = Time.time;
-        spawnCooldown = Random.Range(0f, 1f);
+        spawnCooldown = Random.Range(0f, 0.5f);
     }
 
     // Update is called once per frame
