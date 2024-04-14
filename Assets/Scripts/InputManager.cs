@@ -20,6 +20,10 @@ public class InputManager : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
+        ShipMovement.Instance.Rotate(vertical);
+
+
+
         if(Input.GetButtonDown("Fire")) Fire();
         if(Input.GetButtonDown("Puzzle1")) Puzzle1();
         if(Input.GetButtonDown("Puzzle1")) Puzzle2();
