@@ -20,6 +20,8 @@ public class ShipMovement : MonoBehaviour
     public float HoldRotateMultiplier = 2;
     public float InitialRotatePower = 0.2f;
 
+    public float Thrust = 100;
+
     private Rigidbody2D rb;
     public static ShipMovement Instance;
     private float currentTorque;
@@ -40,6 +42,10 @@ public class ShipMovement : MonoBehaviour
         }
     }
 
+    public Vector2 GetDirection()
+    {
+        return transform.up;
+    }
     
     private float TurningMultiplier(float angVel, float inputTorque)
     {
@@ -60,17 +66,28 @@ public class ShipMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ApplyTorque();
+        ApplyThrust();
+
+    }
+
+    private void ApplyTorque()
+    {
         if (currentTorque == 0)
         {
             rb.AddTorque(Damping(rb.angularVelocity) * AngularDamping * Time.deltaTime);
         }
         else
-        rb.AddTorque(currentTorque * TorqueMultiplier * TurningMultiplier(rb.angularVelocity, currentTorque) * Time.deltaTime,
-            ForceMode2D.Force);
-        
+            rb.AddTorque(currentTorque * TorqueMultiplier * TurningMultiplier(rb.angularVelocity, currentTorque) * Time.deltaTime,
+                ForceMode2D.Force);
 
     }
 
+    private void ApplyThrust()
+    {
+        rb.AddForce(GetDirection() * Thrust * Time.deltaTime);
+        //rb.velocity = 5 * GetDirection();
+    }
 
     public void Rotate(float torque)
     {
