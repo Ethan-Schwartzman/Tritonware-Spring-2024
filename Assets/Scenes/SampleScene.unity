@@ -619,7 +619,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 3
+  m_AngularDrag: 0.1
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -660,7 +660,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34d476fe94f54834688128fe0682e77f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TorqueMultiplier: 1000
+  TorqueMultiplier: 2000
+  InitialMaxTorqueMultiplier: 3
+  InitialTorqueBoostAngSpeedThreshold: 80
+  AngularDrag: 5
+  MaxAngSpeed: 300
+  AngularDamping: 800
+  AngularDampingVelocityThreshold: 120
+  HoldRotateMultiplier: 2
+  InitialRotatePower: 0.2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
