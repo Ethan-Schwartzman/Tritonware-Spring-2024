@@ -11,8 +11,8 @@ public class InputManager : MonoBehaviour
             Instance = this;
         }
         else {
-            Destroy(this);
             Debug.LogWarning("Tried to create more than one instance of InputManager");
+            Destroy(this);
         }        
     }
 
