@@ -19,6 +19,9 @@ public class ShipMovement : MonoBehaviour {
     [SerializeField] private float holdRotateMultiplier = 2;
     [SerializeField] private float initialRotatePower = 0.2f;
     [SerializeField] private float liftMultiplier = 100; // *
+    [SerializeField] private float topSpeed = 30; //*
+    [SerializeField] private float excessSpeedDrag = 100f;
+    [SerializeField] private float aoaDrag = 50;
 
     public float accumulatedThrust = 0;
     public float defaultThrust = 200;
@@ -50,6 +53,11 @@ public class ShipMovement : MonoBehaviour {
         return rb.velocity.normalized;
     }
 
+    public float GetSpeed() 
+    {
+        return rb.velocity.magnitude;   
+    }
+
     private float AngleOfAttack()
     {
         // positive = facing down relative to velocity
@@ -71,14 +79,49 @@ public class ShipMovement : MonoBehaviour {
 
 
         rb.AddTorque(GetTorque() * Time.deltaTime * rb.mass);
-        rb.AddForce(GetThrust() * Time.deltaTime * rb.mass);
+        rb.AddForce((GetThrust() - GetSpeedDamping()) * Time.deltaTime * rb.mass);
+        rb.AddForce(GetExcessSpeedDrag()  * Time.deltaTime * rb.mass);
+        rb.AddForce(GetAOADrag() * Time.deltaTime * rb.mass);
         rb.AddForce(GetLift() * Time.deltaTime * rb.mass);
-        Debug.Log(AngleOfAttack());
         DebugRenderer.lineRenderer1.SetPosition(0, transform.position);
         DebugRenderer.lineRenderer1.SetPosition(1, transform.position + (Vector3)GetLift() * 0.01f);
         DebugRenderer.lineRenderer2.SetPosition(0, transform.position);
         DebugRenderer.lineRenderer2.SetPosition(1, transform.position + (Vector3)rb.velocity * 0.5f);
+        DebugRenderer.lineRenderer3.SetPosition(0, transform.position);
+        DebugRenderer.lineRenderer3.SetPosition(1, transform.position - (Vector3)GetSpeedDamping() * 0.01f);
+
+        Debug.Log($"Speed: {GetSpeed()} Thrust Damping: {GetSpeedDamping()}, Drag Damping: {GetExcessSpeedDrag()}, AOA Drag: {GetAOADrag()}");
     }
+
+    private Vector2 GetSpeedDamping()
+    {
+        // function between 1 and 0 that adjusts thrust based on current speed.
+        if (Mathf.Abs(AngleOfAttack()) > 90) return Vector2.zero;
+        float speed = GetSpeed();
+        Vector2 vhat = GetMovingDirection();
+        if (speed < topSpeed)
+        {
+            
+            return (1f - Mathf.Pow(1f - Mathf.Pow(speed, 2) /
+        Mathf.Pow(topSpeed, 2), 1f / 3f)) * (Vector2.Dot(vhat,GetThrust()) * vhat);
+        }
+        return (Vector2.Dot(vhat, GetThrust()) * vhat);
+
+    }
+
+    private Vector2 GetExcessSpeedDrag()
+    {
+        if (GetSpeed() > topSpeed)
+        return -GetMovingDirection() * Mathf.Clamp01(Mathf.Pow((GetSpeed() - topSpeed) / topSpeed, 2)) 
+               * excessSpeedDrag;
+        return Vector2.zero;
+    }
+
+    private Vector2 GetAOADrag()
+    {
+        return -GetMovingDirection() * Mathf.Sin(Mathf.Deg2Rad * Mathf.Abs(AngleOfAttack())) * aoaDrag;
+    }
+
 
     public void Boost(bool toggle)
     {
