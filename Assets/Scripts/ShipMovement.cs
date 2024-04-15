@@ -58,6 +58,11 @@ public class ShipMovement : MonoBehaviour {
         return rb.velocity.magnitude;   
     }
 
+    public Vector2 GetVelocity() 
+    {
+        return rb.velocity;
+    }
+
     private float AngleOfAttack()
     {
         // positive = facing down relative to velocity
@@ -85,12 +90,12 @@ public class ShipMovement : MonoBehaviour {
         rb.AddForce(GetLift() * Time.deltaTime * rb.mass);
         DebugRenderer.lineRenderer1.SetPosition(0, transform.position);
         DebugRenderer.lineRenderer1.SetPosition(1, transform.position + (Vector3)GetLift() * 0.01f);
-        DebugRenderer.lineRenderer2.SetPosition(0, transform.position);
-        DebugRenderer.lineRenderer2.SetPosition(1, transform.position + (Vector3)rb.velocity * 0.5f);
-        DebugRenderer.lineRenderer3.SetPosition(0, transform.position);
-        DebugRenderer.lineRenderer3.SetPosition(1, transform.position - (Vector3)GetSpeedDamping() * 0.01f);
+        //DebugRenderer.lineRenderer2.SetPosition(0, transform.position);
+        //DebugRenderer.lineRenderer2.SetPosition(1, transform.position + (Vector3)rb.velocity * 0.5f);
+        //DebugRenderer.lineRenderer3.SetPosition(0, transform.position);
+        //DebugRenderer.lineRenderer3.SetPosition(1, transform.position - (Vector3)GetSpeedDamping() * 0.01f);
 
-        Debug.Log($"Speed: {GetSpeed()} Thrust Damping: {GetSpeedDamping()}, Drag Damping: {GetExcessSpeedDrag()}, AOA Drag: {GetAOADrag()}");
+        //Debug.Log($"Speed: {GetSpeed()} Thrust Damping: {GetSpeedDamping()}, Drag Damping: {GetExcessSpeedDrag()}, AOA Drag: {GetAOADrag()}");
     }
 
     private Vector2 GetSpeedDamping()
