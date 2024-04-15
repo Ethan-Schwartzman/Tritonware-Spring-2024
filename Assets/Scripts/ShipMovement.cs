@@ -32,6 +32,8 @@ public class ShipMovement : MonoBehaviour {
     private float currentTorque;
     private float upDuration, downDuration;
 
+    public GameObject sm;
+
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
 
@@ -197,6 +199,18 @@ public class ShipMovement : MonoBehaviour {
         }
 
 
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collision");
+        StartCoroutine(OutageControl());
+    }
+
+    public IEnumerator OutageControl(){
+        sm.GetComponent<ScreenManager>().Outage();
+        yield return new WaitForSeconds(0.4f);
+        sm.GetComponent<ScreenManager>().Recovery();
     }
 
 }
