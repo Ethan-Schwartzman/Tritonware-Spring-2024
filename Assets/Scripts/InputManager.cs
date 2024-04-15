@@ -41,9 +41,13 @@ public class InputManager : MonoBehaviour
             ShipMovement.Instance.Rotate(0);
         }
 
+        if (Input.GetKey(KeyCode.A))
+        {
+            ShipMovement.Instance.Boost(true);
+        }
 
 
-        if(Input.GetButtonDown("Fire")) Fire();
+        if (Input.GetButtonDown("Fire")) Fire();
         if(Input.GetButtonDown("Puzzle1")) Puzzle1();
         if(Input.GetButtonDown("Puzzle1")) Puzzle2();
 

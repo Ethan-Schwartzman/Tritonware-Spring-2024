@@ -856,18 +856,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34d476fe94f54834688128fe0682e77f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TorqueMultiplier: 2000
-  InitialMaxTorqueMultiplier: 2
-  InitialTorqueBoostAngSpeedThreshold: 80
-  MaxAngSpeed: 250
-  AngularDamping: 500
-  AngularDampingVelocityThreshold: 120
-  HoldRotateMultiplier: 2
-  InitialRotatePower: 0.2
+  torqueMultiplier: 2000
+  initialMaxTorqueMultiplier: 2
+  initialTorqueBoostAngSpeedThreshold: 80
+  maxAngSpeed: 250
+  angularDamping: 500
+  angularDampingVelocityThreshold: 120
+  holdRotateMultiplier: 2
+  initialRotatePower: 0.2
+  liftMultiplier: 100
   accumulatedThrust: 0
   defaultThrust: 200
-  Thrust: 100
-  LiftMultiplier: 100
 --- !u!70 &1249115236
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
