@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Asteroid : MonoBehaviour
+public class Asteroid : MonoBehaviour, IEntity
 {
     private const float MAX_DISTANCE = 100;
 
     public Transform PlayerTransform;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+
+    public HealthTracker healthTracker;
 
     public void SetVelocity(Vector2 v) {
         rb.velocity = Vector2.zero;
@@ -25,6 +27,11 @@ public class Asteroid : MonoBehaviour
 
     public void SetSprite(Sprite s) {
         sr.sprite = s;
+    }
+
+    public void TriggerDeath()
+    {
+        // todo
     }
 
     void Awake()

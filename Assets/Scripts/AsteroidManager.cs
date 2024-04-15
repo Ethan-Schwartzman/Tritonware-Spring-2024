@@ -22,6 +22,9 @@ public class AsteroidGenerator : MonoBehaviour
     const int POOL_DEFAUlT = 100;
     const int MAX_ACTIVE = 100;
 
+    [SerializeField] private int asteroidMaxHealth;
+
+
     public static AsteroidGenerator Instance;
 
     public Transform PlayerTransform;
@@ -101,6 +104,8 @@ public class AsteroidGenerator : MonoBehaviour
         asteroid.SetMass(Random.Range(MIN_MASS, MAX_MASS));
 
         asteroid.SetSpin(Random.Range(-MAX_SPIN, MAX_SPIN));
+
+        asteroid.healthTracker = new HealthTracker(asteroid, asteroidMaxHealth);
     }
 
     // Return the asteroid to the pool
