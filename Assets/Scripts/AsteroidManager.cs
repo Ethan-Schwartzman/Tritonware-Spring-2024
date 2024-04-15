@@ -5,10 +5,27 @@ using UnityEngine.Pool;
 
 public class AsteroidGenerator : MonoBehaviour
 {
+    // Parameters
+    const float MAX_ANGLE = 30f;
+    const float MIN_SCALE = 0.5f;
+    const float MAX_SCALE = 3.0f;
+    const float MIN_DISTANCE = 40f;
+    const float MAX_DISTANCE = 80f;
+    const float MAX_VELOCITY = 10f;
+    const float MIN_SPAWN_COOLDOWN = 0.0f;
+    const float MAX_SPAWN_COOLDOWN = 0.5f;
+    const float MIN_MASS = 5f;
+    const float MAX_MASS = 40f;
+    const float MAX_SPIN = 200f;
+
+    const int POOL_MAX = 200;
+    const int POOL_DEFAUlT = 100;
+    const int MAX_ACTIVE = 100;
+
     public static AsteroidGenerator Instance;
 
     public Transform PlayerTransform;
-    public Texture2D[] AsteroidTextures;
+    public Sprite[] AsteroidSprites;
     public Asteroid AsteroidPrefab;
     public ObjectPool<Asteroid> AsteroidPool;
 
@@ -30,7 +47,7 @@ public class AsteroidGenerator : MonoBehaviour
             OnTakeFromPool, 
             OnReleaseAsteroid, 
             OnDestroyAsteroid, 
-            true, 100, 200
+            true, POOL_DEFAUlT, POOL_MAX
         );
 
         ResetSpawnTimer();
@@ -46,21 +63,25 @@ public class AsteroidGenerator : MonoBehaviour
 
     // Spawn the asteroid
     private void OnTakeFromPool(Asteroid asteroid) {
+        // Set sprite
+        if(AsteroidSprites.Length != 0) {
+            asteroid.SetSprite(AsteroidSprites[Random.Range(0, AsteroidSprites.Length)]);
+        }
+
         // Set asteroid scale
         asteroid.transform.localScale = new Vector3(
-            Random.Range(0.8f, 3.0f), 
-            Random.Range(0.8f, 3.0f), 
+            Random.Range(MIN_SCALE, MAX_SCALE), 
+            Random.Range(MIN_SCALE, MAX_SCALE), 
             1f
         );
 
         // Spawn asteroid in the general direction player is facing
-        float maxAngle = 30f;
-        float rotationAmount = Random.Range(-maxAngle, maxAngle);
+        float rotationAmount = Random.Range(-MAX_ANGLE, MAX_ANGLE);
         Vector3 spawnDirection = Quaternion.AngleAxis(rotationAmount, Vector3.forward) * PlayerTransform.up;
         float angleRad = Mathf.Deg2Rad * Vector3.SignedAngle(Vector3.right, spawnDirection, Vector3.forward);
 
         // Set asteroid position
-        float spawnDistance = Random.Range(40f, 80f);
+        float spawnDistance = Random.Range(MIN_DISTANCE, MAX_DISTANCE);
         Vector3 spawnLocation = new Vector3(
             PlayerTransform.position.x + (spawnDistance * Mathf.Cos(angleRad)),
             PlayerTransform.position.y + (spawnDistance * Mathf.Sin(angleRad)),
@@ -68,13 +89,18 @@ public class AsteroidGenerator : MonoBehaviour
         );
         asteroid.transform.position = spawnLocation;
 
+        // Set active before setting rigidbody properties
         asteroid.gameObject.SetActive(true);
 
-        // Set asteroid velocity
+        // Set asteroid rigidbody properties
         asteroid.SetVelocity(new Vector2(
-            Random.Range(-10f, 10f),
-            Random.Range(-10f, 10f)
+            Random.Range(-MAX_VELOCITY, MAX_VELOCITY),
+            Random.Range(-MAX_VELOCITY, MAX_VELOCITY)
         ));
+
+        asteroid.SetMass(Random.Range(MIN_MASS, MAX_MASS));
+
+        asteroid.SetSpin(Random.Range(-MAX_SPIN, MAX_SPIN));
     }
 
     // Return the asteroid to the pool
@@ -89,14 +115,14 @@ public class AsteroidGenerator : MonoBehaviour
 
     private void ResetSpawnTimer() {
         lastSpawnTime = Time.time;
-        spawnCooldown = Random.Range(0f, 0.5f);
+        spawnCooldown = Random.Range(MIN_SPAWN_COOLDOWN, MAX_SPAWN_COOLDOWN);
     }
 
     // Update is called once per frame
     void Update()
     {
         if(Time.time - lastSpawnTime >= spawnCooldown) {
-            if(AsteroidPool.CountActive <= 100) {
+            if(AsteroidPool.CountActive <= MAX_ACTIVE) {
                 Asteroid asteroid = AsteroidPool.Get();
             }
             ResetSpawnTimer();

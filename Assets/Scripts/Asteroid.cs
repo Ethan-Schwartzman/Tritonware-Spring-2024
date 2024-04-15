@@ -8,10 +8,23 @@ public class Asteroid : MonoBehaviour
 
     public Transform PlayerTransform;
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
 
     public void SetVelocity(Vector2 v) {
         rb.velocity = Vector2.zero;
         rb.AddForce(v * 40, ForceMode2D.Impulse);
+    }
+
+    public void SetMass(float m) {
+        rb.mass = m;
+    }
+
+    public void SetSpin(float t) {
+        rb.AddTorque(t, ForceMode2D.Impulse);
+    }
+
+    public void SetSprite(Sprite s) {
+        sr.sprite = s;
     }
 
     void Awake()
@@ -21,6 +34,7 @@ public class Asteroid : MonoBehaviour
         }
 
         rb = gameObject.GetComponent<Rigidbody2D>();
+        sr = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
