@@ -7,9 +7,9 @@ public class HealthTracker
 {
     public int health { get; private set; }
     public int maxHealth;
-    IEntity attachedEntity;
+    IDamagable attachedEntity;
 
-    public HealthTracker(IEntity attachedEntity, int maxHealth)
+    public HealthTracker(IDamagable attachedEntity, int maxHealth)
     {
         this.attachedEntity = attachedEntity;
         this.maxHealth = maxHealth;

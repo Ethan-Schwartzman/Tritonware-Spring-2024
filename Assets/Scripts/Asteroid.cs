@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Asteroid : MonoBehaviour, IEntity
+public class Asteroid : DynamicEntity, IDamagable
 {
     private const float MAX_DISTANCE = 100;
 
@@ -11,6 +11,17 @@ public class Asteroid : MonoBehaviour, IEntity
     private SpriteRenderer sr;
 
     public HealthTracker healthTracker;
+
+    public override Vector2 GetVelocity()
+    {
+        return rb.velocity;
+    }
+
+    public override Vector2 GetFacingDirection()
+    {
+        return transform.up;
+    }
+
 
     public void SetVelocity(Vector2 v) {
         rb.velocity = Vector2.zero;
@@ -29,13 +40,21 @@ public class Asteroid : MonoBehaviour, IEntity
         sr.sprite = s;
     }
 
+    public void DealDamage(int damage)
+    {
+        healthTracker.TakeDamage(damage);
+    }
+
     public void TriggerDeath()
     {
-        // todo
+        AsteroidGenerator.Instance.AsteroidPool.Release(this);
     }
+
+
 
     void Awake()
     {
+        PlayerTransform = PlayerShip.Instance.transform;
         if(PlayerTransform == null) {
             Debug.LogError("null reference to PlayerTransform");
         }
@@ -51,4 +70,11 @@ public class Asteroid : MonoBehaviour, IEntity
             AsteroidGenerator.Instance.AsteroidPool.Release(this);
         }
     }
+
+    public int GetHealth()
+    {
+        throw new System.NotImplementedException();
+    }
+
+
 }

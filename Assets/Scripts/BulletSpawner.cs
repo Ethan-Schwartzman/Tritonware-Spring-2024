@@ -10,11 +10,30 @@ public class BulletSpawner : MonoBehaviour
 
     public Bullet templateBullet;
 
+    private IWeaponContainer weaponContainer;
+
     private ObjectPool<Bullet> bulletPool;
 
     // Start is called before the first frame update
     void Start()
     {
+        /*
+        DynamicEntity parentEntity = GetComponent<DynamicEntity>();
+        if (parentEntity is IWeaponContainer wc)
+        {
+            weaponContainer = wc;
+        }
+        else
+        {
+            Debug.LogError("Bullet Spawner not attached to weaponContainer");
+        }
+        */
+
+        weaponContainer = GetComponent<IWeaponContainer>();
+        if (weaponContainer == null )
+        {
+            Debug.LogError("Bullet Spawner not attached to weaponContainer");
+        }
         bulletPool = new ObjectPool<Bullet>(
             CreateBullet,
             OnTakeFromPool,
@@ -31,8 +50,7 @@ public class BulletSpawner : MonoBehaviour
     }
 
     private void OnTakeFromPool(Bullet bullet) {
-        bullet.SetDirection(ShipMovement.Instance.GetFacingDirection());
-        bullet.SetRelativeVelocity(ShipMovement.Instance.GetSpeed() + 50f);
+        bullet.SetVelocityFromParent(weaponContainer);
         bullet.transform.position = transform.position;
         bullet.gameObject.SetActive(true);
     }

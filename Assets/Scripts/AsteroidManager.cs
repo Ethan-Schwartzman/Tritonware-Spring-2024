@@ -35,7 +35,13 @@ public class AsteroidGenerator : MonoBehaviour
     private float spawnCooldown;
     private float lastSpawnTime;
 
+
+    private void Awake()
+    {
+        PlayerTransform = PlayerShip.Instance.transform;
+    }
     void Start() {
+        
         if(Instance == null) {
             Instance = this;
         }

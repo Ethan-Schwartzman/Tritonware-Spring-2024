@@ -6,11 +6,10 @@ public class Bullet : MonoBehaviour
 {
     public Transform PlayerTransform;
 
-    private float speed = 100f;
-    private Vector2 velocity, initialVelocity;
-    private float damage = 5f;
+    public float speed = 50f;
+    private Vector2 velocity;
+    public int damage = 3;
     private float bulletRadius = 3f;
-    private Vector2 direction;
     private List<Collider2D> collisions;
     private ContactFilter2D filter;
     private BulletSpawner spawner;
@@ -23,13 +22,10 @@ public class Bullet : MonoBehaviour
         filter = filter.NoFilter();
     }
 
-    public void SetDirection(Vector2 dir) {
-        direction = dir;
-    }
 
-    public void SetRelativeVelocity(float s) {
-        speed = s;
-        velocity = ShipMovement.Instance.GetFacingDirection() * s + ShipMovement.Instance.GetVelocity();
+
+    public void SetVelocityFromParent(IWeaponContainer weaponContainer) {
+        velocity = weaponContainer.GetAimDirection() * speed + weaponContainer.GetVelocity();
     }
 
     public void SetSpawner(BulletSpawner s) {
@@ -44,18 +40,24 @@ public class Bullet : MonoBehaviour
             transform.position.y + velocity.y * Time.deltaTime
         );
 
-        if(Vector2.Distance(transform.position, PlayerTransform.position) > 50f) {
+        if(Vector2.Distance(transform.position, PlayerShip.GetPosition()) > 50f) {
             if(spawner!= null)spawner.Release(this); //TODO
         }
 
         if(Physics2D.OverlapCircle(transform.position, bulletRadius, filter, collisions) > 0) {
             foreach(Collider2D col in collisions) {
-                Asteroid asteroid = col.gameObject.GetComponent<Asteroid>();
-                if(asteroid != null) {
-                    AsteroidGenerator.Instance.AsteroidPool.Release(asteroid);
-                    if(spawner!= null)spawner.Release(this); //TODO
+                IDamagable hit = col.gameObject.GetComponent<IDamagable>();
+                if(hit != null && col.gameObject != spawner.gameObject) {
+                    HitTarget(hit);
                 }
             }
         }
     }
+
+    private void HitTarget(IDamagable target)
+    {
+        target.DealDamage(damage);
+        if (spawner != null) spawner.Release(this); //TODO
+    }
+
 }

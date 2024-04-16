@@ -10,18 +10,18 @@ public enum RotateDirection {
 public class ShipMovement : MonoBehaviour {
 
     // * = feel free to tweak, otherwise don't touch the value
-    [SerializeField] private float torqueMultiplier = 2000; // *
+    [SerializeField] private float torqueMultiplier = 2000; // * how fast you rotate
     [SerializeField] private float initialMaxTorqueMultiplier = 2;
     [SerializeField] private float initialTorqueBoostAngSpeedThreshold = 80;
-    [SerializeField] private float maxAngSpeed = 250; // *
-    [SerializeField] private float angularDamping = 500; // *
+    [SerializeField] private float maxAngSpeed = 250; // * the speed limit of rotation
+    [SerializeField] private float angularDamping = 500; // * how quickly rotation stops when not actively applying torque
     [SerializeField] private float angularDampingVelocityThreshold = 120;
     [SerializeField] private float holdRotateMultiplier = 2;
     [SerializeField] private float initialRotatePower = 0.2f;
-    [SerializeField] private float liftMultiplier = 100; // *
-    [SerializeField] private float topSpeed = 30; //*
-    [SerializeField] private float excessSpeedDrag = 100f;
-    [SerializeField] private float aoaDrag = 50;
+    [SerializeField] private float liftMultiplier = 100; // * how much lift (force that corrects your velocity to align to your facing direction) applies
+    [SerializeField] private float topSpeed = 30; // * top speed through thrust only
+    [SerializeField] private float excessSpeedDrag = 100f; // * how quickly you slow down if you go past the top speed
+    [SerializeField] private float aoaDrag = 50; // * how much you slow down when you turn
 
     public float accumulatedThrust = 0;
     public float defaultThrust = 200;
@@ -92,12 +92,12 @@ public class ShipMovement : MonoBehaviour {
         rb.AddForce(GetLift() * Time.deltaTime * rb.mass);
         DebugRenderer.lineRenderer1.SetPosition(0, transform.position);
         DebugRenderer.lineRenderer1.SetPosition(1, transform.position + (Vector3)GetLift() * 0.01f);
-        //DebugRenderer.lineRenderer2.SetPosition(0, transform.position);
-        //DebugRenderer.lineRenderer2.SetPosition(1, transform.position + (Vector3)rb.velocity * 0.5f);
+        DebugRenderer.lineRenderer2.SetPosition(0, transform.position);
+        DebugRenderer.lineRenderer2.SetPosition(1, transform.position + (Vector3)rb.velocity * 0.5f);
         //DebugRenderer.lineRenderer3.SetPosition(0, transform.position);
         //DebugRenderer.lineRenderer3.SetPosition(1, transform.position - (Vector3)GetSpeedDamping() * 0.01f);
 
-        //Debug.Log($"Speed: {GetSpeed()} Thrust Damping: {GetSpeedDamping()}, Drag Damping: {GetExcessSpeedDrag()}, AOA Drag: {GetAOADrag()}");
+        // Debug.Log($"Speed: {GetSpeed()} Thrust Damping: {GetSpeedDamping()}, Drag Damping: {GetExcessSpeedDrag()}, AOA Drag: {GetAOADrag()}");
     }
 
     private Vector2 GetSpeedDamping()
