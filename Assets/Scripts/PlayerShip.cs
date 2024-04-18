@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 {
     public static PlayerShip Instance;
-    public static ShipMovement shipMovement;
+    public static PlayerShipMovement shipMovement;
     public static HealthTracker healthTracker;
 
     [SerializeField] private int maxHealth = 20;
@@ -23,6 +23,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     {
         return shipMovement.GetFacingDirection();
     }
+
 
     public Vector2 GetAimDirection()
     {
@@ -51,7 +52,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
         {
             Instance = this;
         }
-        shipMovement = GetComponent<ShipMovement>();
+        shipMovement = GetComponent<PlayerShipMovement>();
         healthTracker = new HealthTracker(this, maxHealth);
     }
 

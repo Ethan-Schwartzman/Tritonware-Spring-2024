@@ -8,13 +8,13 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        shipRelativePos = transform.position - ShipMovement.Instance.transform.position;
+        shipRelativePos = transform.position - PlayerShipMovement.Instance.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = ShipMovement.Instance.transform.position + shipRelativePos; 
+        transform.position = PlayerShipMovement.Instance.transform.position + shipRelativePos; 
         
     }
 }

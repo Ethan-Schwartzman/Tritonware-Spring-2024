@@ -7,7 +7,7 @@ public enum RotateDirection {
     Up, Down
 }
 
-public class ShipMovement : MonoBehaviour {
+public class PlayerShipMovement : MonoBehaviour {
 
     // * = feel free to tweak, otherwise don't touch the value
     [SerializeField] private float torqueMultiplier = 2000; // * how fast you rotate
@@ -28,11 +28,16 @@ public class ShipMovement : MonoBehaviour {
     private float currentThrust = 200;
 
     private Rigidbody2D rb;
-    public static ShipMovement Instance;
+    public static PlayerShipMovement Instance;
     private float currentTorque;
     private float upDuration, downDuration;
 
     public GameObject sm;
+
+    private Vector2 lastVelocity, dv;
+
+
+
 
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
@@ -65,6 +70,18 @@ public class ShipMovement : MonoBehaviour {
         return rb.velocity;
     }
 
+    public Vector2 GetDv()
+    {
+        Vector2 accel = dv / Time.deltaTime; // better to take average over time
+        if (accel.magnitude > 50f) 
+        {
+            Debug.LogWarning("encountered dv spike");
+            return Vector2.zero;
+            
+        }
+        return accel;
+    }
+
     private float AngleOfAttack()
     {
         // positive = facing down relative to velocity
@@ -90,6 +107,13 @@ public class ShipMovement : MonoBehaviour {
         rb.AddForce(GetExcessSpeedDrag()  * Time.deltaTime * rb.mass);
         rb.AddForce(GetAOADrag() * Time.deltaTime * rb.mass);
         rb.AddForce(GetLift() * Time.deltaTime * rb.mass);
+
+        dv = rb.velocity - lastVelocity;
+        lastVelocity = rb.velocity;
+
+
+
+
         DebugRenderer.lineRenderer1.SetPosition(0, transform.position);
         DebugRenderer.lineRenderer1.SetPosition(1, transform.position + (Vector3)GetLift() * 0.01f);
         DebugRenderer.lineRenderer2.SetPosition(0, transform.position);
@@ -98,6 +122,8 @@ public class ShipMovement : MonoBehaviour {
         //DebugRenderer.lineRenderer3.SetPosition(1, transform.position - (Vector3)GetSpeedDamping() * 0.01f);
 
         // Debug.Log($"Speed: {GetSpeed()} Thrust Damping: {GetSpeedDamping()}, Drag Damping: {GetExcessSpeedDrag()}, AOA Drag: {GetAOADrag()}");
+
+
     }
 
     private Vector2 GetSpeedDamping()

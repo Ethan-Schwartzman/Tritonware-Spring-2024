@@ -27,23 +27,23 @@ public class InputManager : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             
-            ShipMovement.Instance.Rotate(1);
+            PlayerShipMovement.Instance.Rotate(1);
             
         }
         if (Input.GetKey(KeyCode.S))
         {
             
-            ShipMovement.Instance.Rotate(-1);
+            PlayerShipMovement.Instance.Rotate(-1);
         }
         
         if (!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
         {
-            ShipMovement.Instance.Rotate(0);
+            PlayerShipMovement.Instance.Rotate(0);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            ShipMovement.Instance.Boost(true);
+            PlayerShipMovement.Instance.Boost(true);
         }
 
 
