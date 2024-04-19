@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -19,13 +20,57 @@ public class EnemyShipMovement : MonoBehaviour
     public bool inertialDrift = true;
     public bool compensation = true;
 
-    public float compensationFactor = 5f;
-    public float dampingFactor = 1.0f;
+    bool up = true;
+
+    [SerializeField] private float compensationFactor = 5f;
+    [SerializeField] private float xComp = 1f;
+    [SerializeField] private float yComp = 1f;
+    [SerializeField] private float xDamp = 1.0f;
+    [SerializeField] private float yDamp = 1.0f;
+
+    [SerializeField] private float strafeSpeed = 1f;
+    [SerializeField] private float xStrafeDestRange = 10f;
+    [SerializeField] private float yStrafeDestRange = 10f;
+
+    Vector2 strafeDest = new Vector2(20f, 0);
+
+    const float MAX_STRAFE_RESET_ERROR = 3f;
+    const float MAX_STRAFE_DEVIATION = 1f;
+    const float MIN_STRAFE_PATH_DIST = 10f;
 
     private void Update()
     {
-        rb.AddForce(GetCompensation() * Time.deltaTime);
-        rb.AddForce(GetDamping() * Time.deltaTime);
+        float m = rb.mass;
+        float dt = Time.deltaTime;
+        float devStrafeFactor = Mathf.Clamp(1 / GetDeviation().magnitude, 0.2f, 1f);
+
+        rb.AddForce(GetCompensation() * dt * m);
+        rb.AddForce(GetDamping() * dt * m);
+
+       
+
+        //Debug.Log(devStrafeFactor);
+
+
+        targetRelativePos = Vector2.MoveTowards(targetRelativePos, strafeDest, dt * strafeSpeed * devStrafeFactor);
+        Debug.Log(targetRelativePos);
+
+        if (Vector2.Distance(targetRelativePos, strafeDest) <= MAX_STRAFE_RESET_ERROR)
+        {
+            while (Vector2.Distance(strafeDest,targetRelativePos) < MIN_STRAFE_PATH_DIST)
+            {
+                strafeDest = new Vector2(20f, 0f) + new Vector2(UnityEngine.Random.Range(-xStrafeDestRange, xStrafeDestRange),
+                                                UnityEngine.Random.Range(-yStrafeDestRange, yStrafeDestRange));
+            }
+
+            Debug.Log(strafeDest);
+        }
+
+    }
+
+    Vector2 GetDeviation()
+    {
+        return GetRelativePosition() - targetRelativePos;
     }
 
     Vector2 GetRelativePosition()
@@ -49,12 +94,12 @@ public class EnemyShipMovement : MonoBehaviour
 
         if (!compensation) return Vector2.zero;
         Vector2 dr = targetRelativePos - GetRelativePosition();
-        return compensationFactor * dr;
+        return compensationFactor * new Vector2(dr.x * xComp, dr.y * yComp) * player.GetVelocity().magnitude / 30f;
     }
 
     Vector2 GetDamping()
     {
-        return -GetRelativeVelocity() * dampingFactor;
+        return -new Vector2(GetRelativeVelocity().x * xDamp, GetRelativeVelocity().y * yDamp);
     }
 
 }

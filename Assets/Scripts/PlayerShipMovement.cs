@@ -215,7 +215,7 @@ public class PlayerShipMovement : MonoBehaviour {
         }
         else if (torque < 0) {
             upDuration = initialRotatePower;
-            if (upDuration < 1) downDuration += holdRotateMultiplier * Time.deltaTime;
+            if (downDuration < 1) downDuration += holdRotateMultiplier * Time.deltaTime;
             currentTorque = torque * downDuration;
         }
         else {

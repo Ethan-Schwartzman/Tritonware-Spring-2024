@@ -156,8 +156,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inertialDrift: 0
   compensation: 1
-  compensationFactor: 8060
-  dampingFactor: 2009.8
+  compensationFactor: 1502
+  xComp: 0.5
+  yComp: 0.3
+  xDamp: 250
+  yDamp: 150
+  strafeSpeed: 10
+  xStrafeDestRange: 10
+  yStrafeDestRange: 15
 --- !u!70 &256559934
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -207,7 +213,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 10
   m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 0.21
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1450,8 +1456,8 @@ MonoBehaviour:
   maxAngSpeed: 250
   angularDamping: 500
   angularDampingVelocityThreshold: 120
-  holdRotateMultiplier: 2
-  initialRotatePower: 0.2
+  holdRotateMultiplier: 0.6
+  initialRotatePower: 0.1
   liftMultiplier: 100
   topSpeed: 30
   excessSpeedDrag: 2000
