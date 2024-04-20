@@ -8,7 +8,21 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     public static PlayerShipMovement shipMovement;
     public static HealthTracker healthTracker;
 
+    BulletSpawner bulletSpawner;
+
     [SerializeField] private int maxHealth = 20;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        shipMovement = GetComponent<PlayerShipMovement>();
+        healthTracker = new HealthTracker(this, maxHealth);
+        bulletSpawner = GetComponent<BulletSpawner>();
+    }
+
 
     public void DealDamage(int damage)
     {
@@ -46,16 +60,11 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
         throw new System.NotImplementedException();
     }
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        shipMovement = GetComponent<PlayerShipMovement>();
-        healthTracker = new HealthTracker(this, maxHealth);
-    }
 
+    public void Shoot()
+    {
+        bulletSpawner.SpawnBullet();
+    }
 
 
 }
