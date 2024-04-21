@@ -9,6 +9,7 @@ public class BulletSpawner : MonoBehaviour
     const int POOL_MAX = 1000;
 
     public Bullet templateBullet;
+    public FMODUnity.StudioEventEmitter SoundEffect;
 
     public IWeaponContainer weaponContainer;
 
@@ -66,6 +67,7 @@ public class BulletSpawner : MonoBehaviour
     public void SpawnBullet() {
         Bullet bullet = bulletPool.Get();
         bullet.SetSpawner(this);
+        SoundEffect.Play();
     }
 
     public void Release(Bullet bullet) {

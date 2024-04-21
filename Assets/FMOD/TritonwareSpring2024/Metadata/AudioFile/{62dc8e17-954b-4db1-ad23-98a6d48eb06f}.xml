@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{62dc8e17-954b-4db1-ad23-98a6d48eb06f}">
+		<property name="assetPath">
+			<value>tritonware-spring-24-laser.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.9069387755102041</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{4dcd0b87-8900-4068-92a2-5c0019636e2e}</destination>
+		</relationship>
+	</object>
+</objects>
