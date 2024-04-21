@@ -86,7 +86,7 @@ public class PuzzleManager : MonoBehaviour
 
     public void CompletePuzzle(int index)
     {
-        Destroy(puzzles[index].gameObject, 0.01f);
+        Destroy(puzzles[index].gameObject);
         puzzles[index] = null;
     }
 
