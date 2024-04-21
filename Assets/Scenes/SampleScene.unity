@@ -1291,7 +1291,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1334,6 +1334,7 @@ MonoBehaviour:
   BottomMiddlePuzzle: {fileID: 0}
   BottomRightPuzzle: {fileID: 0}
   puzzleTemplates:
+  - {fileID: 3286874186972502667, guid: 279e7a253aaecb84fab04854bc52212b, type: 3}
   - {fileID: 2975608107691423368, guid: 93fe148daa7355742a32f362de47d7ae, type: 3}
   - {fileID: 1085407465457882604, guid: 4d6b298a3ef9f1047b2fddee4862309e, type: 3}
 --- !u!1 &959442846
