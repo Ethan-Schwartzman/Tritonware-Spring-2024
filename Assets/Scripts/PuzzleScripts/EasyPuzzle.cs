@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EasyPuzzle : Puzzle
 {
-    public BoxCollider2D SelectorCollider;
-    public BoxCollider2D IndicatorCollider;
+    public Collider2D SelectorCollider;
+    public Collider2D IndicatorCollider;
     public Transform SelectorTransform;
     public Transform Center;
 
