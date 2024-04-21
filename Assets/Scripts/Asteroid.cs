@@ -12,6 +12,10 @@ public class Asteroid : DynamicEntity, IDamagable
 
     public HealthTracker healthTracker;
 
+    public Team GetTeam()
+    {
+        return Team.neutral;
+    }
     public override Vector2 GetVelocity()
     {
         return rb.velocity;
@@ -40,9 +44,16 @@ public class Asteroid : DynamicEntity, IDamagable
         sr.sprite = s;
     }
 
+    public void ResetColor()
+    {
+        sr.color = Color.white;
+    }
+
     public void DealDamage(int damage)
     {
+        StartCoroutine(EffectController.DamageEffect(sr));
         healthTracker.TakeDamage(damage);
+        
     }
 
     public void TriggerDeath()
@@ -75,6 +86,7 @@ public class Asteroid : DynamicEntity, IDamagable
     {
         throw new System.NotImplementedException();
     }
+
 
 
 }
