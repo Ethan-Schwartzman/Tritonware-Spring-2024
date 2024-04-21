@@ -12,6 +12,9 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 
     [SerializeField] private int maxHealth = 20;
 
+    float currentWeaponCooldown;
+    public float weaponCooldown;
+
     private void Awake()
     {
         if (Instance == null)
@@ -21,6 +24,11 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
         shipMovement = GetComponent<PlayerShipMovement>();
         healthTracker = new HealthTracker(this, maxHealth);
         bulletSpawner = GetComponent<BulletSpawner>();
+    }
+
+    private void Update()
+    {
+        if (currentWeaponCooldown >= 0) currentWeaponCooldown -= Time.deltaTime;
     }
 
 
@@ -64,7 +72,11 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 
     public void Shoot()
     {
-        bulletSpawner.SpawnBullet();
+        if (currentWeaponCooldown <= 0)
+        {
+            currentWeaponCooldown = weaponCooldown;
+            bulletSpawner.SpawnBullet();
+        }
     }
 
     public Team GetTeam()

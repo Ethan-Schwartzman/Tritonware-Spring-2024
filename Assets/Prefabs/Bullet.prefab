@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerTransform: {fileID: 0}
   speed: 100
-  damage: 3
+  damage: 2
   bulletRadius: 2
 --- !u!58 &5282028507754259066
 CircleCollider2D:

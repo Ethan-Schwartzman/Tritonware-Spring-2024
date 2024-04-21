@@ -47,7 +47,7 @@ public class InputManager : MonoBehaviour
         }
 
 
-        if (Input.GetButtonDown("Fire")) Fire();
+        if (Input.GetButton("Fire")) Fire();
         if(Input.GetButtonDown("Puzzle1")) Puzzle1();
         if(Input.GetButtonDown("Puzzle1")) Puzzle2();
 
