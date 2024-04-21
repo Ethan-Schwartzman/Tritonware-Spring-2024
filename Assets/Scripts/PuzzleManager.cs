@@ -38,4 +38,33 @@ public class PuzzleManager : MonoBehaviour
     {
         
     }
+
+    public void TriggerPuzzle1()
+    {
+        foreach (Puzzle puzzle in puzzles)
+        {
+            if (puzzle != null)
+            {
+                puzzle.OnPuzzle1();
+            }
+        }
+    }
+
+    public void TriggerPuzzle2()
+    {
+        foreach (Puzzle puzzle in puzzles)
+        {
+            if (puzzle != null)
+            {
+                puzzle.OnPuzzle2();
+            }
+        }
+    }
+
+    public void SpawnPuzzle()
+    {
+        List<int> availableSpaces = new List<int>();
+        //availableSpaces
+    }
+
 }

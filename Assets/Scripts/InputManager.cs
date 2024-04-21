@@ -60,10 +60,10 @@ public class InputManager : MonoBehaviour
     }
 
     void Puzzle1() {
-
+        PuzzleManager.Instance.TriggerPuzzle1();
     }
 
     void Puzzle2() {
-
+        PuzzleManager.Instance.TriggerPuzzle2();
     }
 }
