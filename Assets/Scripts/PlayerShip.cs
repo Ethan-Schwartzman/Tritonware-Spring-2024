@@ -57,6 +57,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 
     public void TriggerDeath()
     {
+        return;
         throw new System.NotImplementedException();
     }
 

@@ -229,7 +229,7 @@ public class PlayerShipMovement : MonoBehaviour {
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision");
+        //Debug.Log("Collision");
         StartCoroutine(OutageControl());
     }
 

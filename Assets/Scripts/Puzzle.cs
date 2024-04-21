@@ -4,10 +4,11 @@ using UnityEngine;
 
 public abstract class Puzzle : MonoBehaviour
 {
-    public bool isComplete = false;
+    public abstract bool IsComplete { get; }
     public abstract void OnPuzzle1();
 
     public abstract void OnPuzzle2();
 
-    public abstract void CompletePuzzle();
+    //public abstract void CompletePuzzle();
+    //public abstract bool IsComplete() {};
 }

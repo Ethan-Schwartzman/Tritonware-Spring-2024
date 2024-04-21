@@ -18,11 +18,11 @@ public class ScreenManager : MonoBehaviour
 
     public void Outage()
     {
-        Debug.Log("Outage");
+        //Debug.Log("Outage");
         for (int i = 0; i < transform.childCount; i++)
         {
             GameObject curChild = transform.GetChild(i).gameObject;
-            Debug.Log(curChild);
+            //Debug.Log(curChild);
             Color curColor = curChild.GetComponent<SpriteRenderer>().color;
             curColor.a = 0.5f;
             curChild.GetComponent<SpriteRenderer>().color = curColor;
