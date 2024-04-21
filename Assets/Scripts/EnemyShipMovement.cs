@@ -75,7 +75,7 @@ public class EnemyShipMovement : MonoBehaviour
                 //Debug.Log(devStrafeFactor);
 
                 targetRelativePos = Vector2.MoveTowards(targetRelativePos, strafeDest, dt * strafeSpeed * devStrafeFactor);
-                Debug.Log(targetRelativePos);
+                //Debug.Log(targetRelativePos);
 
                 if (Vector2.Distance(targetRelativePos, strafeDest) <= MAX_STRAFE_RESET_ERROR)
                 {
@@ -85,7 +85,7 @@ public class EnemyShipMovement : MonoBehaviour
                                                         UnityEngine.Random.Range(-yStrafeDestRange, yStrafeDestRange));
                     }
 
-                    Debug.Log(strafeDest);
+                    //Debug.Log(strafeDest);
                 }
                 break;
         }

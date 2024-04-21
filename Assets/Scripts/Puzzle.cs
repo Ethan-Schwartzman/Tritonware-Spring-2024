@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Puzzle : MonoBehaviour
+public abstract class Puzzle : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool isComplete = false;
+    public abstract void OnPuzzle1();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void OnPuzzle2();
+
+    public abstract void CompletePuzzle();
 }
