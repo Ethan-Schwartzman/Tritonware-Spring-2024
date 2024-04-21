@@ -51,7 +51,7 @@ public class InputManager : MonoBehaviour
         if(Input.GetButtonDown("Puzzle1")) Puzzle1();
         if(Input.GetButtonDown("Puzzle1")) Puzzle2();
 
-
+        if (Input.GetKeyDown(KeyCode.F)) PuzzleManager.Instance.SpawnPuzzle();
 
     }
 

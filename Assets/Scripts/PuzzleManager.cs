@@ -15,6 +15,8 @@ public class PuzzleManager : MonoBehaviour
 
     private Puzzle[] puzzles;
 
+    public Puzzle[] puzzleTemplates;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,7 +66,28 @@ public class PuzzleManager : MonoBehaviour
     public void SpawnPuzzle()
     {
         List<int> availableSpaces = new List<int>();
-        //availableSpaces
+        for (int i = 0; i < puzzles.Length; i++)
+        {
+            if (puzzles[i] == null)
+            {
+                availableSpaces.Add(i);
+            }
+        }
+        if (availableSpaces.Count == 0) return;
+        int puzzleIndex = availableSpaces[Random.Range(0,availableSpaces.Count)];
+        Puzzle newPuzzle = Instantiate(puzzleTemplates[Random.Range(0, puzzleTemplates.Length)]);
+        newPuzzle.transform.SetParent(transform, false);
+        // todo: choose puzzle based on difficulty
+        newPuzzle.SetPosition(puzzleIndex);
+        newPuzzle.InitPuzzle(1f);
+        puzzles[puzzleIndex] = newPuzzle;
+
+    }
+
+    public void CompletePuzzle(int index)
+    {
+        Destroy(puzzles[index].gameObject, 0.01f);
+        puzzles[index] = null;
     }
 
 }

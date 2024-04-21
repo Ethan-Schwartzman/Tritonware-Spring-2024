@@ -6,22 +6,26 @@ public class EasyPuzzle : Puzzle
 {
     public Collider2D SelectorCollider;
     public Collider2D IndicatorCollider;
-    public Transform SelectorTransform;
-    public Transform Center;
+    public RectTransform SelectorTransform;
+    public RectTransform Center;
 
-    private float speed = 10f;
-    private float range = 10f;
+    private float speed = 300f;
+    private float range = 200f;
     private bool movingRight = true;
 
-    private bool isComplete = false;
 
-    public override bool IsComplete { get{ return isComplete;} }
+    public override void InitPuzzle(float difficulty)
+    {
+        SelectorTransform.position = Center.position + Random.Range(-range, range) * Vector3.right;
+        speed *= difficulty;
+    }
+
+
 
     public override void OnPuzzle1()
     {
         if(Physics2D.IsTouching(SelectorCollider, IndicatorCollider)) {
-            isComplete = true;
-            Debug.Log("complete");
+            PuzzleManager.Instance.CompletePuzzle(index);
         }
     }
 
