@@ -111,7 +111,9 @@ public class AsteroidGenerator : MonoBehaviour
 
         asteroid.SetSpin(Random.Range(-MAX_SPIN, MAX_SPIN));
 
-        asteroid.healthTracker = new HealthTracker(asteroid, asteroidMaxHealth);
+        asteroid.healthTracker = new HealthTracker(asteroid, ThreatController.AsteroidHealth);
+
+        asteroid.ResetColor();
     }
 
     // Return the asteroid to the pool

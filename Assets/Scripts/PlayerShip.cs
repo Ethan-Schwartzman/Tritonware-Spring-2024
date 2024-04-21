@@ -67,5 +67,8 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
         bulletSpawner.SpawnBullet();
     }
 
-
+    public Team GetTeam()
+    {
+        return Team.player;
+    }
 }

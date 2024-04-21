@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -9,10 +10,11 @@ public class Bullet : MonoBehaviour
     public float speed = 50f;
     private Vector2 velocity;
     public int damage = 3;
-    private float bulletRadius = 3f;
+    [SerializeField] private float bulletRadius = 3f;
     private List<Collider2D> collisions;
     private ContactFilter2D filter;
     private BulletSpawner spawner;
+    Team team;
 
     void Awake()
     {
@@ -20,6 +22,8 @@ public class Bullet : MonoBehaviour
         collisions = new List<Collider2D>();
         filter = new ContactFilter2D();
         filter = filter.NoFilter();
+        
+
     }
 
 
@@ -30,15 +34,18 @@ public class Bullet : MonoBehaviour
 
     public void SetSpawner(BulletSpawner s) {
         spawner = s;
+        team = spawner.weaponContainer.GetTeam();
+    }
+
+    private void FixedUpdate()
+    {
+        transform.position += (Vector3)velocity * Time.fixedDeltaTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector2(
-            transform.position.x + velocity.x * Time.deltaTime,
-            transform.position.y + velocity.y * Time.deltaTime
-        );
+        
 
         if(Vector2.Distance(transform.position, PlayerShip.GetPosition()) > 50f) {
             if(spawner!= null)spawner.Release(this); //TODO
@@ -47,10 +54,15 @@ public class Bullet : MonoBehaviour
         if(Physics2D.OverlapCircle(transform.position, bulletRadius, filter, collisions) > 0) {
             foreach(Collider2D col in collisions) {
                 IDamagable hit = col.gameObject.GetComponent<IDamagable>();
-                if(hit != null && col.gameObject != spawner.gameObject) {
+                if(hit != null && hit.GetTeam() != team) {
                     HitTarget(hit);
                 }
             }
+        }
+
+        if (spawner == null)
+        {
+            Destroy(gameObject, 2f);
         }
     }
 
@@ -60,4 +72,5 @@ public class Bullet : MonoBehaviour
         if (spawner != null) spawner.Release(this); //TODO
     }
 
+    
 }

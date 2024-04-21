@@ -10,7 +10,7 @@ public class BulletSpawner : MonoBehaviour
 
     public Bullet templateBullet;
 
-    private IWeaponContainer weaponContainer;
+    public IWeaponContainer weaponContainer;
 
     private ObjectPool<Bullet> bulletPool;
 

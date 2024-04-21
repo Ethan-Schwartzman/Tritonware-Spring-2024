@@ -1,10 +1,15 @@
 using UnityEngine;
 
+public enum Team
+{
+    player, enemy, neutral
+}
 public interface IDamagable
 {
     public int GetHealth();
     public void DealDamage(int damage);
     public void TriggerDeath();
+    public Team GetTeam();
 
 }
 
@@ -20,4 +25,5 @@ public interface IDynamicEntity
 public interface IWeaponContainer: IDynamicEntity
 {
     public Vector2 GetAimDirection();
+    public Team GetTeam();
 }
