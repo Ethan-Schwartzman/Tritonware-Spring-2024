@@ -100,8 +100,9 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
-    public void SpawnPuzzle()
+    public void SpawnPuzzle(bool force = false)
     {
+        
         List<int> availableSpaces = new List<int>();
        
 
@@ -115,10 +116,10 @@ public class PuzzleManager : MonoBehaviour
         }
         if (availableSpaces.Count == 0) return;
         int puzzleIndex = availableSpaces[Random.Range(0,availableSpaces.Count)];
-
+        
         bool puzzleCreated = false;
-        Puzzle selectedPuzzle = null;
-        while (!puzzleCreated)
+        Puzzle selectedPuzzle = puzzleTemplates[Random.Range(0, puzzleTemplates.Length)];
+        while (!force && !puzzleCreated)
         {
             selectedPuzzle = puzzleTemplates[Random.Range(0, puzzleTemplates.Length)];
             puzzleCreated = selectedPuzzle.GetDifficulty() + GetTotalDifficulty() <= maxDifficulty;

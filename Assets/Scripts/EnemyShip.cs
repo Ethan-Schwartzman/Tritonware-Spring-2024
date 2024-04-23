@@ -24,7 +24,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
     float spawnTime;
 
     SpriteRenderer spriteRenderer;
-    [SerializeField] private Color defaultColor, damageColor;
+    [SerializeField] private Color defaultColor;
 
     private void Awake()
     {
