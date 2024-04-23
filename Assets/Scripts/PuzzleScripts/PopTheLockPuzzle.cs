@@ -21,7 +21,7 @@ public class PopTheLockPuzzle : Puzzle
 
     public override void InitPuzzle(float difficulty)
     {
-        count = Random.Range(3, 6);
+        count = Random.Range(2, 5);
         speed = Random.Range(100f, 200f);
         CountText.text = count.ToString();
         Indicator.RotateAround(Center.position, Vector3.forward, Random.Range(0.0f, 9999f));
@@ -44,6 +44,11 @@ public class PopTheLockPuzzle : Puzzle
     public override void OnPuzzle2()
     {
         return;
+    }
+
+    public override int GetDifficulty()
+    {
+        return 3;
     }
 
     void Update() {

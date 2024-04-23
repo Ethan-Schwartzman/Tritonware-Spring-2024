@@ -1642,6 +1642,7 @@ MonoBehaviour:
   - {fileID: 3286874186972502667, guid: 279e7a253aaecb84fab04854bc52212b, type: 3}
   - {fileID: 2975608107691423368, guid: 93fe148daa7355742a32f362de47d7ae, type: 3}
   - {fileID: 1085407465457882604, guid: 4d6b298a3ef9f1047b2fddee4862309e, type: 3}
+  puzzleChancePerDamage: 0.15
 --- !u!1 &914578300
 GameObject:
   m_ObjectHideFlags: 0
@@ -2219,6 +2220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponCooldown: 0.2
+  controlLossTime: 3
   isAlive: 1
   trailColor: {r: 0, g: 0.97032166, b: 1, a: 1}
   driftTrailColor: {r: 1, g: 0, b: 0, a: 1}
@@ -2508,7 +2510,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -437, y: -469}
+  m_AnchoredPosition: {x: -437, y: -507}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1443346647
@@ -2790,7 +2792,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -801, y: -470}
+  m_AnchoredPosition: {x: -801, y: -508}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1768424597

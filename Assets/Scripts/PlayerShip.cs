@@ -55,6 +55,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     public void DealDamage(int damage)
     {
         healthTracker.TakeDamage(damage);
+        PuzzleManager.Instance.RollForPuzzle(damage);
         StartCoroutine(EffectController.DamageEffect(spriteRenderer));
         PlayerUI.Instance.UpdateUI();
     }

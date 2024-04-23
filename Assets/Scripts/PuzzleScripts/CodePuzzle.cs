@@ -20,7 +20,7 @@ public class CodePuzzle : Puzzle
     int selectedKey = 0;
     int currentInputLength = 0;
 
-    const int CODE_LENGTH = 4;
+    const int CODE_LENGTH = 3;
     char[] correctCode = new char[CODE_LENGTH];
     char[] currentGuess = new char[CODE_LENGTH];
 
@@ -76,6 +76,11 @@ public class CodePuzzle : Puzzle
     {
         if (isComplete) return;
         SetSelectedKey((selectedKey + 1) % 6);
+    }
+
+    public override int GetDifficulty()
+    {
+        return 5;
     }
 
     IEnumerator Complete()

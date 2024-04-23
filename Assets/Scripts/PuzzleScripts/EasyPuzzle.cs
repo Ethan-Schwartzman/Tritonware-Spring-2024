@@ -47,6 +47,11 @@ public class EasyPuzzle : Puzzle
         return;
     }
 
+    public override int GetDifficulty()
+    {
+        return 1;
+    }
+
     // puzzle mechanics here: move selector left and right linearly
     void Update() {
         if(movingRight) {

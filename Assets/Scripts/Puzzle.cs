@@ -6,7 +6,8 @@ public abstract class Puzzle : MonoBehaviour
 {
     private static int SCREEN_WIDTH = 1920;
     private static int SCREEN_HEIGHT = 1080;
-    public int index;
+    protected int index;
+
 
 
     public void SetPosition(int index)
@@ -22,6 +23,8 @@ public abstract class Puzzle : MonoBehaviour
     public abstract void OnPuzzle1();
 
     public abstract void OnPuzzle2();
+
+    public abstract int GetDifficulty();
 
     //public abstract void CompletePuzzle();
     //public abstract bool IsComplete() {};

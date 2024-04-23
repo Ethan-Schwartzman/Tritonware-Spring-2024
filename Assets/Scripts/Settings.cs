@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Settings : MonoBehaviour
 {
-    public static int PlayerMaxHealth = 30;
+    public static int PlayerMaxHealth = 100;
     public static int AsteroidCollisionDamage = 8;
-    public static int ShipCollisionDamage = 3;
+    public static int ShipCollisionDamage = 4;
 }

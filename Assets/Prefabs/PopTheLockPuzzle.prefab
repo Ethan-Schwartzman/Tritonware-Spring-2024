@@ -602,7 +602,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580bbae04859f754fa4afdcaff8eefa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
   CountText: {fileID: 3153202972596920573}
   Center: {fileID: 801276782549528069}
   Indicator: {fileID: 4030517009210257819}
@@ -868,5 +867,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 44.4, y: 135.3}
+  m_Size: {x: 80.03, y: 135.3}
   m_EdgeRadius: 0
