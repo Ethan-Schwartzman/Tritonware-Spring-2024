@@ -10,22 +10,35 @@ public enum RotateDirection {
 public class PlayerShipMovement : MonoBehaviour {
 
     // * = feel free to tweak, otherwise don't touch the value
-    [SerializeField] private float torqueMultiplier = 2000; // * how fast you rotate
+    private float torqueMultiplier = 2000; // * how fast you rotate
+    private float angularDamping = 500; // * how quickly rotation stops when not actively applying torque
+    private float liftMultiplier = 100; // * how much lift (force that corrects your velocity to align to your facing direction) applies
+    private float topSpeed = 30; // * top speed through thrust only
+    private float aoaDrag = 50; // * how much you slow down when you turn
+
+    [SerializeField] private float maxAngSpeed = 250; // * the speed limit of rotation
     [SerializeField] private float initialMaxTorqueMultiplier = 2;
     [SerializeField] private float initialTorqueBoostAngSpeedThreshold = 80;
-    [SerializeField] private float maxAngSpeed = 250; // * the speed limit of rotation
-    [SerializeField] private float angularDamping = 500; // * how quickly rotation stops when not actively applying torque
     [SerializeField] private float angularDampingVelocityThreshold = 120;
     [SerializeField] private float holdRotateMultiplier = 2;
     [SerializeField] private float initialRotatePower = 0.2f;
-    [SerializeField] private float liftMultiplier = 100; // * how much lift (force that corrects your velocity to align to your facing direction) applies
-    [SerializeField] private float topSpeed = 30; // * top speed through thrust only
     [SerializeField] private float excessSpeedDrag = 100f; // * how quickly you slow down if you go past the top speed
-    [SerializeField] private float aoaDrag = 50; // * how much you slow down when you turn
+
+
+
 
     public float accumulatedThrust = 0;
-    public float defaultThrust = 200;
-    private float currentThrust = 200;
+
+    [SerializeField] private float thrust = 200;
+
+    [SerializeField] private float torqueMultiplierDefault = 2000;
+    [SerializeField] private float angularDampingDefault = 500;
+    [SerializeField] private float liftMultiplierDefault = 100;
+    [SerializeField] private float topSpeedDefault = 30;
+    [SerializeField] private float aoaDragDefault = 50;
+    [SerializeField] private float thrustDefault = 200;
+
+
 
     private Rigidbody2D rb;
     public static PlayerShipMovement Instance;
@@ -40,6 +53,16 @@ public class PlayerShipMovement : MonoBehaviour {
 
 
     private void Awake() {
+
+        torqueMultiplier = torqueMultiplierDefault;
+        angularDamping = angularDampingDefault;
+        liftMultiplier = liftMultiplierDefault;
+        topSpeed = topSpeedDefault;
+        aoaDrag = aoaDragDefault;
+        thrust = thrustDefault;
+
+
+
         rb = GetComponent<Rigidbody2D>();
 
         if (Instance == null) {
@@ -50,6 +73,8 @@ public class PlayerShipMovement : MonoBehaviour {
             Debug.LogWarning("Tried to create more than one instance of InputManager");
         }
     }
+
+    
 
     public Vector2 GetFacingDirection() {
         return transform.up;
@@ -160,7 +185,7 @@ public class PlayerShipMovement : MonoBehaviour {
     {
         if (toggle)
         {
-            currentThrust = 0;
+            thrust = 0;
             if (accumulatedThrust < 300)
             {
                 accumulatedThrust += Time.deltaTime * 100;
@@ -169,10 +194,10 @@ public class PlayerShipMovement : MonoBehaviour {
         }
         else
         {
-            currentThrust = defaultThrust;
+            thrust = thrustDefault;
             if (accumulatedThrust > 0)
             {
-                currentThrust += accumulatedThrust;
+                thrust += accumulatedThrust;
                 accumulatedThrust -= Time.deltaTime * 100;
                 // Debug.Log(accumulatedThrust);
             }
@@ -194,7 +219,7 @@ public class PlayerShipMovement : MonoBehaviour {
 
 
     private Vector2 GetThrust() {
-        return GetFacingDirection() * currentThrust;
+        return GetFacingDirection() * thrust;
         //rb.velocity = 5 * GetDirection();
     }
 
@@ -225,6 +250,28 @@ public class PlayerShipMovement : MonoBehaviour {
         }
 
 
+    }
+
+    public void ToggleDrift(bool toggle)
+    {
+        if (toggle)
+        {
+            aoaDrag = 0;
+            angularDamping = 0;
+            liftMultiplier = 0;
+            thrust = thrustDefault / 2;
+            torqueMultiplier = torqueMultiplierDefault / 5;
+            topSpeed = 1000;
+        }
+        else
+        {
+            aoaDrag = aoaDragDefault;
+            angularDamping = angularDampingDefault;
+            liftMultiplier = liftMultiplierDefault;
+            thrust = thrustDefault;
+            torqueMultiplier = torqueMultiplierDefault;
+            topSpeed = topSpeedDefault;
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D collision)

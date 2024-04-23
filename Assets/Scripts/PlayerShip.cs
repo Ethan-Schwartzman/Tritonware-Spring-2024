@@ -9,32 +9,54 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     public static HealthTracker healthTracker;
 
     BulletSpawner bulletSpawner;
+    SpriteRenderer spriteRenderer;
+    TrailRenderer trailRenderer;
 
-    [SerializeField] private int maxHealth = 20;
 
     float currentWeaponCooldown;
     public float weaponCooldown;
 
+    bool controlLoss = false;
+    float controlLossTimer = 0f;
+    [SerializeField] float controlLossTime = 3f;
+
+    public bool isAlive = true;
+
+    public Color trailColor, driftTrailColor;
+
     private void Awake()
     {
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (Instance == null)
         {
             Instance = this;
         }
         shipMovement = GetComponent<PlayerShipMovement>();
-        healthTracker = new HealthTracker(this, maxHealth);
+        healthTracker = new HealthTracker(this, Settings.PlayerMaxHealth);
         bulletSpawner = GetComponent<BulletSpawner>();
+        trailRenderer = GetComponentInChildren<TrailRenderer>();
+
+        trailRenderer.startColor = trailColor;
+    }
+
+    private void Start()
+    {
+        PlayerUI.Instance.UpdateUI();
     }
 
     private void Update()
     {
         if (currentWeaponCooldown >= 0) currentWeaponCooldown -= Time.deltaTime;
+        if (controlLoss) controlLossTimer -= Time.deltaTime;
+        if (controlLossTimer <= 0) ToggleDrift(false);
     }
 
 
     public void DealDamage(int damage)
     {
         healthTracker.TakeDamage(damage);
+        StartCoroutine(EffectController.DamageEffect(spriteRenderer));
+        PlayerUI.Instance.UpdateUI();
     }
 
     public override Vector2 GetVelocity()
@@ -57,6 +79,11 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
         return healthTracker.health;
     }
 
+    public int GetMaxHealth()
+    {
+        return healthTracker.maxHealth;
+    }
+
     public static Vector3 GetPosition()
     {
         return Instance.transform.position;
@@ -66,7 +93,32 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     public void TriggerDeath()
     {
         return;
+        isAlive = false;
         throw new System.NotImplementedException();
+        
+    }
+
+    public void TriggerCollision()
+    {
+        ToggleDrift(true);
+    }
+
+    public void ToggleDrift(bool toggle)
+    {
+
+        PlayerShipMovement.Instance.ToggleDrift(toggle);
+        if (toggle)
+        {
+            controlLoss = true;
+            controlLossTimer = controlLossTime;
+            trailRenderer.startColor = driftTrailColor;
+        }
+        else
+        {
+            controlLoss = false;
+            trailRenderer.startColor = trailColor;
+        }
+
     }
 
 

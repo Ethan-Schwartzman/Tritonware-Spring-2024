@@ -105,12 +105,6 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
         Destroy(gameObject);
     }
 
-    IEnumerator DamageEffect()
-    {
-        spriteRenderer.color = damageColor;
-        yield return new WaitForSeconds(0.2f);
-        spriteRenderer.color = defaultColor;
-    }
 
     public Team GetTeam()
     {

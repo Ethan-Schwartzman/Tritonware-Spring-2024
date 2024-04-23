@@ -84,9 +84,22 @@ public class Asteroid : DynamicEntity, IDamagable
 
     public int GetHealth()
     {
-        throw new System.NotImplementedException();
+        return healthTracker.health;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        IDamagable hit = collision.gameObject.GetComponent<IDamagable>();
+        if (hit != null)
+        {
+            hit.DealDamage(Settings.ShipCollisionDamage);
+            if (hit is PlayerShip ship && ship.isAlive) 
+            {
+                ship.TriggerCollision();
+            }
+            this.DealDamage(Settings.AsteroidCollisionDamage);
+        }
+    }
 
 
 }

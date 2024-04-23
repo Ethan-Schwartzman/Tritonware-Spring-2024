@@ -198,8 +198,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inertialDrift: 0
   compensation: 1
-  compensationFactor: 1502
-  xComp: 0.5
+  compensationFactor: 1000
+  xComp: 0.3
   yComp: 0.3
   xDamp: 250
   yDamp: 150

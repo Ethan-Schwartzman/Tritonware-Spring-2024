@@ -24,26 +24,36 @@ public class InputManager : MonoBehaviour
 
         // need to change to not hard coded inputs
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.A))
         {
             
             PlayerShipMovement.Instance.Rotate(1);
             
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.D))
         {
             
             PlayerShipMovement.Instance.Rotate(-1);
         }
         
-        if (!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
+        if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         {
             PlayerShipMovement.Instance.Rotate(0);
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             PlayerShipMovement.Instance.Boost(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            PlayerShip.Instance.ToggleDrift(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            PlayerShip.Instance.ToggleDrift(false);
         }
 
 
