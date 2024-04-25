@@ -222,9 +222,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  weaponCooldown: 1
+  weaponCooldown: 0.8
+  bulletSpread: 2
   defaultColor: {r: 1, g: 0.5943396, b: 0.5943396, a: 1}
-  damageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &3263568845652755424
 MonoBehaviour:
   m_ObjectHideFlags: 0

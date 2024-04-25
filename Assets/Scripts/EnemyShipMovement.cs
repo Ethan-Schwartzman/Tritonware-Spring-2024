@@ -47,9 +47,9 @@ public class EnemyShipMovement : MonoBehaviour
     const float MAX_STRAFE_DEVIATION = 1f;
     const float MIN_STRAFE_PATH_DIST = 10f;
 
-    private void Update()
+    private void FixedUpdate()
     {
-        float dt = Time.deltaTime;
+        float dt = Time.fixedDeltaTime;
         switch (attachedShip.state)
         {
             case ActivationState.idle:

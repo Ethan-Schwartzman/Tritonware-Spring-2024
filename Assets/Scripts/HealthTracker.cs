@@ -23,10 +23,17 @@ public class HealthTracker
         {
             health = 0;
             attachedEntity.TriggerDeath();
-        }
-            
+        }       
     }
 
+    public void Heal(int hp)
+    {
+        health += hp;
+        if (health >= maxHealth)
+        {
+            health = maxHealth;
+        }
+    }
     
 
 }

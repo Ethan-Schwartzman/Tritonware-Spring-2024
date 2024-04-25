@@ -27,10 +27,18 @@ public class PuzzleManager : MonoBehaviour
     float puzzleActiveTime = 0;
     float activePuzzleDifficultyTickTime = 5f;
 
+    float randomPuzzleSpawnTime = 0;
+    const float RANDOM_PUZZLE_TICK_TIME = 2f;
+    const float BASE_RANDOM_PUZZLE_CHANCE = 0.05f;
+    float currentRandomPuzzleChance;
+
+    [SerializeField] int healPerPuzzle = 3;
+
     // Start is called before the first frame update
     void Start()
     {
         maxDifficulty = baseMaxDifficulty;
+        currentRandomPuzzleChance = BASE_RANDOM_PUZZLE_CHANCE;
 
         if(Instance == null) {
             Instance = this;
@@ -63,7 +71,15 @@ public class PuzzleManager : MonoBehaviour
         {
             puzzleActiveTime = 0;
             maxDifficulty += 2;
-            Debug.Log($"max difficulty ticked, now {maxDifficulty}");
+            // Debug.Log($"max difficulty ticked, now {maxDifficulty}");
+        }
+
+        randomPuzzleSpawnTime += Time.deltaTime;
+        if (randomPuzzleSpawnTime >= RANDOM_PUZZLE_TICK_TIME)
+        {
+            RollForPuzzleRandom();
+            randomPuzzleSpawnTime = 0;
+            Debug.Log($"Current chance of puzzle spawning per tick: {currentRandomPuzzleChance} at time {Time.time}");
         }
     }
 
@@ -89,7 +105,7 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
-    public void RollForPuzzle(int damage)
+    public void RollForPuzzleDamage(int damage)
     {
         if (GetTotalDifficulty() >= maxDifficulty - 1) return;
         float roll = Random.value;
@@ -97,6 +113,25 @@ public class PuzzleManager : MonoBehaviour
         if (roll < damage * puzzleChancePerDamage)
         {
             SpawnPuzzle();
+        }
+    }
+
+    public void RollForPuzzleRandom()
+    {
+        if (GetTotalDifficulty() >= maxDifficulty - 1) return;
+        float roll = Random.value;
+        if (puzzleCount >= 3) roll *= 2;
+
+
+        if (roll < currentRandomPuzzleChance)
+        {
+            SpawnPuzzle();
+            currentRandomPuzzleChance = BASE_RANDOM_PUZZLE_CHANCE;
+            Debug.Log($"RANDOM PUZZLE SPAWNED at time {Time.time}");
+        }
+        else
+        {
+            currentRandomPuzzleChance += 0.1f * (1f - (float)PlayerShip.Instance.GetHealth() / (float)PlayerShip.Instance.GetMaxHealth());
         }
     }
 
@@ -119,11 +154,18 @@ public class PuzzleManager : MonoBehaviour
         
         bool puzzleCreated = false;
         Puzzle selectedPuzzle = puzzleTemplates[Random.Range(0, puzzleTemplates.Length)];
+        int c = 0;
         while (!force && !puzzleCreated)
         {
             selectedPuzzle = puzzleTemplates[Random.Range(0, puzzleTemplates.Length)];
             puzzleCreated = selectedPuzzle.GetDifficulty() + GetTotalDifficulty() <= maxDifficulty;
             if (!puzzleCreated) Debug.Log($"Tried to create puzzle of difficulty {selectedPuzzle.GetDifficulty()} but would exceed max difficulty of {maxDifficulty} (current: {GetTotalDifficulty()})");
+            if (c++ > 100)
+            {
+                Debug.LogError("Failed to spawn puzzle");
+                return;
+            }
+            
         }
         
         Puzzle newPuzzle = Instantiate(selectedPuzzle);
@@ -140,6 +182,7 @@ public class PuzzleManager : MonoBehaviour
         Destroy(puzzles[index].gameObject);
         puzzles[index] = null;
         puzzleCount--;
+        PlayerShip.Instance.Heal(healPerPuzzle);
     }
 
     int GetTotalDifficulty()

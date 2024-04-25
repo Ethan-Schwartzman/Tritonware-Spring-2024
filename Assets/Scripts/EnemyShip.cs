@@ -21,6 +21,8 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
     float currentWeaponCooldown;
     public float weaponCooldown;
 
+    public float bulletSpread = 1f;
+
     float spawnTime;
 
     SpriteRenderer spriteRenderer;
@@ -84,7 +86,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
 
     public Vector2 GetAimDirection()
     {
-        return (PlayerShip.GetPosition() - transform.position).normalized;
+        return ((Vector2)(PlayerShip.GetPosition() - transform.position) + Random.insideUnitCircle * bulletSpread).normalized;
     }
 
     public int GetHealth()

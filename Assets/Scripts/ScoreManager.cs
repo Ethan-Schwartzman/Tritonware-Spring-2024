@@ -1,17 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour {
-    public GameObject textObject;
+    [SerializeField] TMP_Text scoreText;
+
+    public int score = 0;
     // Start is called before the first frame update
     void Start() {
-        textObject = transform.GetChild(0).gameObject;
-        textObject.GetComponent<TextMesh>().text = "Fish";
+        
     }
 
     // Update is called once per frame
     void Update() {
+        if (!PlayerShip.Instance.isAlive) return;
+        int tmpScore = (int)PlayerShip.Instance.transform.position.x / 10;
+        if (tmpScore > score)
+        {
+            score = tmpScore;
+            scoreText.text = score.ToString();
+        }
 
     }
 }

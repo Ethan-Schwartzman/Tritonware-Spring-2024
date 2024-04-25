@@ -55,8 +55,14 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     public void DealDamage(int damage)
     {
         healthTracker.TakeDamage(damage);
-        PuzzleManager.Instance.RollForPuzzle(damage);
+        PuzzleManager.Instance.RollForPuzzleDamage(damage);
         StartCoroutine(EffectController.DamageEffect(spriteRenderer));
+        PlayerUI.Instance.UpdateUI();
+    }
+
+    public void Heal(int hp)
+    {
+        healthTracker.Heal(hp);
         PlayerUI.Instance.UpdateUI();
     }
 
@@ -93,10 +99,11 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 
     public void TriggerDeath()
     {
-        return;
         isAlive = false;
-        throw new System.NotImplementedException();
-        
+        PlayerShipMovement.Instance.Shutdown();
+        PuzzleManager.Instance.gameObject.SetActive(false);
+        trailRenderer.startColor = driftTrailColor;
+
     }
 
     public void TriggerCollision()
@@ -106,7 +113,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 
     public void ToggleDrift(bool toggle)
     {
-
+        if (!isAlive) return;
         PlayerShipMovement.Instance.ToggleDrift(toggle);
         if (toggle)
         {
@@ -125,7 +132,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 
     public void Shoot()
     {
-        if (currentWeaponCooldown <= 0)
+        if (isAlive && currentWeaponCooldown <= 0)
         {
             currentWeaponCooldown = weaponCooldown;
             bulletSpawner.SpawnBullet();

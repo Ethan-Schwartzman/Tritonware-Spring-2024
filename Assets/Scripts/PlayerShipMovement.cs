@@ -124,14 +124,15 @@ public class PlayerShipMovement : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    void FixedUpdate() {
 
+        float dt = Time.fixedDeltaTime;
 
-        rb.AddTorque(GetTorque() * Time.deltaTime * rb.mass);
-        rb.AddForce((GetThrust() - GetSpeedDamping()) * Time.deltaTime * rb.mass);
-        rb.AddForce(GetExcessSpeedDrag()  * Time.deltaTime * rb.mass);
-        rb.AddForce(GetAOADrag() * Time.deltaTime * rb.mass);
-        rb.AddForce(GetLift() * Time.deltaTime * rb.mass);
+        rb.AddTorque(GetTorque() * dt * rb.mass);
+        rb.AddForce((GetThrust() - GetSpeedDamping()) * dt * rb.mass);
+        rb.AddForce(GetExcessSpeedDrag()  * dt * rb.mass);
+        rb.AddForce(GetAOADrag() * dt * rb.mass);
+        rb.AddForce(GetLift() * dt * rb.mass);
 
         dv = rb.velocity - lastVelocity;
         lastVelocity = rb.velocity;
@@ -272,6 +273,19 @@ public class PlayerShipMovement : MonoBehaviour {
             torqueMultiplier = torqueMultiplierDefault;
             topSpeed = topSpeedDefault;
         }
+    }
+
+    public void Shutdown()
+    {
+        thrustDefault = 0;
+        angularDampingDefault = 0;
+        liftMultiplierDefault = 0;
+        aoaDragDefault = 0;
+        torqueMultiplierDefault = 0;
+        topSpeedDefault = 9999;
+        ToggleDrift(false);
+        
+
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
