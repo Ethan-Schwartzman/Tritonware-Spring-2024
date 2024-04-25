@@ -8,7 +8,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     public static PlayerShipMovement shipMovement;
     public static HealthTracker healthTracker;
 
-    BulletSpawner bulletSpawner;
+    ProjectileSpawner bulletSpawner;
     SpriteRenderer spriteRenderer;
     TrailRenderer trailRenderer;
 
@@ -32,8 +32,8 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
             Instance = this;
         }
         shipMovement = GetComponent<PlayerShipMovement>();
-        healthTracker = new HealthTracker(this, Settings.PlayerMaxHealth);
-        bulletSpawner = GetComponent<BulletSpawner>();
+        healthTracker = new HealthTracker(this, Settings.Instance.PlayerMaxHealth);
+        bulletSpawner = GetComponent<ProjectileSpawner>();
         trailRenderer = GetComponentInChildren<TrailRenderer>();
 
         trailRenderer.startColor = trailColor;
@@ -99,6 +99,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 
     public void TriggerDeath()
     {
+        if (!Settings.Instance.EnableDeath) return;
         isAlive = false;
         PlayerShipMovement.Instance.Shutdown();
         PuzzleManager.Instance.gameObject.SetActive(false);

@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee7309b438a5be4da40556e305fe27b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  templateBullet: {fileID: 540241653526509420, guid: 5fd146e254b5dfb44978f1838152151d, type: 3}
+  templateBullet: {fileID: 5659163448690783328, guid: 5fd146e254b5dfb44978f1838152151d, type: 3}
   SoundEffect: {fileID: 9006830265826053269}
 --- !u!114 &9006830265826053269
 MonoBehaviour:

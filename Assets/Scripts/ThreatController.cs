@@ -80,6 +80,7 @@ public class ThreatController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!Settings.Instance.EnableEnemies) return;
         if (Time.time - lastSpawnTime >= spawnCooldown && activeEnemyCount < MAX_ACTIVE_ENEMIES)
         {
             int spawnCount = Random.Range(1, MAX_GROUP_SIZE);

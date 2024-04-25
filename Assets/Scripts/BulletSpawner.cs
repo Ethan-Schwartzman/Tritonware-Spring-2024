@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class BulletSpawner : MonoBehaviour
+public class ProjectileSpawner : MonoBehaviour
 {
     const int POOL_DEFAULT = 100;
     const int POOL_MAX = 1000;
 
-    public Bullet templateBullet;
+    public Projectile templateBullet;
     public FMODUnity.StudioEventEmitter SoundEffect;
 
     public IWeaponContainer weaponContainer;
 
-    private ObjectPool<Bullet> bulletPool;
+    private ObjectPool<Projectile> bulletPool;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +35,7 @@ public class BulletSpawner : MonoBehaviour
         {
             Debug.LogError("Bullet Spawner not attached to weaponContainer");
         }
-        bulletPool = new ObjectPool<Bullet>(
+        bulletPool = new ObjectPool<Projectile>(
             CreateBullet,
             OnTakeFromPool,
             OnReleaseFromPool,
@@ -44,33 +44,34 @@ public class BulletSpawner : MonoBehaviour
         );
     }
 
-    private Bullet CreateBullet() {
-        Bullet bullet = Instantiate(templateBullet);
+    private Projectile CreateBullet() {
+        Projectile bullet = Instantiate(templateBullet);
         bullet.gameObject.SetActive(false);
         return bullet;
     }
 
-    private void OnTakeFromPool(Bullet bullet) {
+    private void OnTakeFromPool(Projectile bullet) {
+        bullet.gameObject.SetActive(true);
         bullet.SetVelocityFromParent(weaponContainer);
         bullet.transform.position = transform.position;
-        bullet.gameObject.SetActive(true);
+        
     }
 
-    private void OnReleaseFromPool(Bullet bullet) {
+    private void OnReleaseFromPool(Projectile bullet) {
         bullet.gameObject.SetActive(false);
     } 
 
-    private void DestroyBullet(Bullet bullet) {
+    private void DestroyBullet(Projectile bullet) {
         Destroy(bullet);
     }
 
     public void SpawnBullet() {
-        Bullet bullet = bulletPool.Get();
+        Projectile bullet = bulletPool.Get();
         bullet.SetSpawner(this);
         SoundEffect.Play();
     }
 
-    public void Release(Bullet bullet) {
+    public void Release(Projectile bullet) {
         if (bullet.isActiveAndEnabled) 
         bulletPool.Release(bullet);
     }

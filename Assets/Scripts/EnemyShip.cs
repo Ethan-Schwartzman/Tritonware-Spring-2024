@@ -15,7 +15,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
     Collider2D col;
     Rigidbody2D rb;
     EnemyShipMovement shipMovement;
-    BulletSpawner bulletSpawner;
+    ProjectileSpawner bulletSpawner;
     HealthTracker healthTracker;
 
     float currentWeaponCooldown;
@@ -33,7 +33,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         shipMovement = GetComponent<EnemyShipMovement>();
-        bulletSpawner = GetComponent<BulletSpawner>();
+        bulletSpawner = GetComponent<ProjectileSpawner>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         healthTracker = new HealthTracker(this, ThreatController.EnemyHealth);

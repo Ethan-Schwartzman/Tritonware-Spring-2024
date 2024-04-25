@@ -79,7 +79,6 @@ public class PuzzleManager : MonoBehaviour
         {
             RollForPuzzleRandom();
             randomPuzzleSpawnTime = 0;
-            Debug.Log($"Current chance of puzzle spawning per tick: {currentRandomPuzzleChance} at time {Time.time}");
         }
     }
 
@@ -127,7 +126,7 @@ public class PuzzleManager : MonoBehaviour
         {
             SpawnPuzzle();
             currentRandomPuzzleChance = BASE_RANDOM_PUZZLE_CHANCE;
-            Debug.Log($"RANDOM PUZZLE SPAWNED at time {Time.time}");
+            // Debug.Log($"RANDOM PUZZLE SPAWNED at time {Time.time}");
         }
         else
         {
@@ -137,7 +136,8 @@ public class PuzzleManager : MonoBehaviour
 
     public void SpawnPuzzle(bool force = false)
     {
-        
+        if (!Settings.Instance.EnablePuzzles) return;
+
         List<int> availableSpaces = new List<int>();
        
 

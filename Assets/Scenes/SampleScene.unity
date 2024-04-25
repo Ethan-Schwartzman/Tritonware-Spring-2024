@@ -2242,6 +2242,7 @@ GameObject:
   - component: {fileID: 1075298643}
   - component: {fileID: 1075298642}
   - component: {fileID: 1075298644}
+  - component: {fileID: 1075298645}
   m_Layer: 0
   m_Name: Game Logic
   m_TagString: Untagged
@@ -2292,6 +2293,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 444601281}
   score: 0
+--- !u!114 &1075298645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075298641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b3b111517bafee4c8d031a5043293df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerMaxHealth: 100
+  AsteroidCollisionDamage: 4
+  ShipCollisionDamage: 4
+  EnableAsteroids: 1
+  EnableEnemies: 1
+  EnablePuzzles: 1
+  EnableDeath: 1
 --- !u!1 &1083953288
 GameObject:
   m_ObjectHideFlags: 0
@@ -2350,7 +2370,6 @@ GameObject:
   - component: {fileID: 1249115232}
   - component: {fileID: 1249115235}
   - component: {fileID: 1249115236}
-  - component: {fileID: 1249115237}
   - component: {fileID: 1249115238}
   - component: {fileID: 1249115239}
   - component: {fileID: 1249115240}
@@ -2468,18 +2487,6 @@ CapsuleCollider2D:
   m_Offset: {x: 3.6607676e-15, y: 0.13260362}
   m_Size: {x: 0.99999654, y: 3.0534468}
   m_Direction: 0
---- !u!114 &1249115237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1249115231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb07d4565bf9acd49b5d9f32e5943afd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1249115238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2492,7 +2499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee7309b438a5be4da40556e305fe27b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  templateBullet: {fileID: 540241653526509420, guid: e3d09a9859213b14786139272d27fba2, type: 3}
+  templateBullet: {fileID: 4741551735274470022, guid: e3d09a9859213b14786139272d27fba2, type: 3}
   SoundEffect: {fileID: 1249115240}
 --- !u!114 &1249115239
 MonoBehaviour:
@@ -3053,6 +3060,10 @@ PrefabInstance:
     - target: {fileID: 2140317385887574823, guid: 3d52946616a630342b412a7b3546c61b, type: 3}
       propertyPath: m_Name
       value: Enemy Ship
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140317385887574823, guid: 3d52946616a630342b412a7b3546c61b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5319544260072768743, guid: 3d52946616a630342b412a7b3546c61b, type: 3}
       propertyPath: strafeSpeed
@@ -3690,6 +3701,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1979644628535903921
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5855747692808347159, guid: 69316d1d7a22b894fba76109506b67d3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855747692808347159, guid: 69316d1d7a22b894fba76109506b67d3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855747692808347159, guid: 69316d1d7a22b894fba76109506b67d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855747692808347159, guid: 69316d1d7a22b894fba76109506b67d3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855747692808347159, guid: 69316d1d7a22b894fba76109506b67d3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855747692808347159, guid: 69316d1d7a22b894fba76109506b67d3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855747692808347159, guid: 69316d1d7a22b894fba76109506b67d3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855747692808347159, guid: 69316d1d7a22b894fba76109506b67d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855747692808347159, guid: 69316d1d7a22b894fba76109506b67d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855747692808347159, guid: 69316d1d7a22b894fba76109506b67d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8831688018982806760, guid: 69316d1d7a22b894fba76109506b67d3, type: 3}
+      propertyPath: m_Name
+      value: Missile
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 69316d1d7a22b894fba76109506b67d3, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3708,3 +3776,4 @@ SceneRoots:
   - {fileID: 282238349}
   - {fileID: 530139918}
   - {fileID: 1734907126}
+  - {fileID: 1979644628535903921}

@@ -139,6 +139,7 @@ public class AsteroidGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!Settings.Instance.EnableAsteroids) return;
         if(Time.time - lastSpawnTime >= spawnCooldown) {
             if(AsteroidPool.CountActive <= MAX_ACTIVE) {
                 Asteroid asteroid = AsteroidPool.Get();
