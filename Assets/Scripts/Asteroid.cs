@@ -51,14 +51,19 @@ public class Asteroid : DynamicEntity, IDamagable
 
     public void DealDamage(int damage)
     {
-        StartCoroutine(EffectController.DamageEffect(sr));
-        healthTracker.TakeDamage(damage);
         
+        healthTracker.TakeDamage(damage);
+        if (this.isActiveAndEnabled)
+        {
+            StartCoroutine(EffectController.DamageEffect(sr));
+        }
+
     }
 
     public void TriggerDeath()
     {
-        AsteroidGenerator.Instance.AsteroidPool.Release(this);
+        if (isActiveAndEnabled) AsteroidGenerator.Instance.AsteroidPool.Release(this);
+
     }
 
 

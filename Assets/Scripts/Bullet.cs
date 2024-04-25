@@ -69,7 +69,7 @@ public class Bullet : MonoBehaviour
     private void HitTarget(IDamagable target)
     {
         target.DealDamage(damage);
-        if (spawner != null) spawner.Release(this);
+        if (spawner != null && isActiveAndEnabled) spawner.Release(this);
         else Destroy(gameObject);
     }
 

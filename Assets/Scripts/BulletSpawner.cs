@@ -71,6 +71,7 @@ public class BulletSpawner : MonoBehaviour
     }
 
     public void Release(Bullet bullet) {
+        if (bullet.isActiveAndEnabled) 
         bulletPool.Release(bullet);
     }
 

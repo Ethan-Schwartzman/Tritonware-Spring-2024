@@ -9,6 +9,7 @@ public class AsteroidGenerator : MonoBehaviour
     const float MAX_ANGLE = 30f;
     const float MIN_SCALE = 0.5f;
     const float MAX_SCALE = 3.0f;
+    const float MAX_SKEW = 0.5f;
     const float MIN_DISTANCE = 40f;
     const float MAX_DISTANCE = 80f;
     const float MAX_VELOCITY = 10f;
@@ -16,7 +17,7 @@ public class AsteroidGenerator : MonoBehaviour
     const float MAX_SPAWN_COOLDOWN = 0.5f;
     const float MIN_MASS = 5f;
     const float MAX_MASS = 40f;
-    const float MAX_SPIN = 200f;
+    const float MAX_SPIN = 100f;
 
     const int POOL_MAX = 200;
     const int POOL_DEFAUlT = 100;
@@ -78,9 +79,11 @@ public class AsteroidGenerator : MonoBehaviour
         }
 
         // Set asteroid scale
+        float skew = Random.Range(-MAX_SKEW, MAX_SKEW);
+        float scale = Random.Range(MIN_SCALE, MAX_SCALE);
         asteroid.transform.localScale = new Vector3(
-            Random.Range(MIN_SCALE, MAX_SCALE), 
-            Random.Range(MIN_SCALE, MAX_SCALE), 
+            scale,
+            Mathf.Clamp(scale + skew, MIN_SCALE, MAX_SCALE),
             1f
         );
 
@@ -102,16 +105,18 @@ public class AsteroidGenerator : MonoBehaviour
         asteroid.gameObject.SetActive(true);
 
         // Set asteroid rigidbody properties
+
+
+        asteroid.SetMass(MIN_MASS * Mathf.Pow(scale,3));
+
         asteroid.SetVelocity(new Vector2(
             Random.Range(-MAX_VELOCITY, MAX_VELOCITY),
             Random.Range(-MAX_VELOCITY, MAX_VELOCITY)
         ));
 
-        asteroid.SetMass(Random.Range(MIN_MASS, MAX_MASS));
-
         asteroid.SetSpin(Random.Range(-MAX_SPIN, MAX_SPIN));
 
-        asteroid.healthTracker = new HealthTracker(asteroid, ThreatController.AsteroidHealth);
+        asteroid.healthTracker = new HealthTracker(asteroid, (int)(ThreatController.AsteroidHealth * scale));
 
         asteroid.ResetColor();
     }
