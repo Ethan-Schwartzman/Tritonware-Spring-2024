@@ -56,7 +56,7 @@ public abstract class Projectile : MonoBehaviour
         {
             Destroy(gameObject, 2f);
         }
-        else if (Vector2.Distance(transform.position, PlayerShip.GetPosition()) > 50f)
+        else if (Vector2.Distance(transform.position, PlayerShip.GetPosition()) > 100f)
         {
             if (spawner != null) spawner.Release(this); //TODO
         }
@@ -80,6 +80,11 @@ public abstract class Projectile : MonoBehaviour
     private void HitTarget(IDamagable target)
     {
         target.DealDamage(damage);
+        Despawn();
+    }
+
+    protected void Despawn()
+    {
         if (spawner != null && isActiveAndEnabled) spawner.Release(this);
         else Destroy(gameObject);
     }

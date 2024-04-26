@@ -28,6 +28,11 @@ public class ThreatController : MonoBehaviour
     float lastSpawnTime;
     float spawnCooldown;
 
+    float pursuitProgress;
+    public float pursuitProgressSpeed = 0.7f;
+    public float pursuitStartTimer = 10f;
+    bool pursuitStarted = false;
+
     public EnemyShip enemyShipTemplate;
 
 
@@ -91,11 +96,34 @@ public class ThreatController : MonoBehaviour
             }
             ResetSpawnTimer();
         }
+
+        if (!pursuitStarted && Time.time > pursuitStartTimer) pursuitStarted = true;
+        if (pursuitStarted)
+        {
+            pursuitProgress += pursuitProgressSpeed * Time.deltaTime;
+        }
+        
     }
 
     public void DecreaseEnemyCount()
     {
         activeEnemyCount--;
     }
+
+    public float GetPlayerProgress()
+    {
+        return PlayerShip.Instance.transform.position.x / 10;
+    }
+
+    public float GetEnemyProgress()
+    {
+        return pursuitProgress;
+    }
+
+    public float GetMissileCooldown()
+    {
+        return 10f;
+    }
+
 }
 

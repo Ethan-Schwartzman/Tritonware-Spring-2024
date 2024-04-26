@@ -15,7 +15,7 @@ public class ScoreManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (!PlayerShip.Instance.isAlive) return;
-        int tmpScore = (int)PlayerShip.Instance.transform.position.x / 10;
+        int tmpScore = (int)ThreatController.Instance.GetPlayerProgress();
         if (tmpScore > score)
         {
             score = tmpScore;

@@ -65,10 +65,11 @@ public class ProjectileSpawner : MonoBehaviour
         Destroy(bullet);
     }
 
-    public void SpawnBullet() {
+    public void SpawnProjectile() {
         Projectile bullet = bulletPool.Get();
         bullet.SetSpawner(this);
-        SoundEffect.Play();
+        
+        if (SoundEffect != null) SoundEffect.Play();
     }
 
     public void Release(Projectile bullet) {

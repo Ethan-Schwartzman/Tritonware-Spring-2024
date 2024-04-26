@@ -136,7 +136,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
         if (isAlive && currentWeaponCooldown <= 0)
         {
             currentWeaponCooldown = weaponCooldown;
-            bulletSpawner.SpawnBullet();
+            bulletSpawner.SpawnProjectile();
         }
     }
 

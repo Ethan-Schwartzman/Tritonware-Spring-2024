@@ -7,7 +7,8 @@ public class PlayerUI : MonoBehaviour
 {
 
     public static PlayerUI Instance;
-    [SerializeField] TMP_Text health, maxHealth, speed;
+    [SerializeField] TMP_Text health, maxHealth, speed,
+        playerProgress, enemyProgress;
 
     
 
@@ -20,6 +21,8 @@ public class PlayerUI : MonoBehaviour
     private void Update()
     {
         speed.text = Mathf.RoundToInt(PlayerShip.Instance.GetVelocity().magnitude).ToString();
+        playerProgress.text = ThreatController.Instance.GetPlayerProgress().ToString();
+        enemyProgress.text = ThreatController.Instance.GetEnemyProgress().ToString();
     }
 
     public void UpdateUI()

@@ -55,7 +55,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
             case ActivationState.combat:
                 if (currentWeaponCooldown <= 0)
                 {
-                    bulletSpawner.SpawnBullet();
+                    bulletSpawner.SpawnProjectile();
                     currentWeaponCooldown = weaponCooldown;
                 }
                 break;
@@ -86,7 +86,8 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
 
     public Vector2 GetAimDirection()
     {
-        return ((Vector2)(PlayerShip.GetPosition() - transform.position) + Random.insideUnitCircle * bulletSpread).normalized;
+        Vector2 r = (Vector2)(PlayerShip.GetPosition() - transform.position);
+        return (r + Vector2.Perpendicular(r) * Random.Range(-1f,1f) * bulletSpread).normalized;
     }
 
     public int GetHealth()

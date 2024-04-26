@@ -134,10 +134,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7f00de1e8313f444bb3720bf66dc00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 20
   damage: 2
   bulletRadius: 3
-  trackingForce: 200
+  trackingForce: 4
+  missileSpeed: 60
 --- !u!50 &3315444852802341980
 Rigidbody2D:
   serializedVersion: 4

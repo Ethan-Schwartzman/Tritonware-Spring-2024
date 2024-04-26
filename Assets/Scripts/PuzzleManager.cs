@@ -113,6 +113,7 @@ public class PuzzleManager : MonoBehaviour
         {
             SpawnPuzzle();
         }
+
     }
 
     public void RollForPuzzleRandom()
@@ -130,7 +131,8 @@ public class PuzzleManager : MonoBehaviour
         }
         else
         {
-            currentRandomPuzzleChance += 0.1f * (1f - (float)PlayerShip.Instance.GetHealth() / (float)PlayerShip.Instance.GetMaxHealth());
+            currentRandomPuzzleChance += 0.1f * (1f - (float)PlayerShip.Instance.GetHealth() /
+                (float)PlayerShip.Instance.GetMaxHealth());
         }
     }
 

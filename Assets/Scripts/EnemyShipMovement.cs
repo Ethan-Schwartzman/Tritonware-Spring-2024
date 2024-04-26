@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -13,7 +14,7 @@ public class EnemyShipMovement : MonoBehaviour
     PlayerShipMovement player;
 
 
-    Vector2 targetRelativePos = new Vector2(20f, 0);
+    public Vector2 targetRelativePos = new Vector2(20f, 0);
 
     private void Awake()
     {
@@ -89,6 +90,7 @@ public class EnemyShipMovement : MonoBehaviour
                 }
                 break;
         }
+        
     }
 
 
