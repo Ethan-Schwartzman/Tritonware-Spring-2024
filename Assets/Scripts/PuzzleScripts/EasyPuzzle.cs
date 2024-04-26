@@ -19,8 +19,8 @@ public class EasyPuzzle : Puzzle
     public RectTransform SelectorTransform;
     public RectTransform Center;
 
-    private float speed = 300f;
-    private float range = 200f;
+    private float speed = 300f/30f;
+    private float range = 200f/30f;
     private bool movingRight = true;
 
     // sets initial state of puzzle: randomizes selector position and sets difficulty

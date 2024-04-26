@@ -23,7 +23,7 @@ public class MashPuzzle : Puzzle
     {
         steps = new Stack<Transform>();
         stepCount = Random.Range(MIN_STEPS, MAX_STEPS+1);
-        float height = 300f;
+        float height = 300f/30f;
         for(int i = 0; i < stepCount; i++) {
             Transform s = Instantiate(Step);
             s.parent = Center;
