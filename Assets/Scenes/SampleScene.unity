@@ -3137,7 +3137,7 @@ MonoBehaviour:
   PlayerMaxHealth: 100
   AsteroidCollisionDamage: 4
   ShipCollisionDamage: 4
-  EnableAsteroids: 1
+  EnableAsteroids: 0
   EnableEnemies: 0
   EnablePuzzles: 0
   EnableDeath: 1

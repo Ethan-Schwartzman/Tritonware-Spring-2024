@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -51,6 +52,9 @@ public class ProjectileSpawner : MonoBehaviour
     }
 
     private void OnTakeFromPool(Projectile bullet) {
+        if(bullet.trailRenderer != null) {
+            bullet.trailRenderer.Clear();
+        }
         bullet.gameObject.SetActive(true);
         bullet.SetVelocityFromParent(weaponContainer);
         bullet.transform.position = transform.position;

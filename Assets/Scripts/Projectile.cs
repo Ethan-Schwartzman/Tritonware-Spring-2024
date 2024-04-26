@@ -17,6 +17,7 @@ public abstract class Projectile : MonoBehaviour
     protected Team team;
 
     public bool collideAsteroids = true;
+    public TrailRenderer trailRenderer;
 
     protected virtual void Awake()
     {
@@ -54,13 +55,10 @@ public abstract class Projectile : MonoBehaviour
 
     private void CheckDespawn()
     {
-        if (spawner == null)
-        {
-            Destroy(gameObject, 2f);
-        }
-        else if (Vector2.Distance(transform.position, PlayerShip.GetPosition()) > 100f)
+        if (Vector2.Distance(transform.position, PlayerShip.GetPosition()) > 100f)
         {
             if (spawner != null) spawner.Release(this); //TODO
+            else Destroy(this);
         }
     }
 
@@ -88,7 +86,7 @@ public abstract class Projectile : MonoBehaviour
 
     protected void Despawn()
     {
-        if (spawner != null && isActiveAndEnabled) spawner.Release(this);
+        if (spawner != null/* && isActiveAndEnabled*/) spawner.Release(this);
         else Destroy(gameObject);
     }
 
