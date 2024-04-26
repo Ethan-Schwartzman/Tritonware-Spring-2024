@@ -23,6 +23,7 @@ public class MissileSpawner : MonoBehaviour, IWeaponContainer
 
     private void Update()
     {
+        if (!Settings.Instance.EnableMissiles) return;
         lastMissileSpawnTime += Time.deltaTime;
         if (lastMissileSpawnTime > ThreatController.Instance.GetMissileCooldown())
         {
@@ -55,5 +56,6 @@ public class MissileSpawner : MonoBehaviour, IWeaponContainer
     {
         transform.position = (Vector2)PlayerShip.Instance.transform.position + new Vector2(-50f, Random.Range(-20f, 20f));
         pSpawner.SpawnProjectile();
+        StartCoroutine(PlayerUI.Instance.MissileWarning());
     }
 }

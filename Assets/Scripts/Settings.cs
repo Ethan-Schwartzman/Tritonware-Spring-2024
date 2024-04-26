@@ -19,4 +19,5 @@ public class Settings : MonoBehaviour
     public bool EnableEnemies = true;
     public bool EnablePuzzles = true;
     public bool EnableDeath = true;
+    public bool EnableMissiles = true;
 }

@@ -136,3 +136,4 @@ MonoBehaviour:
   speed: 35
   damage: 1
   bulletRadius: 0.5
+  collideAsteroids: 1

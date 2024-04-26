@@ -16,6 +16,8 @@ public abstract class Projectile : MonoBehaviour
     protected ProjectileSpawner spawner;
     protected Team team;
 
+    public bool collideAsteroids = true;
+
     protected virtual void Awake()
     {
         //cc = GetComponent<CircleCollider2D>();
@@ -69,8 +71,9 @@ public abstract class Projectile : MonoBehaviour
             foreach (Collider2D col in collisions)
             {
                 IDamagable hit = col.gameObject.GetComponent<IDamagable>();
-                if (hit != null && hit.GetTeam() != team)
+                if (hit != null && (hit.GetTeam() != team))
                 {
+                    if (hit is Asteroid && !collideAsteroids) return;
                     HitTarget(hit);
                 }
             }

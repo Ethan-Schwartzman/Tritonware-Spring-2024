@@ -9,7 +9,7 @@ public class Missile : Projectile
     public float missileSpeed = 60;
     public float maxTime = 4f;
 
-    float activeTime = 0;
+    public float activeTime = 0;
 
     protected override void Awake()
     {
@@ -17,6 +17,13 @@ public class Missile : Projectile
         rb = GetComponent<Rigidbody2D>();
         activeTime = 0;
     }
+
+    private void OnEnable()
+    {
+        activeTime = 0;
+    }
+
+    
 
     protected override void FixedUpdate()
     {

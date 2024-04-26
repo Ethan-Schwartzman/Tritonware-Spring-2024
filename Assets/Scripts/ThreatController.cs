@@ -35,6 +35,7 @@ public class ThreatController : MonoBehaviour
 
     public EnemyShip enemyShipTemplate;
 
+    public float missileCooldown = 10f;
 
     private void Awake()
     {
@@ -122,7 +123,7 @@ public class ThreatController : MonoBehaviour
 
     public float GetMissileCooldown()
     {
-        return 10f;
+        return missileCooldown;
     }
 
 }

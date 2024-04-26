@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7493824806828570669}
   - component: {fileID: 3315444852802341980}
   m_Layer: 0
-  m_Name: Missile
+  m_Name: Fast Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,13 +134,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7f00de1e8313f444bb3720bf66dc00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 40
   damage: 2
-  bulletRadius: 3
-  collideAsteroids: 1
-  trackingForce: 4
-  missileSpeed: 60
-  maxTime: 10
+  bulletRadius: 1
+  trackingForce: 3
+  missileSpeed: 80
+  maxTime: 4
   activeTime: 0
 --- !u!50 &3315444852802341980
 Rigidbody2D:
