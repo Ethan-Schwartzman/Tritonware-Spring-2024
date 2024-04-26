@@ -165,7 +165,7 @@ public class PuzzleManager : MonoBehaviour
                 Debug.LogError("Failed to spawn puzzle");
                 return;
             }
-            
+            ShaderManager.Instance.HitEffect();
         }
         
         Puzzle newPuzzle = Instantiate(selectedPuzzle);
