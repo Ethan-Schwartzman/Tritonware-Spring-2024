@@ -28,8 +28,7 @@ public class ShaderManager : MonoBehaviour
     }
 
     private IEnumerator HitCoroutine() {
-        Debug.Log("here");
-        float intensity = 0.01f;
+        float intensity = 0.005f;
         float rate = 0.0005f;
 
         while(intensity > 0) {

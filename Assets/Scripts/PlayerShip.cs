@@ -36,7 +36,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
         bulletSpawner = GetComponent<ProjectileSpawner>();
         trailRenderer = GetComponentInChildren<TrailRenderer>();
 
-        trailRenderer.startColor = trailColor;
+       // trailRenderer.startColor = trailColor;
     }
 
     private void Start()
@@ -103,7 +103,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
         isAlive = false;
         PlayerShipMovement.Instance.Shutdown();
         PuzzleManager.Instance.gameObject.SetActive(false);
-        trailRenderer.startColor = driftTrailColor;
+        //trailRenderer.startColor = driftTrailColor;
 
     }
 
@@ -120,12 +120,12 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
         {
             controlLoss = true;
             controlLossTimer = controlLossTime;
-            trailRenderer.startColor = driftTrailColor;
+            //trailRenderer.startColor = driftTrailColor;
         }
         else
         {
             controlLoss = false;
-            trailRenderer.startColor = trailColor;
+            //trailRenderer.startColor = trailColor;
         }
 
     }
