@@ -7,6 +7,9 @@ public class ShaderManager : MonoBehaviour
     public static ShaderManager Instance;
 
     public Material ChromaticAberration;
+    private const float DEFAULT_ABERRATION = 0.001f;
+    private const float MAX_ABERRATION = 0.0075f;
+    private const float ABERRATION_RATE = 0.0005f;
     private Coroutine hitEffect;
 
     void Start()
@@ -19,7 +22,7 @@ public class ShaderManager : MonoBehaviour
             Destroy(this);
         }
 
-        ChromaticAberration.SetFloat("_intensity", 0);
+        ChromaticAberration.SetFloat("_intensity", DEFAULT_ABERRATION);
     }
 
     public void HitEffect() {
@@ -28,12 +31,11 @@ public class ShaderManager : MonoBehaviour
     }
 
     private IEnumerator HitCoroutine() {
-        float intensity = 0.005f;
-        float rate = 0.0005f;
+        float intensity = MAX_ABERRATION;
 
         while(intensity > 0) {
-            intensity -= rate;
-            if(intensity < 0) intensity = 0;
+            intensity -= ABERRATION_RATE;
+            if(intensity < DEFAULT_ABERRATION) intensity = DEFAULT_ABERRATION;
             ChromaticAberration.SetFloat("_intensity", intensity);
             yield return new WaitForSeconds(0.01f);
         }
