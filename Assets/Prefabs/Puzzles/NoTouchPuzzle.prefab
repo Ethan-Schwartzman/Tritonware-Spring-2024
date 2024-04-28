@@ -340,6 +340,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScoreText: {fileID: 615902915153993890}
   flash: {fileID: 2384222665943068478}
+  AllControlsTrigger: 1
+  failIncrease: 0.5
+  countdownStart: 2
 --- !u!1 &7011585536050080437
 GameObject:
   m_ObjectHideFlags: 0
