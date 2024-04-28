@@ -10,6 +10,12 @@ public class ShaderManager : MonoBehaviour
     private const float DEFAULT_ABERRATION = 0.001f;
     private const float MAX_ABERRATION = 0.0075f;
     private const float ABERRATION_RATE = 0.0005f;
+
+
+    public Transform CameraTransform;
+    private const float CAMERA_DAMPING = 1.0f;
+
+
     private Coroutine hitEffect;
 
     void Start()
@@ -41,5 +47,34 @@ public class ShaderManager : MonoBehaviour
         }
         
         hitEffect = null;
+    }
+
+    public void HyperspaceEffect(float duration) {
+        StartCoroutine(HyperspaceCoroutine(duration)); 
+    }
+
+    private IEnumerator HyperspaceCoroutine(float duration) {
+        if(hitEffect != null) StopCoroutine(hitEffect);
+
+        Vector3 initialPosition = new Vector3(0, 0, -10f);
+
+        float intensity = 0;
+        float startTime = Time.time;
+
+        while(Time.time - startTime < duration) {
+            // Aberration
+            float t = (Time.time - startTime) / duration;
+            t = -1.0f + 2*t;
+            intensity = 1.0f - Mathf.Pow(Mathf.Abs(Mathf.Sin(Mathf.PI * t / 2.0f)), 2.5f);
+            ChromaticAberration.SetFloat("_intensity", intensity * MAX_ABERRATION);
+
+            // Screen shake
+            CameraTransform.localPosition = initialPosition + Random.insideUnitSphere * intensity;
+
+            yield return null;
+        }
+
+        CameraTransform.localPosition = initialPosition;
+        ChromaticAberration.SetFloat("_intensity", DEFAULT_ABERRATION);
     }
 }

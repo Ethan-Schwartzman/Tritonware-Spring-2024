@@ -60,14 +60,8 @@ public class BossEnemy : EnemyShip
 
     public override void TriggerDeath()
     {
+        StageManager.Instance.AdvanceStage();
         healthbar.gameObject.SetActive(false);
         base.TriggerDeath();
-        //StartCoroutine(AdvanceStage());
-    }
-
-    private IEnumerator AdvanceStage() {
-        EffectController.Instance.Hyperspace();
-        yield return new WaitForSeconds(5);
-        ScoreManager.Instance.NextStage();
     }
 }
