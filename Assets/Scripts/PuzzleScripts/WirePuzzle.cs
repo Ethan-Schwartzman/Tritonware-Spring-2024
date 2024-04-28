@@ -20,9 +20,6 @@ public class WirePuzzle : Puzzle
 
     private int[] wireColors;
 
-    const int MIN_STEPS = 15;
-    const int MAX_STEPS = 30;
-
     public override int GetDifficulty()
     {
         return 2;
