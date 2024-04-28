@@ -18,10 +18,10 @@ public class EffectController : MonoBehaviour
         }
     }
 
-    public void SpawnAsteroidParticles(ParticleSystem particles, Transform asteroid) {
+    public void SpawnParticles(ParticleSystem particles, Transform t) {
         ParticleSystem ps = Instantiate(particles);
-        ps.transform.position = asteroid.position;
-        ps.transform.localScale = asteroid.localScale;
+        ps.transform.position = t.position;
+        ps.transform.localScale = t.localScale;
         StartCoroutine(this.ParticleCoroutine(ps));
     }
 

@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  Particles: {fileID: 1222855035342946810, guid: 14fc8ccbeb49e744f94224bfc9f086bb, type: 3}
   weaponCooldown: 2
   bulletSpread: 0.2
   defaultColor: {r: 1, g: 0.5943396, b: 0.5943396, a: 1}

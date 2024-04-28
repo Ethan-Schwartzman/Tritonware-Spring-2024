@@ -63,7 +63,7 @@ public class Asteroid : DynamicEntity, IDamagable
 
     public void TriggerDeath()
     {
-        EffectController.Instance.SpawnAsteroidParticles(Particles, transform);
+        EffectController.Instance.SpawnParticles(Particles, transform);
         if (isActiveAndEnabled) AsteroidGenerator.Instance.AsteroidPool.Release(this);
     }
 
