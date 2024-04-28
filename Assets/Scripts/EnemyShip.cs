@@ -17,7 +17,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
     Rigidbody2D rb;
     protected EnemyShipMovement shipMovement;
     protected ProjectileSpawner[] bulletSpawner;
-    HealthTracker healthTracker;
+    protected HealthTracker healthTracker;
 
     protected float currentWeaponCooldown;
     public float weaponCooldown;
@@ -98,7 +98,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
         StartCoroutine(EffectController.DamageEffect(spriteRenderer));
     }
 
-    public void TriggerDeath()
+    public virtual void TriggerDeath()
     {
         EffectController.Instance.SpawnParticles(Particles, transform);
         Powerup pow = PowerupManager.SpawnPowerup();

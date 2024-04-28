@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ThreatController : MonoBehaviour
 {
     public static int EnemyHealth = 10;
-    public static int BossHealth = 100;
+    public static int BossHealth = 200;
     public static int AsteroidHealth = 2;
+    public Slider BossHealthbar;
 
     public static ThreatController Instance;
     public int activeEnemyCount;
@@ -61,7 +63,7 @@ public class ThreatController : MonoBehaviour
     }
 
     // Create the ship
-    private void SpawnEnemyShip()
+    public void SpawnEnemyShip()
     {
         EnemyShip newShip = Instantiate(enemyShipTemplate);
         // Spawn ship in the general direction player is facing

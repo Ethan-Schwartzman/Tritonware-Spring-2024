@@ -36,7 +36,7 @@ public class Missile : Projectile
         float deviationAngle = Vector2.SignedAngle(r, vRel);
 
         rb.velocity += -Vector2.Perpendicular(vRel) * trackingForce * Mathf.Deg2Rad * Mathf.Sin(Mathf.Deg2Rad * deviationAngle);
-        if (rb.velocity.magnitude < missileSpeed) rb.velocity += rb.velocity.normalized * 10 * dt;
+        //if (rb.velocity.magnitude < missileSpeed) rb.velocity += rb.velocity.normalized * 10 * dt;
 
         //Debug.Log($"Angle: {deviationAngle}");
 

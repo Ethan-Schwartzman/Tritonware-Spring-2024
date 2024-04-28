@@ -134,12 +134,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7f00de1e8313f444bb3720bf66dc00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 25
   damage: 2
-  bulletRadius: 3
+  bulletRadius: 1
   collideAsteroids: 1
   trailRenderer: {fileID: 0}
-  trackingForce: 4
+  trackingForce: 3
   missileSpeed: 60
   maxTime: 5
   activeTime: 0

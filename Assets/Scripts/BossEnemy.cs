@@ -1,25 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossEnemy : EnemyShip
 {
     public ProjectileSpawner Bullets;
     public ProjectileSpawner Missiles;
     private float bossWeaponCooldown = 5f;
+    private bool halfHealth = false;
+
+    private Slider healthbar;
 
     override protected void Awake() {
+        healthbar = ThreatController.Instance.BossHealthbar;
         base.Awake();
         shipMovement.CombatDistance = new Vector3(30f, 0);
     }
 
     override public HealthTracker SetHealth() {
+        healthbar.value = 1;
+        healthbar.gameObject.SetActive(true);
         return new HealthTracker(this, ThreatController.BossHealth);
     }
 
     protected override void Combat() {
+        healthbar.value = (float)healthTracker.health/healthTracker.maxHealth;
         if (currentWeaponCooldown <= 0)
         {
+            // call minions
+            if(healthTracker.health < healthTracker.maxHealth/2 && !halfHealth) {
+                halfHealth = true;
+
+                ThreatController.Instance.SpawnEnemyShip();
+                ThreatController.Instance.SpawnEnemyShip();
+                ThreatController.Instance.SpawnEnemyShip();
+            }
+
             int weapon = Random.Range(0, 2);
             // bullets
             if(weapon == 0) {
@@ -31,6 +48,7 @@ public class BossEnemy : EnemyShip
             }
             currentWeaponCooldown = bossWeaponCooldown;
         }
+        
     }
 
     private IEnumerator RapidFire(ProjectileSpawner spawner, int count, float time) {
@@ -38,5 +56,11 @@ public class BossEnemy : EnemyShip
             spawner.SpawnProjectile();
             yield return new WaitForSeconds(time);
         }
+    }
+
+    public override void TriggerDeath()
+    {
+        healthbar.gameObject.SetActive(false);
+        base.TriggerDeath();
     }
 }
