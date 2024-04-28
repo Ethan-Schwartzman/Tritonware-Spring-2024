@@ -16,7 +16,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
     Collider2D col;
     Rigidbody2D rb;
     protected EnemyShipMovement shipMovement;
-    protected ProjectileSpawner[] bulletSpawner;
+    protected IWeapon[] bulletSpawner;
     protected HealthTracker healthTracker;
 
     protected float currentWeaponCooldown;
@@ -36,7 +36,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         shipMovement = GetComponent<EnemyShipMovement>();
-        bulletSpawner = GetComponentsInChildren<ProjectileSpawner>();
+        bulletSpawner = GetComponentsInChildren<IWeapon>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         spawnTime = Time.time;
@@ -45,7 +45,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
     // Update is called once per frame
     void Update()
     {
-        if (currentWeaponCooldown >= 0) currentWeaponCooldown -= Time.deltaTime;
+        //if (currentWeaponCooldown >= 0) currentWeaponCooldown -= Time.deltaTime;
         switch (state)
         {
             case ActivationState.idle:
@@ -121,14 +121,12 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
         healthTracker = new HealthTracker(this, hp);
     }
 
-    virtual protected void Combat() {
-        if (currentWeaponCooldown <= 0)
+    virtual protected void Combat()
+    {
+        foreach (IWeapon ps in bulletSpawner)
         {
-            foreach (ProjectileSpawner ps in bulletSpawner)
-            {
+            if (ps.CanFire())
                 ps.Fire();
-            }
-            currentWeaponCooldown = weaponCooldown;
         }
     }
 }

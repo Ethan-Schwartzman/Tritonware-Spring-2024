@@ -9,14 +9,14 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     public static PlayerShipMovement shipMovement;
     public static HealthTracker healthTracker;
 
-    ProjectileSpawner[] bulletSpawner;
+    IWeapon[] bulletSpawner;
     SpriteRenderer spriteRenderer;
     TrailRenderer trailRenderer;
 
     public Powerup currentPowerup;
 
-    float currentWeaponCooldown;
-    public float weaponCooldown;
+    //float currentWeaponCooldown;
+    //public float weaponCooldown;
 
     bool controlLoss = false;
     float controlLossTimer = 0f;
@@ -36,7 +36,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
         }
         shipMovement = GetComponent<PlayerShipMovement>();
         healthTracker = new HealthTracker(this, Settings.Instance.PlayerMaxHealth);
-        bulletSpawner = GetComponentsInChildren<ProjectileSpawner>();
+        bulletSpawner = GetComponentsInChildren<IWeapon>();
         trailRenderer = GetComponentInChildren<TrailRenderer>();
 
        // trailRenderer.startColor = trailColor;
@@ -49,12 +49,11 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 
     private void Update()
     {
-        if (currentWeaponCooldown >= 0) currentWeaponCooldown -= Time.deltaTime;
+        //if (currentWeaponCooldown >= 0) currentWeaponCooldown -= Time.deltaTime;
         if (controlLoss) controlLossTimer -= Time.deltaTime;
         if (controlLoss && controlLossTimer <= 0) ToggleDrift(false);
 
-        DebugRenderer.lineRenderer1.SetPosition(0, bulletSpawner[0].transform.position);
-        DebugRenderer.lineRenderer1.SetPosition(1, bulletSpawner[0].transform.position + 30 * (Vector3)GetAimDirection());
+        
     }
 
 
@@ -149,12 +148,12 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 
     public void Shoot()
     {
-        if (isAlive && currentWeaponCooldown <= 0)
+        if (isAlive)
         {
-            currentWeaponCooldown = weaponCooldown;
-            foreach (ProjectileSpawner ps in bulletSpawner)
+            //currentWeaponCooldown = weaponCooldown;
+            foreach (IWeapon ps in bulletSpawner)
             {
-                ps.Fire();
+                if (ps.CanFire()) ps.Fire();
             }
             
         }

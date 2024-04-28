@@ -197,6 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRelativePos: {x: 20, y: 0}
+  CombatDistance: {x: 20, y: 0}
   inertialDrift: 0
   compensation: 1
   compensationFactor: 1000
@@ -226,6 +227,7 @@ MonoBehaviour:
   Particles: {fileID: 1222855035342946810, guid: 14fc8ccbeb49e744f94224bfc9f086bb, type: 3}
   weaponCooldown: 2
   bulletSpread: 0.2
+  asteroidImmune: 0
   defaultColor: {r: 1, g: 0.5943396, b: 0.5943396, a: 1}
 --- !u!114 &9006830265826053269
 MonoBehaviour:
@@ -336,3 +338,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   templateBullet: {fileID: 5659163448690783328, guid: 5fd146e254b5dfb44978f1838152151d, type: 3}
   SoundEffect: {fileID: 9006830265826053269}
+  FireInterval: 2

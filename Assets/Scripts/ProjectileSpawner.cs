@@ -7,6 +7,8 @@ using UnityEngine.Pool;
 public interface IWeapon
 {
     public void Fire();
+    public Vector3 GetFirePosition();
+    public bool CanFire();
 }
 
 
@@ -21,6 +23,10 @@ public class ProjectileSpawner : MonoBehaviour, IWeapon
     public IWeaponContainer weaponContainer;
 
     private ObjectPool<Projectile> bulletPool;
+
+    public float FireInterval = 1;
+    float weaponCooldown = 0;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +50,7 @@ public class ProjectileSpawner : MonoBehaviour, IWeapon
         }
         if (weaponContainer == null )
         {
-            Debug.LogError("Bullet Spawner not attached to weaponContainer");
+            //Debug.LogError("Bullet Spawner not attached to weaponContainer");
         }
         bulletPool = new ObjectPool<Projectile>(
             CreateBullet,
@@ -53,6 +59,11 @@ public class ProjectileSpawner : MonoBehaviour, IWeapon
             DestroyBullet,
             true, POOL_DEFAULT, POOL_MAX
         );
+    }
+
+    private void Update()
+    {
+        if (weaponCooldown >= 0) weaponCooldown -= Time.deltaTime;
     }
 
     private Projectile CreateBullet() {
@@ -81,6 +92,7 @@ public class ProjectileSpawner : MonoBehaviour, IWeapon
     }
 
     public void Fire() {
+        weaponCooldown = FireInterval;
         Projectile bullet = bulletPool.Get();
         bullet.SetSpawner(this);
         
@@ -94,8 +106,18 @@ public class ProjectileSpawner : MonoBehaviour, IWeapon
     }
 
     // Update is called once per frame
-    void Update()
+    public Vector3 GetFirePosition()
     {
+        return transform.position;
+    }
 
+    public float GetFireInterval()
+    {
+        return FireInterval;
+    }
+
+    public bool CanFire()
+    {
+        return (weaponCooldown < 0);
     }
 }
