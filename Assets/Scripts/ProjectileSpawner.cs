@@ -34,6 +34,10 @@ public class ProjectileSpawner : MonoBehaviour
         weaponContainer = GetComponent<IWeaponContainer>();
         if (weaponContainer == null )
         {
+            weaponContainer = GetComponentInParent<IWeaponContainer>();
+        }
+        if (weaponContainer == null )
+        {
             Debug.LogError("Bullet Spawner not attached to weaponContainer");
         }
         bulletPool = new ObjectPool<Projectile>(
@@ -58,6 +62,7 @@ public class ProjectileSpawner : MonoBehaviour
         bullet.gameObject.SetActive(true);
         bullet.SetVelocityFromParent(weaponContainer);
         bullet.transform.position = transform.position;
+        bullet.transform.rotation = transform.rotation;
         
     }
 

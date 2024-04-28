@@ -44,7 +44,7 @@ public class EasyPuzzle : Puzzle
     // input: right arrow
     public override void OnPuzzle2()
     {
-        return;
+        OnPuzzle1();
     }
 
     public override int GetDifficulty()

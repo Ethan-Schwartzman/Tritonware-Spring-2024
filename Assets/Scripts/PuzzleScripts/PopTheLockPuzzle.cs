@@ -43,7 +43,7 @@ public class PopTheLockPuzzle : Puzzle
 
     public override void OnPuzzle2()
     {
-        return;
+        OnPuzzle1();
     }
 
     public override int GetDifficulty()

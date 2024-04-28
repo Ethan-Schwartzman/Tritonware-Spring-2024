@@ -49,6 +49,6 @@ public class MashPuzzle : Puzzle
 
     public override void OnPuzzle2()
     {
-        return;
+        OnPuzzle1();
     }
 }

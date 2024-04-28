@@ -140,10 +140,10 @@ public class PlayerShipMovement : MonoBehaviour {
 
 
 
-        DebugRenderer.lineRenderer1.SetPosition(0, transform.position);
-        DebugRenderer.lineRenderer1.SetPosition(1, transform.position + (Vector3)GetLift() * 0.01f);
-        DebugRenderer.lineRenderer2.SetPosition(0, transform.position);
-        DebugRenderer.lineRenderer2.SetPosition(1, transform.position + (Vector3)rb.velocity * 0.5f);
+        //DebugRenderer.lineRenderer1.SetPosition(0, transform.position);
+        //DebugRenderer.lineRenderer1.SetPosition(1, transform.position + (Vector3)GetLift() * 0.01f);
+        //DebugRenderer.lineRenderer2.SetPosition(0, transform.position);
+        //DebugRenderer.lineRenderer2.SetPosition(1, transform.position + (Vector3)rb.velocity * 0.5f);
         //DebugRenderer.lineRenderer3.SetPosition(0, transform.position);
         //DebugRenderer.lineRenderer3.SetPosition(1, transform.position - (Vector3)GetSpeedDamping() * 0.01f);
 

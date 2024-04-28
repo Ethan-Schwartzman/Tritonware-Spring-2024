@@ -44,7 +44,7 @@ public class FlappyBirdPuzzle : Puzzle
 
     public override void OnPuzzle2()
     {
-        return;
+        OnPuzzle1();
     }
 
     // Update is called once per frame
