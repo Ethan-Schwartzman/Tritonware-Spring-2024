@@ -16,7 +16,7 @@ public class WirePuzzle : Puzzle
     private HashSet<int> finishedColors = new HashSet<int>();
     private int[] selectedWires = new int[2];
     
-    private Color[] colors = {Color.red, Color.green, Color.blue, Color.yellow};
+    private Color[] colors = {Color.red, Color.green, Color.blue, new Color(1, 0.5f, 0, 1)};
 
     private int[] wireColors;
 

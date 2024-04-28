@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class MashPuzzle : Puzzle
@@ -37,6 +37,7 @@ public class MashPuzzle : Puzzle
             s.gameObject.SetActive(true);
             steps.Push(s);
         }
+        steps.Peek().GetComponent<Image>().color = Color.red;
     }
 
     public override void OnPuzzle1()
@@ -45,6 +46,8 @@ public class MashPuzzle : Puzzle
         Destroy(steps.Pop().gameObject);
 
         if(stepCount <= 0) PuzzleManager.Instance.CompletePuzzle(index);
+
+        steps.Peek().GetComponent<Image>().color = Color.red;
     }
 
     public override void OnPuzzle2()
