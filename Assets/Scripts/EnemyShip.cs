@@ -12,6 +12,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
 {
 
     public ActivationState state;
+    public ParticleSystem Particles;
     Collider2D col;
     Rigidbody2D rb;
     EnemyShipMovement shipMovement;
@@ -106,6 +107,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
 
     public void TriggerDeath()
     {
+        EffectController.Instance.SpawnParticles(Particles, transform);
         Powerup pow = PowerupManager.SpawnPowerup();
         pow.Init(transform.position, rb.velocity);
         ThreatController.Instance.DecreaseEnemyCount();
