@@ -31,6 +31,9 @@ public class WirePuzzle : Puzzle
         selectedWires[1] = 4;
         wireColors = new int[Wires.Length];
         RandomizeWires();
+        while (wireColors[selectedWires[0]] == wireColors[selectedWires[1]]){
+            RandomizeWires();
+        }
         CheckWires();
     }
 
