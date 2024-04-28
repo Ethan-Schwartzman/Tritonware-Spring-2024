@@ -13,18 +13,30 @@ public class BeamWeapon : MonoBehaviour, IWeapon
     public float beamInterval = 0.5f;
     public int beamDamage = 1;
 
+    float overheatDuration = 0f;
+    public float heatCapacity = 2f;
+    public bool overheated = false;
+
+    public float radius = 1f;
+
     bool beamEnabled = false;
 
     LineRenderer lineRenderer;
 
+
+    public bool collideEnemies;
     int layerMask;
-    
+
+    [SerializeField] Color beamColor, overheatColor;
 
     
 
     private void Awake()
     {
-        layerMask = LayerMask.GetMask("Player Ship", "Enemy Ship", "Asteroid");
+        if (collideEnemies)
+            layerMask = LayerMask.GetMask("Enemy Ship", "Asteroid");
+        else
+            layerMask = LayerMask.GetMask("Player Ship", "Asteroid");
 
 
 
@@ -35,14 +47,25 @@ public class BeamWeapon : MonoBehaviour, IWeapon
         }
         lineRenderer = GetComponent<LineRenderer>();
         
+        
     }
 
     private void Update()
     {
-
-
-        if (beamEnabled) beamDuration -= Time.deltaTime;
-        if (beamDuration > -0.05)
+        if (beamEnabled)
+        {
+            beamDuration -= Time.deltaTime;
+            overheatDuration += Time.deltaTime;
+        }
+        else if (overheatDuration > 0f)
+        {
+            overheatDuration -= Time.deltaTime;
+        }
+        if (overheatDuration <= 0f)
+        {
+            overheated = false;
+        }
+        if (beamEnabled && beamDuration > -0.02)
         {
             RaycastHit2D beamHit = Physics2D.Raycast(transform.position, wc.GetAimDirection(), 100, layerMask);
             lineRenderer.SetPosition(0, transform.position);
@@ -61,6 +84,13 @@ public class BeamWeapon : MonoBehaviour, IWeapon
             beamEnabled = false;
         }
 
+        if (overheatDuration > heatCapacity)
+        {
+            overheated = true;
+        }
+
+        lineRenderer.startColor = Color.Lerp(beamColor, overheatColor, overheatDuration/heatCapacity);
+        lineRenderer.endColor = Color.Lerp(beamColor, overheatColor, overheatDuration / heatCapacity);
     }
 
 
@@ -70,7 +100,7 @@ public class BeamWeapon : MonoBehaviour, IWeapon
         beamEnabled = true;
         lineRenderer.enabled = true;
         beamDuration = beamInterval;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, wc.GetAimDirection(), 100, layerMask);
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, radius, wc.GetAimDirection(), 100, layerMask);
         if (hit.collider != null)
         {
             IDamagable target = hit.collider.GetComponent<IDamagable>();
@@ -94,7 +124,14 @@ public class BeamWeapon : MonoBehaviour, IWeapon
 
     public bool CanFire()
     {
-        return (beamDuration <= 0);
+        return (beamDuration <= 0 && !overheated);
+    }
+
+    public void ResetHeat()
+    {
+        beamEnabled = false;
+        overheated = false;
+        overheatDuration = 0;
     }
 }
 

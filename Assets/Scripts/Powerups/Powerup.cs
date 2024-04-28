@@ -13,6 +13,7 @@ public abstract class Powerup: MonoBehaviour
     public float activatedDuration = 0f;
     public int maxCharges = 3;
     public int charges;
+    protected bool overrideFinish = false;
 
     float spawnTime;
     Rigidbody2D rb;
@@ -33,7 +34,7 @@ public abstract class Powerup: MonoBehaviour
             return;
         }
         if (isActive) activatedDuration += Time.deltaTime;
-        if (activatedDuration > GetDuration())
+        if (activatedDuration > GetDuration() && !overrideFinish)
         {
             Finish();
         }
