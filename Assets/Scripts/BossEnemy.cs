@@ -53,7 +53,7 @@ public class BossEnemy : EnemyShip
 
     private IEnumerator RapidFire(ProjectileSpawner spawner, int count, float time) {
         for(int i = 0; i < count; i++) {
-            spawner.SpawnProjectile();
+            spawner.Fire();
             yield return new WaitForSeconds(time);
         }
     }

@@ -36,6 +36,7 @@ public class ProgressBar : MonoBehaviour
             RectTransform rect = Instantiate(segment).rectTransform;
             rect.SetParent(transform, false);
             rect.anchoredPosition = new Vector2((initialWidth / segments) * i, 0);
+            rect.sizeDelta = new Vector2(rect.sizeDelta.x, rectTransform.rect.height);
             allSegments.Add(rect);
         }
     }

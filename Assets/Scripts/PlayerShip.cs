@@ -154,7 +154,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
             currentWeaponCooldown = weaponCooldown;
             foreach (ProjectileSpawner ps in bulletSpawner)
             {
-                ps.SpawnProjectile();
+                ps.Fire();
             }
             
         }

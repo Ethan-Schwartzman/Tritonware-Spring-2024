@@ -126,7 +126,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
         {
             foreach (ProjectileSpawner ps in bulletSpawner)
             {
-                ps.SpawnProjectile();
+                ps.Fire();
             }
             currentWeaponCooldown = weaponCooldown;
         }

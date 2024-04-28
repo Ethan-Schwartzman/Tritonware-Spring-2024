@@ -4,7 +4,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class ProjectileSpawner : MonoBehaviour
+public interface IWeapon
+{
+    public void Fire();
+}
+
+
+public class ProjectileSpawner : MonoBehaviour, IWeapon
 {
     const int POOL_DEFAULT = 100;
     const int POOL_MAX = 1000;
@@ -74,12 +80,13 @@ public class ProjectileSpawner : MonoBehaviour
         Destroy(bullet);
     }
 
-    public void SpawnProjectile() {
+    public void Fire() {
         Projectile bullet = bulletPool.Get();
         bullet.SetSpawner(this);
         
         if (SoundEffect != null) SoundEffect.Play();
     }
+
 
     public void Release(Projectile bullet) {
         if (bullet.isActiveAndEnabled) 
