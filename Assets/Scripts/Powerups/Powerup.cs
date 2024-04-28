@@ -3,7 +3,11 @@ using UnityEngine;
 public abstract class Powerup: MonoBehaviour
 {
     bool collected;
-    public static float collectDuration = 5f;
+    public bool isActive;
+    public const float COLLECT_DURATION = 5f;
+    public float activatedDuration = 0f;
+
+    float spawnTime;
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
 
@@ -12,9 +16,24 @@ public abstract class Powerup: MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spawnTime = Time.time;
     }
 
-    public void Init(Vector3 pos, Vector3 vel)
+    protected virtual void Update()
+    {
+        if (Time.time - spawnTime > COLLECT_DURATION)
+        {
+            Destroy(this);
+            return;
+        }
+        if (isActive) activatedDuration += Time.deltaTime;
+        if (activatedDuration > GetDuration())
+        {
+            Finish();
+        }
+    }
+
+    public virtual void Init(Vector3 pos, Vector3 vel)
     {
         transform.position = pos;
         rb.velocity = vel;
@@ -25,7 +44,12 @@ public abstract class Powerup: MonoBehaviour
         Debug.Log("collided");
         if (collision.gameObject == PlayerShip.Instance.gameObject)
         {
-            Collect();
+            Powerup pow = PlayerShip.Instance.currentPowerup;
+            if (pow == null || (pow != null && !pow.isActive))
+            {
+                Collect();
+            }
+               
         }
     }
 
@@ -39,8 +63,21 @@ public abstract class Powerup: MonoBehaviour
         collected = true;
     }
 
+    protected virtual void Finish()
+    {
+        PlayerShip.Instance.SetPowerup(null);
+        Destroy(gameObject);
+    }
+
     public abstract string GetName();
 
-    public abstract void Activate();
+    public virtual void Activate()
+    {
+        isActive = true;
+    }
+
+
+
+    public abstract float GetDuration();
 
 }

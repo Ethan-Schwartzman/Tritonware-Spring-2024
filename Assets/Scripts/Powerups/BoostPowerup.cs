@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class BoostPowerup : Powerup
 {
     public override string GetName()
@@ -6,6 +8,11 @@ public class BoostPowerup : Powerup
     }
     public override void Activate()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("boost activated");
+    }
+
+    public override float GetDuration()
+    {
+        return 5f;
     }
 }

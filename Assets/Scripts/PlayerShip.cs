@@ -11,8 +11,8 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     ProjectileSpawner[] bulletSpawner;
     SpriteRenderer spriteRenderer;
     TrailRenderer trailRenderer;
-    public Powerup currentPowerup;
 
+    public Powerup currentPowerup;
 
     float currentWeaponCooldown;
     public float weaponCooldown;
@@ -157,5 +157,10 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     {
         currentPowerup = powerup;
         PlayerUI.Instance.UpdateUI();
+    }
+
+    public void ActivatePowerup()
+    {
+        if (currentPowerup != null && !currentPowerup.isActive) currentPowerup.Activate();
     }
 }

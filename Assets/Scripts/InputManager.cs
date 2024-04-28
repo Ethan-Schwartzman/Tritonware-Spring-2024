@@ -43,7 +43,7 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            PlayerShipMovement.Instance.Boost(true);
+            PlayerShip.Instance.ActivatePowerup();
         }
 
         if (Input.GetKeyDown(KeyCode.G))

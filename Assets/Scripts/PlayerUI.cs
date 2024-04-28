@@ -10,7 +10,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] TMP_Text health, maxHealth, speed,
         playerProgress, enemyProgress, missileWarning,
         powerup;
-
+    [SerializeField] ProgressBar powerupDuration;
     
 
 
@@ -24,6 +24,13 @@ public class PlayerUI : MonoBehaviour
         speed.text = Mathf.RoundToInt(PlayerShip.Instance.GetVelocity().magnitude).ToString();
         playerProgress.text = ThreatController.Instance.GetPlayerProgress().ToString();
         enemyProgress.text = ThreatController.Instance.GetEnemyProgress().ToString();
+
+        Powerup pow = PlayerShip.Instance.currentPowerup;
+        if (pow != null)
+        {
+            powerupDuration.SetLevel((pow.GetDuration() - pow.activatedDuration) / pow.activatedDuration);
+        }
+        
     }
 
     public void UpdateUI()
