@@ -8,7 +8,8 @@ public class PlayerUI : MonoBehaviour
 
     public static PlayerUI Instance;
     [SerializeField] TMP_Text health, maxHealth, speed,
-        playerProgress, enemyProgress, missileWarning;
+        playerProgress, enemyProgress, missileWarning,
+        powerup;
 
     
 
@@ -29,6 +30,8 @@ public class PlayerUI : MonoBehaviour
     {
         health.text = PlayerShip.Instance.GetHealth().ToString();
         maxHealth.text = PlayerShip.Instance.GetMaxHealth().ToString();
+        if (PlayerShip.Instance.currentPowerup == null) powerup.text = "";
+        else powerup.text = PlayerShip.Instance.currentPowerup.GetName();
     }
 
     public IEnumerator MissileWarning()

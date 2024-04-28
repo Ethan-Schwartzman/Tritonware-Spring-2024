@@ -8,9 +8,10 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     public static PlayerShipMovement shipMovement;
     public static HealthTracker healthTracker;
 
-    ProjectileSpawner bulletSpawner;
+    ProjectileSpawner[] bulletSpawner;
     SpriteRenderer spriteRenderer;
     TrailRenderer trailRenderer;
+    public Powerup currentPowerup;
 
 
     float currentWeaponCooldown;
@@ -33,7 +34,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
         }
         shipMovement = GetComponent<PlayerShipMovement>();
         healthTracker = new HealthTracker(this, Settings.Instance.PlayerMaxHealth);
-        bulletSpawner = GetComponent<ProjectileSpawner>();
+        bulletSpawner = GetComponentsInChildren<ProjectileSpawner>();
         trailRenderer = GetComponentInChildren<TrailRenderer>();
 
        // trailRenderer.startColor = trailColor;
@@ -49,6 +50,9 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
         if (currentWeaponCooldown >= 0) currentWeaponCooldown -= Time.deltaTime;
         if (controlLoss) controlLossTimer -= Time.deltaTime;
         if (controlLossTimer <= 0) ToggleDrift(false);
+
+        DebugRenderer.lineRenderer1.SetPosition(0, bulletSpawner[0].transform.position);
+        DebugRenderer.lineRenderer1.SetPosition(1, bulletSpawner[0].transform.position + 30 * (Vector3)GetAimDirection());
     }
 
 
@@ -136,12 +140,22 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
         if (isAlive && currentWeaponCooldown <= 0)
         {
             currentWeaponCooldown = weaponCooldown;
-            bulletSpawner.SpawnProjectile();
+            foreach (ProjectileSpawner ps in bulletSpawner)
+            {
+                ps.SpawnProjectile();
+            }
+            
         }
     }
 
     public Team GetTeam()
     {
         return Team.player;
+    }
+
+    public void SetPowerup(Powerup powerup)
+    {
+        currentPowerup = powerup;
+        PlayerUI.Instance.UpdateUI();
     }
 }
