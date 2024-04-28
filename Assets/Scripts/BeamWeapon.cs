@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 
@@ -16,8 +17,17 @@ public class BeamWeapon : MonoBehaviour, IWeapon
 
     LineRenderer lineRenderer;
 
+    int layerMask;
+    
+
+    
+
     private void Awake()
     {
+        layerMask = LayerMask.GetMask("Player Ship", "Enemy Ship", "Asteroid");
+
+
+
         wc = GetComponent<IWeaponContainer>();
         if (wc == null)
         {
@@ -34,7 +44,7 @@ public class BeamWeapon : MonoBehaviour, IWeapon
         if (beamEnabled) beamDuration -= Time.deltaTime;
         if (beamDuration > -0.05)
         {
-            RaycastHit2D beamHit = Physics2D.Raycast(transform.position, wc.GetAimDirection());
+            RaycastHit2D beamHit = Physics2D.Raycast(transform.position, wc.GetAimDirection(), 100, layerMask);
             lineRenderer.SetPosition(0, transform.position);
             if (beamHit.collider != null)
             {
@@ -60,7 +70,7 @@ public class BeamWeapon : MonoBehaviour, IWeapon
         beamEnabled = true;
         lineRenderer.enabled = true;
         beamDuration = beamInterval;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, wc.GetAimDirection());
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, wc.GetAimDirection(), 100, layerMask);
         if (hit.collider != null)
         {
             IDamagable target = hit.collider.GetComponent<IDamagable>();
