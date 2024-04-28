@@ -3108,7 +3108,13 @@ MonoBehaviour:
   BottomMiddlePuzzle: {fileID: 0}
   BottomRightPuzzle: {fileID: 0}
   puzzleTemplates:
-  - {fileID: 8475585179735044389, guid: 55032f976d3305a4ba0536bd1b74754d, type: 3}
+  - {fileID: 3286874186972502667, guid: 279e7a253aaecb84fab04854bc52212b, type: 3}
+  - {fileID: 2975608107691423368, guid: 93fe148daa7355742a32f362de47d7ae, type: 3}
+  - {fileID: 8475585179735044389, guid: 1e17d8c02397f6b4395099f34fc44f4b, type: 3}
+  - {fileID: 1680345761350017478, guid: 388ecdbc8f200bd46805037dca05e477, type: 3}
+  - {fileID: 5228105164526541812, guid: 67ba791bc6fc94ffbafc4065254f0d90, type: 3}
+  - {fileID: 1085407465457882604, guid: 4d6b298a3ef9f1047b2fddee4862309e, type: 3}
+  - {fileID: 2287134039445927511, guid: 01285ddba87dd4aeeb5bb7faf871ce16, type: 3}
   puzzleChancePerDamage: 0.15
   baseMaxDifficulty: 12
   healPerPuzzle: 3
@@ -3722,7 +3728,7 @@ MonoBehaviour:
   ShipCollisionDamage: 4
   EnableAsteroids: 1
   EnableEnemies: 1
-  EnablePuzzles: 0
+  EnablePuzzles: 1
   EnableDeath: 1
   EnableMissiles: 1
 --- !u!114 &1075298646
