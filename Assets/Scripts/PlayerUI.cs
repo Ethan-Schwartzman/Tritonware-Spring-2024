@@ -8,10 +8,11 @@ public class PlayerUI : MonoBehaviour
 
     public static PlayerUI Instance;
     [SerializeField] TMP_Text health, maxHealth, speed,
-        playerProgress, enemyProgress, missileWarning,
-        powerup;
-    [SerializeField] ProgressBar powerupDuration;
-    
+        missileWarning,
+        powerup, popupText;
+    [SerializeField] ProgressBar powerupDuration, playerProgress, enemyProgress;
+
+    Coroutine currentPopup;
 
 
     private void Awake()
@@ -22,15 +23,15 @@ public class PlayerUI : MonoBehaviour
     private void Update()
     {
         speed.text = Mathf.RoundToInt(PlayerShip.Instance.GetVelocity().magnitude).ToString();
-        playerProgress.text = ThreatController.Instance.GetPlayerProgress().ToString();
-        enemyProgress.text = ThreatController.Instance.GetEnemyProgress().ToString();
+        playerProgress.SetLevel(ThreatController.Instance.GetPlayerProgress() / Settings.Instance.sectorDistance);
+        enemyProgress.SetLevel(ThreatController.Instance.GetEnemyProgress() / Settings.Instance.sectorDistance);
 
         Powerup pow = PlayerShip.Instance.currentPowerup;
         if (pow != null)
         {
-            Debug.Log((pow.GetDuration() - pow.activatedDuration) / pow.GetDuration());
             powerupDuration.SetLevel((pow.GetDuration() - pow.activatedDuration) / pow.GetDuration());
         }
+        else powerupDuration.SetLevel(0);
         
     }
 
@@ -42,19 +43,34 @@ public class PlayerUI : MonoBehaviour
         else powerup.text = PlayerShip.Instance.currentPowerup.GetName();
     }
 
-    public IEnumerator MissileWarning()
+    public IEnumerator MissileWarning(float height)
     {
-        missileWarning.enabled = true;
+        missileWarning.rectTransform.anchoredPosition = new Vector2(0, height * 5);
+        for (int i = 0; i < 5; i++) 
+        {
+            missileWarning.enabled = true;
+            yield return new WaitForSeconds(0.2f);
+            missileWarning.enabled = false;
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+
+
+    public void PopupText(string text)
+    {
+        if (currentPopup != null) StopCoroutine(currentPopup);
+        currentPopup = StartCoroutine(PopupTextC(text));
+    }
+    private IEnumerator PopupTextC(string text)
+    {
+        popupText.text = text;
+        popupText.enabled = true;
         yield return new WaitForSeconds(0.2f);
-        missileWarning.enabled = false;
+        popupText.enabled = false;
         yield return new WaitForSeconds(0.2f);
-        missileWarning.enabled = true;
+        popupText.enabled = true;
         yield return new WaitForSeconds(0.2f);
-        missileWarning.enabled = false;
-        yield return new WaitForSeconds(0.2f);
-        missileWarning.enabled = true;
-        yield return new WaitForSeconds(0.2f);
-        missileWarning.enabled = false;
+        popupText.enabled = false;
     }
 
 }

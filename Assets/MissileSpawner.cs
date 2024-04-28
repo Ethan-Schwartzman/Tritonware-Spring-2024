@@ -54,8 +54,9 @@ public class MissileSpawner : MonoBehaviour, IWeaponContainer
 
     public void ShootMissile()
     {
-        transform.position = (Vector2)PlayerShip.Instance.transform.position + new Vector2(-50f, Random.Range(-20f, 20f));
+        float height = Random.Range(-30f, 30f);
+        transform.position = (Vector2)PlayerShip.Instance.transform.position + new Vector2(-80f, height);
         pSpawner.SpawnProjectile();
-        StartCoroutine(PlayerUI.Instance.MissileWarning());
+        StartCoroutine(PlayerUI.Instance.MissileWarning(height));
     }
 }

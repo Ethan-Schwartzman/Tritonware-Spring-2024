@@ -266,13 +266,35 @@ public class PlayerShipMovement : MonoBehaviour {
         }
         else
         {
-            aoaDrag = aoaDragDefault;
-            angularDamping = angularDampingDefault;
-            liftMultiplier = liftMultiplierDefault;
-            thrust = thrustDefault;
-            torqueMultiplier = torqueMultiplierDefault;
-            topSpeed = topSpeedDefault;
+            ResetDefault();
         }
+    }
+
+    public void ToggleBoost(bool toggle)
+    {
+        
+        if (toggle)
+        {
+            aoaDrag = 0;
+            liftMultiplier = liftMultiplierDefault * 2;
+            thrust = thrustDefault * 1.2f;
+            topSpeed = topSpeedDefault * 2;
+        }
+        else
+        {
+            ResetDefault();
+        }
+    }
+
+
+    public void ResetDefault()
+    {
+        aoaDrag = aoaDragDefault;
+        angularDamping = angularDampingDefault;
+        liftMultiplier = liftMultiplierDefault;
+        thrust = thrustDefault;
+        torqueMultiplier = torqueMultiplierDefault;
+        topSpeed = topSpeedDefault;
     }
 
     public void Shutdown()

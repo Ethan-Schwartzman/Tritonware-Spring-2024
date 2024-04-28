@@ -101,8 +101,11 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
     public virtual void TriggerDeath()
     {
         EffectController.Instance.SpawnParticles(Particles, transform);
-        Powerup pow = PowerupManager.SpawnPowerup();
-        pow.Init(transform.position, rb.velocity);
+        if (Random.value < Settings.Instance.powerupDropChance)
+        {
+            Powerup pow = PowerupManager.SpawnPowerup();
+            pow.Init(transform.position, rb.velocity);
+        }
         ThreatController.Instance.DecreaseEnemyCount();
         StopAllCoroutines();
         Destroy(gameObject);

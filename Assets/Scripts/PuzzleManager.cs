@@ -29,7 +29,8 @@ public class PuzzleManager : MonoBehaviour
 
     float randomPuzzleSpawnTime = 0;
     const float RANDOM_PUZZLE_TICK_TIME = 2f;
-    const float BASE_RANDOM_PUZZLE_CHANCE = 0.05f;
+    const float BASE_RANDOM_PUZZLE_CHANCE = 0.03f;
+    const float RANDOM_PUZZLE_CHANCE_TICK = 0.03f;
     float currentRandomPuzzleChance;
 
     [SerializeField] int healPerPuzzle = 3;
@@ -128,11 +129,11 @@ public class PuzzleManager : MonoBehaviour
         {
             SpawnPuzzle();
             currentRandomPuzzleChance = BASE_RANDOM_PUZZLE_CHANCE;
-            // Debug.Log($"RANDOM PUZZLE SPAWNED at time {Time.time}");
+            PlayerUI.Instance.PopupText("MALFUNCTION");
         }
         else
         {
-            currentRandomPuzzleChance += 0.1f * (1f - (float)PlayerShip.Instance.GetHealth() /
+            currentRandomPuzzleChance += RANDOM_PUZZLE_CHANCE_TICK * (1f - (float)PlayerShip.Instance.GetHealth() /
                 (float)PlayerShip.Instance.GetMaxHealth());
         }
     }

@@ -47,6 +47,7 @@ public class MashPuzzle : Puzzle
 
         if(stepCount <= 0) PuzzleManager.Instance.CompletePuzzle(index);
 
+        if (steps.Count == 0) return;
         steps.Peek().GetComponent<Image>().color = Color.red;
     }
 

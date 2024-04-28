@@ -15,6 +15,10 @@ public class Settings : MonoBehaviour
     public int AsteroidCollisionDamage = 4;
     public int ShipCollisionDamage = 4;
 
+
+    public float powerupDropChance = 0.1f;
+    public float sectorDistance = 300;
+
     public bool EnableAsteroids = true;
     public bool EnableEnemies = true;
     public bool EnablePuzzles = true;

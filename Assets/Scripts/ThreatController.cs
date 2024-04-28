@@ -7,7 +7,7 @@ public class ThreatController : MonoBehaviour
 {
     public static int EnemyHealth = 10;
     public static int BossHealth = 200;
-    public static int AsteroidHealth = 2;
+    public static int AsteroidHealth = 6;
     public Slider BossHealthbar;
 
     public static ThreatController Instance;

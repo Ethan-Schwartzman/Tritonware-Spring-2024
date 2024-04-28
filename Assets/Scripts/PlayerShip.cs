@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     [SerializeField] float controlLossTime = 3f;
 
     public bool isAlive = true;
+
 
     public Color trailColor, driftTrailColor;
 
@@ -49,7 +51,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     {
         if (currentWeaponCooldown >= 0) currentWeaponCooldown -= Time.deltaTime;
         if (controlLoss) controlLossTimer -= Time.deltaTime;
-        if (controlLossTimer <= 0) ToggleDrift(false);
+        if (controlLoss && controlLossTimer <= 0) ToggleDrift(false);
 
         DebugRenderer.lineRenderer1.SetPosition(0, bulletSpawner[0].transform.position);
         DebugRenderer.lineRenderer1.SetPosition(1, bulletSpawner[0].transform.position + 30 * (Vector3)GetAimDirection());
@@ -58,6 +60,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 
     public void DealDamage(int damage)
     {
+        if (PowerupIsActive(PowerupState.Shield)) return;
         healthTracker.TakeDamage(damage);
         PuzzleManager.Instance.RollForPuzzleDamage(damage);
         StartCoroutine(EffectController.DamageEffect(spriteRenderer));
@@ -113,7 +116,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 
     public void TriggerCollision()
     {
-        ToggleDrift(true);
+        if (!PowerupIsActive(PowerupState.Shield)) ToggleDrift(true);
     }
 
     public void ToggleDrift(bool toggle)
@@ -129,11 +132,20 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
         else
         {
             controlLoss = false;
+            controlLossTimer = 0;
             //trailRenderer.startColor = trailColor;
         }
 
     }
 
+    public void ToggleBoost(bool toggle)
+    {
+        if (toggle)
+        {
+            ToggleDrift(false);
+        }
+        PlayerShipMovement.Instance.ToggleBoost(toggle);
+    }
 
     public void Shoot()
     {
@@ -161,6 +173,16 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 
     public void ActivatePowerup()
     {
+        if (!isAlive) return;
         if (currentPowerup != null && !currentPowerup.isActive) currentPowerup.Activate();
+    }
+
+
+
+    private bool PowerupIsActive(PowerupState state)
+    {
+        if (currentPowerup == null) return false;
+        return currentPowerup.isActive && state == currentPowerup.GetPowerupState();
+
     }
 }

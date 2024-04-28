@@ -18,14 +18,14 @@ public class FlappyBirdPuzzle : Puzzle
     private float score;
 
     private List<FlappyBirdPipe> pipes;
-    private const float SPEED = 125f;
+    private const float SPEED = 250f;
     private const float FASTEST_SPAWN_TIME = 1.5f;
     private const float SLOWEST_SPAWN_TIME = 3f;
     private const float GRAVITY = 1000f;
 
     public override int GetDifficulty()
     {
-        return 3;
+        return 4;
     }
 
     public override void InitPuzzle(float difficulty)
@@ -33,7 +33,7 @@ public class FlappyBirdPuzzle : Puzzle
         pipes = new List<FlappyBirdPipe>();
         spawnCooldown = 0;
         fallSpeed = 0;
-        score = Random.Range(3, 7);
+        score = Random.Range(3, 5);
         UpdateScore();
     }
 

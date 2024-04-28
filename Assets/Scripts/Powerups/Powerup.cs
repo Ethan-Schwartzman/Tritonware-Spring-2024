@@ -1,5 +1,10 @@
 using UnityEngine;
 
+public enum PowerupState
+{
+    None, Shield, Boost
+}
+
 public abstract class Powerup: MonoBehaviour
 {
     bool collected;
@@ -9,13 +14,12 @@ public abstract class Powerup: MonoBehaviour
 
     float spawnTime;
     Rigidbody2D rb;
-    SpriteRenderer spriteRenderer;
+    [SerializeField] SpriteRenderer spriteRenderer;
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         spawnTime = Time.time;
     }
 
@@ -58,12 +62,13 @@ public abstract class Powerup: MonoBehaviour
     public void Collect()
     {
         spriteRenderer.enabled = false;
-        transform.SetParent(PlayerShip.Instance.transform);
+        transform.SetParent(PlayerShip.Instance.transform,false);
         PlayerShip.Instance.SetPowerup(this);
         collected = true;
+        rb.simulated = false;
     }
 
-    protected virtual void Finish()
+    public virtual void Finish()
     {
         PlayerShip.Instance.SetPowerup(null);
         Destroy(gameObject);
@@ -79,5 +84,7 @@ public abstract class Powerup: MonoBehaviour
 
 
     public abstract float GetDuration();
+
+    public abstract PowerupState GetPowerupState();
 
 }
