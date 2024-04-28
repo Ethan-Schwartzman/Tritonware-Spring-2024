@@ -5,6 +5,7 @@ using UnityEngine;
 public class ThreatController : MonoBehaviour
 {
     public static int EnemyHealth = 10;
+    public static int BossHealth = 100;
     public static int AsteroidHealth = 2;
 
     public static ThreatController Instance;
@@ -34,6 +35,7 @@ public class ThreatController : MonoBehaviour
     bool pursuitStarted = false;
 
     public EnemyShip enemyShipTemplate;
+    public BossEnemy BossShipTemplate;
 
     public float missileCooldown = 10f;
 
@@ -55,6 +57,7 @@ public class ThreatController : MonoBehaviour
         }
 
         ResetSpawnTimer();
+        if(Settings.Instance.SpawnBossAtStart) SpawnBoss();
     }
 
     // Create the ship
@@ -74,6 +77,25 @@ public class ThreatController : MonoBehaviour
             PlayerTransform.position.z
         );
         newShip.transform.position = spawnLocation;
+    }
+
+    private void SpawnBoss()
+    {
+        BossEnemy newBoss = Instantiate(BossShipTemplate);
+        // Spawn ship in the general direction player is facing
+        float rotationAmount = Random.Range(-MAX_ANGLE, MAX_ANGLE);
+        Vector3 spawnDirection = Quaternion.AngleAxis(rotationAmount, Vector3.forward) * PlayerTransform.up;
+        float angleRad = Mathf.Deg2Rad * Vector3.SignedAngle(Vector3.right, spawnDirection, Vector3.forward);
+
+        // Set ship position
+        float spawnDistance = Random.Range(MIN_DISTANCE, MAX_DISTANCE);
+        Vector3 spawnLocation = new Vector3(
+            PlayerTransform.position.x + (spawnDistance * Mathf.Cos(angleRad)),
+            PlayerTransform.position.y + (spawnDistance * Mathf.Sin(angleRad)),
+            PlayerTransform.position.z
+        );
+        newBoss.transform.position = spawnLocation;
+        newBoss.Alert();
     }
 
 

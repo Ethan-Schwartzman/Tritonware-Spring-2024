@@ -20,4 +20,5 @@ public class Settings : MonoBehaviour
     public bool EnablePuzzles = true;
     public bool EnableDeath = true;
     public bool EnableMissiles = true;
+    public bool SpawnBossAtStart = true;
 }

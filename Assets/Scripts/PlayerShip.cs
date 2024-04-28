@@ -25,7 +25,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 
     public Color trailColor, driftTrailColor;
 
-    private void Awake()
+    protected void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (Instance == null)

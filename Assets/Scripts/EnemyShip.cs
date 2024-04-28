@@ -15,11 +15,11 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
     public ParticleSystem Particles;
     Collider2D col;
     Rigidbody2D rb;
-    EnemyShipMovement shipMovement;
-    ProjectileSpawner[] bulletSpawner;
+    protected EnemyShipMovement shipMovement;
+    protected ProjectileSpawner[] bulletSpawner;
     HealthTracker healthTracker;
 
-    float currentWeaponCooldown;
+    protected float currentWeaponCooldown;
     public float weaponCooldown;
 
     public float bulletSpread = 1f;
@@ -29,7 +29,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
     SpriteRenderer spriteRenderer;
     [SerializeField] private Color defaultColor;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
@@ -37,7 +37,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
         bulletSpawner = GetComponentsInChildren<ProjectileSpawner>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
-        healthTracker = new HealthTracker(this, ThreatController.EnemyHealth);
+        healthTracker = SetHealth();
         spawnTime = Time.time;
     }
 
@@ -54,14 +54,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
                 }
                 break;
             case ActivationState.combat:
-                if (currentWeaponCooldown <= 0)
-                {
-                    foreach (ProjectileSpawner ps in bulletSpawner)
-                    {
-                        ps.SpawnProjectile();
-                    }
-                    currentWeaponCooldown = weaponCooldown;
-                }
+                Combat();
                 break;
         }
     }
@@ -115,9 +108,23 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
         Destroy(gameObject);
     }
 
-
     public Team GetTeam()
     {
         return Team.enemy;
+    }
+
+    virtual public HealthTracker SetHealth() {
+        return new HealthTracker(this, ThreatController.EnemyHealth);
+    }
+
+    virtual protected void Combat() {
+        if (currentWeaponCooldown <= 0)
+        {
+            foreach (ProjectileSpawner ps in bulletSpawner)
+            {
+                ps.SpawnProjectile();
+            }
+            currentWeaponCooldown = weaponCooldown;
+        }
     }
 }

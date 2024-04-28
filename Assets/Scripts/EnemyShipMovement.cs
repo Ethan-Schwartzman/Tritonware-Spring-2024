@@ -15,6 +15,7 @@ public class EnemyShipMovement : MonoBehaviour
 
 
     public Vector2 targetRelativePos = new Vector2(20f, 0);
+    public Vector2 CombatDistance = new Vector2(20f, 0);
 
     private void Awake()
     {
@@ -82,7 +83,7 @@ public class EnemyShipMovement : MonoBehaviour
                 {
                     while (Vector2.Distance(strafeDest, targetRelativePos) < MIN_STRAFE_PATH_DIST)
                     {
-                        strafeDest = new Vector2(20f, 0f) + new Vector2(UnityEngine.Random.Range(-xStrafeDestRange, xStrafeDestRange),
+                        strafeDest = CombatDistance + new Vector2(UnityEngine.Random.Range(-xStrafeDestRange, xStrafeDestRange),
                                                         UnityEngine.Random.Range(-yStrafeDestRange, yStrafeDestRange));
                     }
 
