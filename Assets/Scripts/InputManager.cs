@@ -28,10 +28,11 @@ public class InputManager : MonoBehaviour
 
         if(Input.GetButtonDown("Puzzle1")) {
             Puzzle1();
-            Fire();
         }
         if(Input.GetButtonDown("Puzzle2")) {
             Puzzle2();
+        }
+        if(Input.GetButton("Puzzle1") || Input.GetButton("Puzzle2")) {
             Fire();
         }
         if(Input.GetButtonDown("Powerup")) {

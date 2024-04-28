@@ -4083,6 +4083,7 @@ MonoBehaviour:
   EnableDeath: 1
   EnableMissiles: 1
   SpawnBossAtStart: 0
+  OverideStageSettings: 0
 --- !u!114 &1075298646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4111,7 +4112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1be8e6f9ff80a4042b2dff3525881384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameLogic: {fileID: 1075298645}
   HyperspaceParticles: {fileID: 1927146094}
+  ActiveBossFight: 0
 --- !u!1001 &1079306393
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -29,6 +29,7 @@ public class EffectController : MonoBehaviour
         ps.Play();
         ShaderManager.Instance.HyperspaceEffect(ps.main.startLifetime.constantMax);
         yield return new WaitForSeconds(ps.main.startLifetime.constantMax);
+        //Debug.Log("done");
     }
 
     private IEnumerator ParticleCoroutine(ParticleSystem ps) {

@@ -54,7 +54,7 @@ public class CodePuzzle : Puzzle
 
     public override void OnPuzzle1()
     {
-        if (isComplete) return;
+        if (isComplete && isActiveAndEnabled) return;
         currentGuess[currentInputLength] = codeChars[selectedKey];
         if (currentGuess[currentInputLength] != correctCode[currentInputLength])
         {
