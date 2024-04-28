@@ -21,7 +21,7 @@ public abstract class Powerup: MonoBehaviour
 
     protected virtual void Update()
     {
-        if (Time.time - spawnTime > COLLECT_DURATION)
+        if (!collected && Time.time - spawnTime > COLLECT_DURATION)
         {
             Destroy(this);
             return;

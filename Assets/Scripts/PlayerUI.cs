@@ -28,7 +28,8 @@ public class PlayerUI : MonoBehaviour
         Powerup pow = PlayerShip.Instance.currentPowerup;
         if (pow != null)
         {
-            powerupDuration.SetLevel((pow.GetDuration() - pow.activatedDuration) / pow.activatedDuration);
+            Debug.Log((pow.GetDuration() - pow.activatedDuration) / pow.GetDuration());
+            powerupDuration.SetLevel((pow.GetDuration() - pow.activatedDuration) / pow.GetDuration());
         }
         
     }

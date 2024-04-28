@@ -18,6 +18,7 @@ public class ShieldPowerup : Powerup
 
     public override void Activate()
     {
+        base.Activate();
         Debug.Log("shield activated");
     }
 }

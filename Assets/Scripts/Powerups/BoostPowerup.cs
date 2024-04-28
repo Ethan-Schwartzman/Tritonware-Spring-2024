@@ -8,6 +8,7 @@ public class BoostPowerup : Powerup
     }
     public override void Activate()
     {
+        base.Activate();
         Debug.Log("boost activated");
     }
 
