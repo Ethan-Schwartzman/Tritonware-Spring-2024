@@ -8,33 +8,33 @@ using TMPro;
 public class NoTouchPuzzle : Puzzle
 {
     public TextMeshProUGUI ScoreText;
-
     public GameObject flash;
-
+    public float failIncrease = 0.5f;
+    public float countdownStart = 2f;
     private float countdown;
+
 
     public override int GetDifficulty()
     {
-        return 2;
+        return 3;
     }
 
     public override void InitPuzzle(float difficulty)
     {
-        countdown = 2f;
+        countdown = countdownStart;
         ScoreText.text = countdown.ToString();
         StartCoroutine(Countdown());
     }
 
     public override void OnPuzzle1()
     {
-        countdown += 1f;
+        countdown += failIncrease;
         StartCoroutine(Flash());
     }
 
     public override void OnPuzzle2()
     {
-        countdown += 1f;
-        StartCoroutine(Flash());
+        OnPuzzle1();
     }
 
     IEnumerator Countdown()
