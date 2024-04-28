@@ -7,6 +7,7 @@ public class Asteroid : DynamicEntity, IDamagable
     private const float MAX_DISTANCE = 100;
 
     public Transform PlayerTransform;
+    public ParticleSystem Particles;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
@@ -62,11 +63,9 @@ public class Asteroid : DynamicEntity, IDamagable
 
     public void TriggerDeath()
     {
+        EffectController.Instance.SpawnAsteroidParticles(Particles, transform);
         if (isActiveAndEnabled) AsteroidGenerator.Instance.AsteroidPool.Release(this);
-
     }
-
-
 
     void Awake()
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ThreatController : MonoBehaviour
 {
     public static int EnemyHealth = 10;
-    public static int AsteroidHealth = 10;
+    public static int AsteroidHealth = 2;
 
     public static ThreatController Instance;
     public int activeEnemyCount;

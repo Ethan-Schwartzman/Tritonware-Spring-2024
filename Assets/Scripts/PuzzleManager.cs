@@ -112,6 +112,7 @@ public class PuzzleManager : MonoBehaviour
         if (roll < damage * puzzleChancePerDamage)
         {
             SpawnPuzzle();
+            ShaderManager.Instance.HitEffect();
         }
 
     }
@@ -138,7 +139,7 @@ public class PuzzleManager : MonoBehaviour
 
     public void SpawnPuzzle(bool force = false)
     {
-        if (!Settings.Instance.EnablePuzzles) return;
+        if (!force && !Settings.Instance.EnablePuzzles) return;
 
         List<int> availableSpaces = new List<int>();
        
@@ -167,7 +168,7 @@ public class PuzzleManager : MonoBehaviour
                 Debug.LogError("Failed to spawn puzzle");
                 return;
             }
-            ShaderManager.Instance.HitEffect();
+            
         }
         
         Puzzle newPuzzle = Instantiate(selectedPuzzle);
