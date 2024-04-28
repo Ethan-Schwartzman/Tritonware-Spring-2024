@@ -7,20 +7,36 @@ public class ScoreManager : MonoBehaviour {
     [SerializeField] TMP_Text scoreText;
 
     public int score = 0;
-    // Start is called before the first frame update
+    private int stageModifier = 0;
+    private const int STAGE_BONUS = 300;
+
+    public static ScoreManager Instance;
+
     void Start() {
-        
+        if(Instance == null) {
+            Instance = this;
+        }
+        else {
+            Debug.LogWarning("Tried to create more than one instance of ScoreManager");
+            Destroy(this);
+        }        
     }
 
     // Update is called once per frame
     void Update() {
         if (!PlayerShip.Instance.isAlive) return;
         int tmpScore = (int)ThreatController.Instance.GetPlayerProgress();
+        if(tmpScore > STAGE_BONUS) tmpScore = STAGE_BONUS;
+        tmpScore += stageModifier;
         if (tmpScore > score)
         {
             score = tmpScore;
             scoreText.text = score.ToString();
         }
 
+    }
+
+    public void NextStage() {
+        stageModifier += STAGE_BONUS;
     }
 }
