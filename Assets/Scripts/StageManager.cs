@@ -6,7 +6,9 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager Instance;
  
+    public Settings GameLogic;
     public ParticleSystem HyperspaceParticles;
+    [HideInInspector] public bool ActiveBossFight;
 
     private int stage;
 
@@ -19,11 +21,44 @@ public class StageManager : MonoBehaviour
             Destroy(this);
         }
 
+        GameLogic.EnablePuzzles = true;
+        GameLogic.EnableDeath = true;
+        GameLogic.EnableAsteroids = true;
         stage = 1;
+        ActiveBossFight = false;
+    }
+
+    public void ActivateBossFight() {
+        ActiveBossFight = true;
+        GameLogic.EnableEnemies = false;
+        GameLogic.EnableAsteroids = false;
+        GameLogic.EnableMissiles = false;
+        ThreatController.Instance.SpawnBoss();
     }
 
     public void AdvanceStage() {
         stage++;
+        if(!GameLogic.OverideStageSettings) {
+            switch(stage) {
+                case 1:
+                    GameLogic.EnableAsteroids = true;
+                    break;
+                case 2:
+                    GameLogic.EnableAsteroids = true;
+                    GameLogic.EnableEnemies = true;
+                    break;
+                case 3:
+                    GameLogic.EnableAsteroids = true;
+                    GameLogic.EnableEnemies = true;
+                    GameLogic.EnableMissiles = true;
+                    break;
+                default:
+                    GameLogic.EnableAsteroids = true;
+                    GameLogic.EnableEnemies = true;
+                    GameLogic.EnableMissiles = true;
+                    break;
+            }
+        }
         StartCoroutine(AdvanceStageCoroutine());
     }
 
@@ -31,5 +66,6 @@ public class StageManager : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         yield return StartCoroutine(EffectController.Instance.Hyperspace(HyperspaceParticles));
         ScoreManager.Instance.NextStage();
+        ActiveBossFight = false;
     }
 }

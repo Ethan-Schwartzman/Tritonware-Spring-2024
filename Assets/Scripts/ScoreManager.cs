@@ -26,7 +26,12 @@ public class ScoreManager : MonoBehaviour {
     void Update() {
         if (!PlayerShip.Instance.isAlive) return;
         int tmpScore = (int)ThreatController.Instance.GetPlayerProgress();
-        if(tmpScore > STAGE_BONUS) tmpScore = STAGE_BONUS;
+        if(tmpScore > STAGE_BONUS) {
+            tmpScore = STAGE_BONUS;
+            if(!StageManager.Instance.ActiveBossFight) {
+                StageManager.Instance.ActivateBossFight();
+            }
+        }
         tmpScore += stageModifier;
         if (tmpScore > score)
         {

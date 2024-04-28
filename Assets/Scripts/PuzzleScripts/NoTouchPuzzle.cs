@@ -39,7 +39,7 @@ public class NoTouchPuzzle : Puzzle
     }
 
     void Update(){
-        if (AllControlsTrigger && (Input.GetButtonDown("Fire") || Input.GetButtonDown("Left") || Input.GetButtonDown("Right"))){
+        if (AllControlsTrigger && Input.GetButtonDown("Left") || Input.GetButtonDown("Right")){
             OnPuzzle1();
         }
     }

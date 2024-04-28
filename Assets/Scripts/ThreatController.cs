@@ -103,7 +103,7 @@ public class ThreatController : MonoBehaviour
         }
     }
 
-    private void SpawnBoss()
+    public void SpawnBoss()
     {
         BossEnemy newBoss = Instantiate(BossShipTemplate);
         newBoss.SetHealth(BossHealth);

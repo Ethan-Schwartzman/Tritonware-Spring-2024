@@ -26,15 +26,22 @@ public class InputManager : MonoBehaviour
         if (Input.GetButton("Right")) PlayerShipMovement.Instance.Rotate(-1);
         if (!Input.GetButton("Left") && !Input.GetButton("Right")) PlayerShipMovement.Instance.Rotate(0);
 
-        if (Input.GetButton("Fire")) Fire();
-        if(Input.GetButtonDown("Puzzle1")) Puzzle1();
-        if(Input.GetButtonDown("Puzzle2")) Puzzle2();
+        if(Input.GetButtonDown("Puzzle1")) {
+            Puzzle1();
+            Fire();
+        }
+        if(Input.GetButtonDown("Puzzle2")) {
+            Puzzle2();
+            Fire();
+        }
+        if(Input.GetButtonDown("Powerup")) {
+            PlayerShip.Instance.ActivatePowerup();
+        }
 
         // Debugging
-        if (Input.GetKey(KeyCode.LeftShift)) PlayerShip.Instance.ActivatePowerup();
-        if (Input.GetKeyDown(KeyCode.G)) PlayerShip.Instance.ToggleDrift(true);
-        if (Input.GetKeyDown(KeyCode.H)) PlayerShip.Instance.ToggleDrift(false);
-        if (Input.GetKeyDown(KeyCode.F)) PuzzleManager.Instance.SpawnPuzzle(true);
+        // if (Input.GetKeyDown(KeyCode.G)) PlayerShip.Instance.ToggleDrift(true);
+        // if (Input.GetKeyDown(KeyCode.H)) PlayerShip.Instance.ToggleDrift(false);
+        // if (Input.GetKeyDown(KeyCode.F)) PuzzleManager.Instance.SpawnPuzzle(true);
 
     }
 
