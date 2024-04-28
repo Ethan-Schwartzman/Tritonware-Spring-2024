@@ -15,7 +15,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
     Collider2D col;
     Rigidbody2D rb;
     EnemyShipMovement shipMovement;
-    ProjectileSpawner bulletSpawner;
+    ProjectileSpawner[] bulletSpawner;
     HealthTracker healthTracker;
 
     float currentWeaponCooldown;
@@ -33,7 +33,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         shipMovement = GetComponent<EnemyShipMovement>();
-        bulletSpawner = GetComponent<ProjectileSpawner>();
+        bulletSpawner = GetComponentsInChildren<ProjectileSpawner>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         healthTracker = new HealthTracker(this, ThreatController.EnemyHealth);
@@ -55,7 +55,10 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
             case ActivationState.combat:
                 if (currentWeaponCooldown <= 0)
                 {
-                    bulletSpawner.SpawnProjectile();
+                    foreach (ProjectileSpawner ps in bulletSpawner)
+                    {
+                        ps.SpawnProjectile();
+                    }
                     currentWeaponCooldown = weaponCooldown;
                 }
                 break;
@@ -103,6 +106,8 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
 
     public void TriggerDeath()
     {
+        Powerup pow = PowerupManager.SpawnPowerup();
+        pow.Init(transform.position, rb.velocity);
         ThreatController.Instance.DecreaseEnemyCount();
         StopAllCoroutines();
         Destroy(gameObject);
