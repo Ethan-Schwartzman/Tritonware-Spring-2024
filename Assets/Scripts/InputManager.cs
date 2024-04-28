@@ -18,49 +18,22 @@ public class InputManager : MonoBehaviour
     }
 
     void Update() {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        // Depreciated
+        // float horizontal = Input.GetAxis("Horizontal");
+        // float vertical = Input.GetAxis("Vertical");
 
-
-        // need to change to not hard coded inputs
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            
-            PlayerShipMovement.Instance.Rotate(1);
-            
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            
-            PlayerShipMovement.Instance.Rotate(-1);
-        }
-        
-        if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
-        {
-            PlayerShipMovement.Instance.Rotate(0);
-        }
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            PlayerShip.Instance.ActivatePowerup();
-        }
-
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            PlayerShip.Instance.ToggleDrift(true);
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            PlayerShip.Instance.ToggleDrift(false);
-        }
-
+        if (Input.GetButton("Left")) PlayerShipMovement.Instance.Rotate(1);
+        if (Input.GetButton("Right")) PlayerShipMovement.Instance.Rotate(-1);
+        if (!Input.GetButton("Left") && !Input.GetButton("Right")) PlayerShipMovement.Instance.Rotate(0);
 
         if (Input.GetButton("Fire")) Fire();
         if(Input.GetButtonDown("Puzzle1")) Puzzle1();
         if(Input.GetButtonDown("Puzzle2")) Puzzle2();
 
+        // Debugging
+        if (Input.GetKey(KeyCode.LeftShift)) PlayerShip.Instance.ActivatePowerup();
+        if (Input.GetKeyDown(KeyCode.G)) PlayerShip.Instance.ToggleDrift(true);
+        if (Input.GetKeyDown(KeyCode.H)) PlayerShip.Instance.ToggleDrift(false);
         if (Input.GetKeyDown(KeyCode.F)) PuzzleManager.Instance.SpawnPuzzle(true);
 
     }
