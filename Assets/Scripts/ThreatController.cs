@@ -69,7 +69,7 @@ public class ThreatController : MonoBehaviour
     }
 
     // Create the ship
-    public void SpawnEnemyShip()
+    public EnemyShip SpawnEnemyShip()
     {
         activeEnemyCount++;
         EnemyShip newShip = Instantiate(enemyShipTemplate);
@@ -87,6 +87,8 @@ public class ThreatController : MonoBehaviour
             PlayerTransform.position.z
         );
         newShip.transform.position = spawnLocation;
+
+        return newShip;
     }
 
     public void SpawnEliteGroup()

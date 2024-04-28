@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class BossEnemy : EnemyShip
     private bool halfHealth = false;
 
     private Slider healthbar;
+    private EnemyShip[] minions = new EnemyShip[3];
 
     override protected void Awake() {
         healthbar = ThreatController.Instance.BossHealthbar;
@@ -25,6 +27,7 @@ public class BossEnemy : EnemyShip
     }
 
     protected override void Combat() {
+        if (currentWeaponCooldown >= 0) currentWeaponCooldown -= Time.deltaTime;
         healthbar.value = (float)healthTracker.health/healthTracker.maxHealth;
         if (currentWeaponCooldown <= 0)
         {
@@ -32,9 +35,9 @@ public class BossEnemy : EnemyShip
             if(healthTracker.health < healthTracker.maxHealth/2 && !halfHealth) {
                 halfHealth = true;
 
-                ThreatController.Instance.SpawnEnemyShip();
-                ThreatController.Instance.SpawnEnemyShip();
-                ThreatController.Instance.SpawnEnemyShip();
+                minions[0] = ThreatController.Instance.SpawnEnemyShip();
+                minions[1] = ThreatController.Instance.SpawnEnemyShip();
+                minions[2] = ThreatController.Instance.SpawnEnemyShip();
             }
 
             int weapon = Random.Range(0, 2);
@@ -60,6 +63,9 @@ public class BossEnemy : EnemyShip
 
     public override void TriggerDeath()
     {
+        foreach(EnemyShip minion in minions) {
+            if(minion != null) minion.TriggerDeath();
+        }
         StageManager.Instance.AdvanceStage();
         healthbar.gameObject.SetActive(false);
         base.TriggerDeath();
