@@ -18,10 +18,10 @@ public class BossEnemy : EnemyShip
         shipMovement.CombatDistance = new Vector3(30f, 0);
     }
 
-    override public HealthTracker SetHealth() {
+    override public void SetHealth(int hp) {
         healthbar.value = 1;
         healthbar.gameObject.SetActive(true);
-        return new HealthTracker(this, ThreatController.BossHealth);
+        healthTracker = new HealthTracker(this, hp);
     }
 
     protected override void Combat() {

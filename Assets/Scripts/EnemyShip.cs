@@ -26,6 +26,8 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
 
     float spawnTime;
 
+    public bool asteroidImmune = false;
+
     SpriteRenderer spriteRenderer;
     [SerializeField] private Color defaultColor;
 
@@ -37,7 +39,6 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
         bulletSpawner = GetComponentsInChildren<ProjectileSpawner>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
-        healthTracker = SetHealth();
         spawnTime = Time.time;
     }
 
@@ -116,8 +117,8 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
         return Team.enemy;
     }
 
-    virtual public HealthTracker SetHealth() {
-        return new HealthTracker(this, ThreatController.EnemyHealth);
+    virtual public void SetHealth(int hp) {
+        healthTracker = new HealthTracker(this, hp);
     }
 
     virtual protected void Combat() {

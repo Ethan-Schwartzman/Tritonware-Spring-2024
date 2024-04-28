@@ -113,6 +113,7 @@ public class PuzzleManager : MonoBehaviour
         if (roll < damage * puzzleChancePerDamage)
         {
             SpawnPuzzle();
+            PlayerUI.Instance.PopupText("SYSTEM DAMAGE");
             ShaderManager.Instance.HitEffect();
         }
 

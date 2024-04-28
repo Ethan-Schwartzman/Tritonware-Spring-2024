@@ -96,6 +96,12 @@ public class Asteroid : DynamicEntity, IDamagable
         IDamagable hit = collision.gameObject.GetComponent<IDamagable>();
         if (hit != null)
         {
+            if (hit is EnemyShip es && es.asteroidImmune)
+            {
+                TriggerDeath();
+                return;
+            }
+                
             hit.DealDamage(Settings.Instance.ShipCollisionDamage);
             if (hit is PlayerShip ship && ship.isAlive) 
             {

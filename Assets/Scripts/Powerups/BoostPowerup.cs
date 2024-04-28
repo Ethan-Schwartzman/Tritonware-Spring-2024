@@ -20,7 +20,7 @@ public class BoostPowerup : Powerup
 
     public override float GetDuration()
     {
-        return 5f;
+        return 3f;
     }
 
     public override PowerupState GetPowerupState()

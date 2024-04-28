@@ -11,6 +11,8 @@ public abstract class Powerup: MonoBehaviour
     public bool isActive;
     public const float COLLECT_DURATION = 5f;
     public float activatedDuration = 0f;
+    public int maxCharges = 3;
+    public int charges;
 
     float spawnTime;
     Rigidbody2D rb;
@@ -45,7 +47,6 @@ public abstract class Powerup: MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("collided");
         if (collision.gameObject == PlayerShip.Instance.gameObject)
         {
             Powerup pow = PlayerShip.Instance.currentPowerup;
@@ -61,17 +62,25 @@ public abstract class Powerup: MonoBehaviour
 
     public void Collect()
     {
+        charges = maxCharges;
         spriteRenderer.enabled = false;
         transform.SetParent(PlayerShip.Instance.transform,false);
         PlayerShip.Instance.SetPowerup(this);
         collected = true;
         rb.simulated = false;
+        
     }
 
     public virtual void Finish()
     {
-        PlayerShip.Instance.SetPowerup(null);
-        Destroy(gameObject);
+        isActive = false;
+        activatedDuration = 0f;
+        charges--;
+        if (charges == 0)
+        {
+            PlayerShip.Instance.SetPowerup(null);
+            Destroy(gameObject);
+        }
     }
 
     public abstract string GetName();

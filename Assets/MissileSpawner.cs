@@ -8,6 +8,7 @@ public class MissileSpawner : MonoBehaviour, IWeaponContainer
     ProjectileSpawner pSpawner;
     public static MissileSpawner Instance;
     float lastMissileSpawnTime;
+    float nextMissileSpawnTime;
 
 
     private void Awake()
@@ -18,17 +19,26 @@ public class MissileSpawner : MonoBehaviour, IWeaponContainer
         }
 
         pSpawner = GetComponent<ProjectileSpawner>();
+
         // transform.SetParent(PlayerShip.Instance.transform, false);
+        nextMissileSpawnTime = 20;
+
+    }
+
+    private void Start()
+    {
+
     }
 
     private void Update()
     {
         if (!Settings.Instance.EnableMissiles) return;
         lastMissileSpawnTime += Time.deltaTime;
-        if (lastMissileSpawnTime > ThreatController.Instance.GetMissileCooldown())
+        if (lastMissileSpawnTime > nextMissileSpawnTime)
         {
             ShootMissile();
             lastMissileSpawnTime = 0;
+            nextMissileSpawnTime = ThreatController.Instance.GetMissileCooldown();
         }
     }
 

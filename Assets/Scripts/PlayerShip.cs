@@ -168,7 +168,16 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     public void SetPowerup(Powerup powerup)
     {
         currentPowerup = powerup;
+        
         PlayerUI.Instance.UpdateUI();
+        if (powerup == null)
+        {
+            PlayerUI.Instance.SetPowerupCharges(0);
+        }
+        else
+        {
+            PlayerUI.Instance.SetPowerupCharges(powerup.maxCharges);
+        }
     }
 
     public void ActivatePowerup()

@@ -49,6 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 0
   activatedDuration: 0
+  maxCharges: 2
+  charges: 0
   spriteRenderer: {fileID: 6919216781437174175}
 --- !u!212 &6919216781437174175
 SpriteRenderer:

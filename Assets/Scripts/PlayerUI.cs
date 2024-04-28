@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerUI : MonoBehaviour
         missileWarning,
         powerup, popupText;
     [SerializeField] ProgressBar powerupDuration, playerProgress, enemyProgress;
+    [SerializeField] Image segment;
+
 
     Coroutine currentPopup;
 
@@ -29,7 +32,9 @@ public class PlayerUI : MonoBehaviour
         Powerup pow = PlayerShip.Instance.currentPowerup;
         if (pow != null)
         {
-            powerupDuration.SetLevel((pow.GetDuration() - pow.activatedDuration) / pow.GetDuration());
+            float percent = ((pow.GetDuration() - pow.activatedDuration) / pow.GetDuration()) / (float)pow.maxCharges
+                + (float)(pow.charges-1) / (float)pow.maxCharges;
+            powerupDuration.SetLevel(percent);
         }
         else powerupDuration.SetLevel(0);
         
@@ -41,6 +46,11 @@ public class PlayerUI : MonoBehaviour
         maxHealth.text = PlayerShip.Instance.GetMaxHealth().ToString();
         if (PlayerShip.Instance.currentPowerup == null) powerup.text = "";
         else powerup.text = PlayerShip.Instance.currentPowerup.GetName();
+    }
+
+    public void SetPowerupCharges(int charges)
+    {
+        powerupDuration.SetSegments(charges);
     }
 
     public IEnumerator MissileWarning(float height)
@@ -65,11 +75,11 @@ public class PlayerUI : MonoBehaviour
     {
         popupText.text = text;
         popupText.enabled = true;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
         popupText.enabled = false;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
         popupText.enabled = true;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
         popupText.enabled = false;
     }
 

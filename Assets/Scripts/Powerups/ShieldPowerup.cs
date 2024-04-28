@@ -19,7 +19,7 @@ public class ShieldPowerup : Powerup
 
     public override float GetDuration()
     {
-        return 5f;
+        return 2f;
     }
 
 
@@ -33,7 +33,7 @@ public class ShieldPowerup : Powerup
 
     public override void Finish()
     {
-
+        shieldSpriteRenderer.enabled = false;
         base.Finish();
     }
 
