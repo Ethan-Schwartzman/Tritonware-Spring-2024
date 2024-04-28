@@ -9,6 +9,7 @@ public class NoTouchPuzzle : Puzzle
 {
     public TextMeshProUGUI ScoreText;
     public GameObject flash;
+    public bool AllControlsTrigger = false;
     public float failIncrease = 0.5f;
     public float countdownStart = 2f;
     private float countdown;
@@ -35,6 +36,12 @@ public class NoTouchPuzzle : Puzzle
     public override void OnPuzzle2()
     {
         OnPuzzle1();
+    }
+
+    void Update(){
+        if (AllControlsTrigger && (Input.GetButtonDown("Fire") || Input.GetButtonDown("Left") || Input.GetButtonDown("Right"))){
+            OnPuzzle1();
+        }
     }
 
     IEnumerator Countdown()
