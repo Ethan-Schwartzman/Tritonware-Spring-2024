@@ -9,6 +9,7 @@ public class Parallax : MonoBehaviour
     public Camera MainCamera;
     private float width;
     private  float height;
+    private Canvas canvas;
     private float scaleFactor;
 
     void Start() {
@@ -17,27 +18,12 @@ public class Parallax : MonoBehaviour
     }
     
     void InitParallax() {
-        Canvas canvas = Layers[0].GetComponent<Canvas>();
-        //scaleFactor = canvas.transform.localScale.x;
+        GL.Clear(true, true, Color.black);
+        
+        canvas = Layers[0].GetComponent<Canvas>();
         scaleFactor = canvas.transform.localScale.x;
         height = canvas.pixelRect.height;
         width = canvas.pixelRect.width;
-        //height = MainCamera.rect.height * MainCamera.pixelRect.height;
-        //height = MainCamera.rect.width * MainCamera.pixelRect.width;
-        //width = MainCamera.rect.width;
-        //height = MainCamera.pixelHeight;
-        //width = MainCamera.pixelWidth;
-
-        //height = MainCamera.rect.height * MainCamera.pixelRect.height;
-        //width = MainCamera.rect.width * MainCamera.pixelRect.width;
-
-        //height = MainCamera.rect.height;
-        //width = MainCamera.rect.width;
-
-
-        Debug.Log("height: " + height);
-        Debug.Log("width: " + width);
-        Debug.Log("scalefactor:" + scaleFactor);
 
         foreach(ParallaxLayer layer in Layers) {
             RectTransform rt = (RectTransform)layer.BottomLeft.transform;
@@ -59,10 +45,8 @@ public class Parallax : MonoBehaviour
     }
 
     public void UpdateParallax(Vector3 deltaPos, Vector3 cameraPos) {
+        if(canvas.transform.localScale.x != scaleFactor) InitParallax();
 
-        Canvas canvas = Layers[0].GetComponent<Canvas>();
-        scaleFactor = canvas.transform.localScale.x;
-        Debug.Log("scalefactor:" + scaleFactor);
         foreach (ParallaxLayer layer in Layers) {
             foreach(RectTransform tile in layer.Tiles) {
                 tile.transform.position -= deltaPos*layer.ParallaxIntensity;
