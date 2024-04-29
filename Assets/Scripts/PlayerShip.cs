@@ -27,8 +27,6 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 
     public Color trailColor, driftTrailColor;
 
-    public FMODUnity.StudioEventEmitter collisionSound;
-
     protected void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -110,7 +108,8 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
         if (!Settings.Instance.EnableDeath) return;
         isAlive = false;
         PlayerShipMovement.Instance.Shutdown();
-        PuzzleManager.Instance.ClearPuzzles();
+        PuzzleManager.Instance.gameObject.SetActive(false);
+        InputManager.Instance.EnableReset();
         //trailRenderer.startColor = driftTrailColor;
 
     }
@@ -118,7 +117,6 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     public void TriggerCollision()
     {
         if (!PowerupIsActive(PowerupState.Shield)) ToggleDrift(true);
-        collisionSound.Play();
     }
 
     public void ToggleDrift(bool toggle)

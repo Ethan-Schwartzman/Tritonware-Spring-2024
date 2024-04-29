@@ -77,7 +77,7 @@ public class PuzzleManager : MonoBehaviour
         }
 
         randomPuzzleSpawnTime += Time.deltaTime;
-        if (randomPuzzleSpawnTime >= RANDOM_PUZZLE_TICK_TIME)
+        if (randomPuzzleSpawnTime >= RANDOM_PUZZLE_TICK_TIME && PlayerShip.Instance.isAlive)
         {
             RollForPuzzleRandom();
             randomPuzzleSpawnTime = 0;

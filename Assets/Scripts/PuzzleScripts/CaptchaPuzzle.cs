@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using Unity.Loading;
-using UnityEditor.Compilation;
 
 public class CaptchaPuzzle : Puzzle
 {
@@ -40,6 +37,7 @@ public class CaptchaPuzzle : Puzzle
 
     public override void OnPuzzle1()
     {
+        if(!isActiveAndEnabled) return;
         if (!loading && PreCaptcha.gameObject.activeSelf)
         {
             PreCaptcha.GetChild(1).gameObject.SetActive(false);

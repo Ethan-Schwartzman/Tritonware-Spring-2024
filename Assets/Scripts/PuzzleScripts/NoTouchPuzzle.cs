@@ -24,13 +24,13 @@ public class NoTouchPuzzle : Puzzle
     {
         countdown = countdownStart;
         ScoreText.text = countdown.ToString();
-        StartCoroutine(Countdown());
+        if(isActiveAndEnabled) StartCoroutine(Countdown());
     }
 
     public override void OnPuzzle1()
     {
         countdown += failIncrease;
-        StartCoroutine(Flash());
+        if(isActiveAndEnabled) StartCoroutine(Flash());
     }
 
     public override void OnPuzzle2()

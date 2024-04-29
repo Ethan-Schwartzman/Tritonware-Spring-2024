@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class RhythmPuzzle : Puzzle
@@ -66,13 +64,13 @@ public class RhythmPuzzle : Puzzle
             LTiles.Add(newTile);
             if (!track.trackL[i])
             {
-                newTile.color = Color.red.WithAlpha(0);
+                newTile.color = new Color(1.0f, 0.0f, 0.0f, 0.0f);
             }
 
             newTile = Instantiate(RTileTemplate);
             newTile.transform.SetParent(line.transform, false);
             newTile.rectTransform.anchoredPosition += new Vector2(0, newTile.rectTransform.rect.height * 1.05f * i);
-            if (!track.trackR[i]) newTile.color = Color.red.WithAlpha(0);
+            if (!track.trackR[i]) newTile.color = new Color(1.0f, 0.0f, 0.0f, 0.0f);
             RTiles.Add(newTile);
         }
 
@@ -88,6 +86,7 @@ public class RhythmPuzzle : Puzzle
 
     private void Update()
     {
+        if(!isActiveAndEnabled) return;
         foreach (Image tile in LTiles)
         {
             tile.rectTransform.anchoredPosition -= new Vector2(0, Time.deltaTime * speed);
@@ -151,7 +150,7 @@ public class RhythmPuzzle : Puzzle
                 else
                 {
                     failed = true;
-                    tile.color = Color.red.WithAlpha(0.1f);
+                    tile.color = new Color(1.0f, 0.0f, 0.0f, 0.1f);
                 }
                 
             }

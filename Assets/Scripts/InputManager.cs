@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance;
+    public TextMeshProUGUI ResetText;
+    private bool canReset;
 
 
     void Start() {
@@ -15,6 +19,8 @@ public class InputManager : MonoBehaviour
             Debug.LogWarning("Tried to create more than one instance of InputManager");
             Destroy(this);
         }        
+
+        canReset = false;
     }
 
     void Update() {
@@ -38,11 +44,16 @@ public class InputManager : MonoBehaviour
         if(Input.GetButtonDown("Powerup")) {
             PlayerShip.Instance.ActivatePowerup();
         }
+        if (Input.GetKeyDown(KeyCode.Return) && canReset) {
+            // reload scene
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(currentSceneName);
+        }
 
         // Debugging
         // if (Input.GetKeyDown(KeyCode.G)) PlayerShip.Instance.ToggleDrift(true);
         // if (Input.GetKeyDown(KeyCode.H)) PlayerShip.Instance.ToggleDrift(false);
-        if (Input.GetKeyDown(KeyCode.F)) PuzzleManager.Instance.SpawnPuzzle(true);
+        //if (Input.GetKeyDown(KeyCode.F)) PuzzleManager.Instance.SpawnPuzzle(true);
 
     }
 
@@ -56,5 +67,10 @@ public class InputManager : MonoBehaviour
 
     void Puzzle2() {
         PuzzleManager.Instance.TriggerPuzzle2();
+    }
+
+    public void EnableReset() {
+        canReset = true;
+        ResetText.gameObject.SetActive(true);
     }
 }

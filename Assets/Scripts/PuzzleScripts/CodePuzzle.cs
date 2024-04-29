@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -55,6 +54,7 @@ public class CodePuzzle : Puzzle
     public override void OnPuzzle1()
     {
         if (isComplete && isActiveAndEnabled) return;
+        if(!isActiveAndEnabled) return;
         currentGuess[currentInputLength] = codeChars[selectedKey];
         if (currentGuess[currentInputLength] != correctCode[currentInputLength])
         {
