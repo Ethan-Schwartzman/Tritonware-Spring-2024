@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 1584021927180267719}
   - component: {fileID: 1648390744357750050}
   - component: {fileID: 5319544260072768743}
-  - component: {fileID: 9006830265826053269}
   - component: {fileID: 8640589398246766048}
   m_Layer: 6
   m_Name: Boss Ship
@@ -212,37 +211,6 @@ MonoBehaviour:
   activationRange: 50
   combatRange: 10
   pursuitSpeed: 20
---- !u!114 &9006830265826053269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2140317385887574823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 365802639
-      Data2: 1227327640
-      Data3: -722890330
-      Data4: -1579758100
-    Path: event:/laser
-  Event: 
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!114 &8640589398246766048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,6 +274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9000942073752727074}
   - component: {fileID: 4246975409640877268}
+  - component: {fileID: 904849176550534201}
   m_Layer: 0
   m_Name: BulletSpawner
   m_TagString: Untagged
@@ -341,8 +310,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   templateBullet: {fileID: 5659163448690783328, guid: 0a6fca311ce37894aa6bc4caf76709b4, type: 3}
-  SoundEffect: {fileID: 9006830265826053269}
+  SoundEffect: {fileID: 904849176550534201}
   FireInterval: 1
+--- !u!114 &904849176550534201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718439484155818847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1559811537
+      Data2: 1206476423
+      Data3: 1065292170
+      Data4: -1578652796
+    Path: event:/enemy-laser
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &8117971981337858177
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,6 +353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 772857294288490820}
   - component: {fileID: 9086091539062680775}
+  - component: {fileID: 5366481600245053477}
   m_Layer: 0
   m_Name: MissileSpawner
   m_TagString: Untagged
@@ -388,5 +389,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   templateBullet: {fileID: 7493824806828570669, guid: 69316d1d7a22b894fba76109506b67d3, type: 3}
-  SoundEffect: {fileID: 9006830265826053269}
+  SoundEffect: {fileID: 5366481600245053477}
   FireInterval: 1
+--- !u!114 &5366481600245053477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8117971981337858177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1773857419
+      Data2: 1273795458
+      Data3: -1093732968
+      Data4: 1834139021
+    Path: event:/missile
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

@@ -245,11 +245,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 365802639
-      Data2: 1227327640
-      Data3: -722890330
-      Data4: -1579758100
-    Path: event:/laser
+      Data1: 1559811537
+      Data2: 1206476423
+      Data3: 1065292170
+      Data4: -1578652796
+    Path: event:/enemy-laser
   Event: 
   PlayEvent: 0
   StopEvent: 0
