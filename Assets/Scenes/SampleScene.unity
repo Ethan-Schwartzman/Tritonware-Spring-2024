@@ -616,14 +616,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5069195, g: 1, b: 0, a: 0.078431375}
+  m_Color: {r: 0.5069195, g: 1, b: 0, a: 0.015686275}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f792622785a43c479a0df17204e1f5d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4917eb88d80053b4187767bc0d5c669d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1647,14 +1647,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5069195, g: 1, b: 0, a: 0.078431375}
+  m_Color: {r: 0.5069195, g: 1, b: 0, a: 0.015686275}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f792622785a43c479a0df17204e1f5d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4917eb88d80053b4187767bc0d5c669d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2051,14 +2051,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5069195, g: 1, b: 0, a: 0.078431375}
+  m_Color: {r: 0.5069195, g: 1, b: 0, a: 0.015686275}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f792622785a43c479a0df17204e1f5d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4917eb88d80053b4187767bc0d5c669d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4476,7 +4476,7 @@ MonoBehaviour:
   BottomRight: {fileID: 1365058956}
   UpperLeft: {fileID: 1563699763}
   UpperRight: {fileID: 1409221909}
-  ParallaxIntensity: 0.3
+  ParallaxIntensity: 0.2
 --- !u!114 &1162590818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4981,7 +4981,7 @@ RectTransform:
   m_GameObject: {fileID: 1365058955}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1162590816}
@@ -5131,7 +5131,7 @@ RectTransform:
   m_GameObject: {fileID: 1409221908}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1162590816}
@@ -5847,7 +5847,7 @@ RectTransform:
   m_GameObject: {fileID: 1563699762}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1162590816}
@@ -6310,7 +6310,7 @@ RectTransform:
   m_GameObject: {fileID: 1849152808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1162590816}
@@ -6432,7 +6432,7 @@ MonoBehaviour:
   BottomRight: {fileID: 518919349}
   UpperLeft: {fileID: 212045698}
   UpperRight: {fileID: 586500626}
-  ParallaxIntensity: 0.2
+  ParallaxIntensity: 0.05
 --- !u!114 &1929970268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7148,14 +7148,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5069195, g: 1, b: 0, a: 0.078431375}
+  m_Color: {r: 0.5069195, g: 1, b: 0, a: 0.015686275}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f792622785a43c479a0df17204e1f5d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4917eb88d80053b4187767bc0d5c669d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
