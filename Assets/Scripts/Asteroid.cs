@@ -75,7 +75,7 @@ public class Asteroid : DynamicEntity, IDamagable
         }
 
         rb = gameObject.GetComponent<Rigidbody2D>();
-        sr = gameObject.GetComponent<SpriteRenderer>();
+        sr = gameObject.GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
