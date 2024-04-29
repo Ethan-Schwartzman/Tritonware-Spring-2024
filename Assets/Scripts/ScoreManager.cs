@@ -8,7 +8,7 @@ public class ScoreManager : MonoBehaviour {
 
     public int score = 0;
     private int stageModifier = 0;
-    private const int STAGE_BONUS = 300;
+    private const int STAGE_BONUS = 50;
 
     public static ScoreManager Instance;
 

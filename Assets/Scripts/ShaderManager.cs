@@ -18,6 +18,8 @@ public class ShaderManager : MonoBehaviour
 
     private Coroutine hitEffect;
 
+    public Transform PlayerTransform;
+
     void Start()
     {
         if(Instance == null) {
@@ -60,6 +62,7 @@ public class ShaderManager : MonoBehaviour
 
         float intensity = 0;
         float startTime = Time.time;
+        bool playerReset = false;
 
         while(Time.time - startTime < duration) {
             // Aberration
@@ -72,6 +75,12 @@ public class ShaderManager : MonoBehaviour
             CameraTransform.localPosition = initialPosition + Random.insideUnitSphere * intensity;
 
             yield return null;
+
+            if (Time.time - startTime > duration * 0.5f && !playerReset) {
+                PlayerTransform.position = new Vector3(-80, 0, 0);
+                playerReset = true;
+                Debug.Log("beepboop done");
+            }
         }
 
         CameraTransform.localPosition = initialPosition;

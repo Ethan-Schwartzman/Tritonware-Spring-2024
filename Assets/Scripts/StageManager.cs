@@ -39,8 +39,25 @@ public class StageManager : MonoBehaviour
         ThreatController.Instance.SpawnBoss();
     }
 
+    public void DeactivateBossFight() {
+        ActiveBossFight = false;
+        GameLogic.EnableEnemies = true;
+        GameLogic.EnableAsteroids = true;
+        GameLogic.EnableMissiles = true;
+    }
+
     public void AdvanceStage() {
         stage++;
+        StartCoroutine(AdvanceStageCoroutine());
+    }
+
+    public int GetStage() {
+        return stage;
+    }
+
+    private IEnumerator AdvanceStageCoroutine() {
+        yield return new WaitForSeconds(2.0f);
+        yield return StartCoroutine(EffectController.Instance.Hyperspace(HyperspaceParticles));
         if(!GameLogic.OverideStageSettings) {
             switch(stage) {
                 case 1:
@@ -62,14 +79,7 @@ public class StageManager : MonoBehaviour
                     break;
             }
         }
-        StartCoroutine(AdvanceStageCoroutine());
-    }
-
-    private IEnumerator AdvanceStageCoroutine() {
-        yield return new WaitForSeconds(2.0f);
-        yield return StartCoroutine(EffectController.Instance.Hyperspace(HyperspaceParticles));
-        //Debug.Log("done2");
         ScoreManager.Instance.NextStage();
-        ActiveBossFight = false;
+        DeactivateBossFight();
     }
 }
