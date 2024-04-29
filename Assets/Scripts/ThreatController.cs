@@ -10,7 +10,7 @@ public class ThreatController : MonoBehaviour
     public static int BeamShipHealth = 6;
     public static int BossHealth = 200;
     public static int EliteHealth = 15;
-    public static int AsteroidHealth = 6;
+    public static float AsteroidHealth = 1.5f;
     public Slider BossHealthbar;
 
     public static ThreatController Instance;

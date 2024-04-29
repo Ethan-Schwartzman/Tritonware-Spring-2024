@@ -3321,7 +3321,6 @@ MonoBehaviour:
   - {fileID: 2287134039445927511, guid: 01285ddba87dd4aeeb5bb7faf871ce16, type: 3}
   - {fileID: 4350463066376799008, guid: 86eca557421614548b56d82565594e8e, type: 3}
   - {fileID: 2832785029875447492, guid: b8aba598ca2cb83409fc0111654369ab, type: 3}
-  puzzleChancePerDamage: 0.075
   baseMaxDifficulty: 10
   healPerPuzzle: 3
 --- !u!1 &914578300
@@ -3988,10 +3987,10 @@ MonoBehaviour:
   HyperspaceSound: {fileID: 2045251175}
   ActiveBossFight: 0
   enemySpawnCooldown:
-  - 13
+  - 30
+  - 15
   - 10
   - 7
-  - 6
   - 5
   pursuitRates:
   - 2.05
@@ -4000,6 +3999,16 @@ MonoBehaviour:
   - 2.3
   - 2.4
   bossHealths: 96000000af000000c8000000
+  AsteroidSpeedMultiplier:
+  - 0.6
+  - 0.8
+  - 1
+  - 1.2
+  PuzzleChances:
+  - 0.025
+  - 0.04
+  - 0.06
+  - 0.075
 --- !u!1 &1083953288
 GameObject:
   m_ObjectHideFlags: 0

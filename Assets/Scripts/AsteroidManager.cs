@@ -7,8 +7,8 @@ public class AsteroidGenerator : MonoBehaviour
 {
     // Parameters
     const float MAX_ANGLE = 30f;
-    const float MIN_SCALE = 0.5f;
-    const float MAX_SCALE = 3.0f;
+    const float MIN_SCALE = 1.0f;
+    const float MAX_SCALE = 5.0f;
     const float MAX_SKEW = 0.5f;
     const float MIN_DISTANCE = 40f;
     const float MAX_DISTANCE = 80f;
@@ -108,9 +108,15 @@ public class AsteroidGenerator : MonoBehaviour
         // Set asteroid rigidbody properties
         asteroid.SetMass(MIN_MASS * Mathf.Pow(scale,3));
 
+        int multiplierIndex = StageManager.Instance.GetStage();
+        if(multiplierIndex > StageManager.Instance.AsteroidSpeedMultiplier.Length) {
+            multiplierIndex = StageManager.Instance.AsteroidSpeedMultiplier.Length-1;
+        }
+        float multiplier = StageManager.Instance.AsteroidSpeedMultiplier[multiplierIndex];
+        float velocityRange = MAX_VELOCITY * multiplier;
         asteroid.SetVelocity(new Vector2(
-            Random.Range(-MAX_VELOCITY, MAX_VELOCITY),
-            Random.Range(-MAX_VELOCITY, MAX_VELOCITY)
+            Random.Range(-velocityRange, velocityRange),
+            Random.Range(-velocityRange, velocityRange)
         ));
 
         asteroid.SetSpin(Random.Range(-MAX_SPIN, MAX_SPIN));

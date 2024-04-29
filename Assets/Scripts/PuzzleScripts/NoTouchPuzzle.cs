@@ -38,11 +38,11 @@ public class NoTouchPuzzle : Puzzle
         OnPuzzle1();
     }
 
-    void Update(){
+    /* void Update(){
         if (AllControlsTrigger && Input.GetButtonDown("Left") || Input.GetButtonDown("Right")){
             OnPuzzle1();
         }
-    }
+    } */
 
     IEnumerator Countdown()
     {

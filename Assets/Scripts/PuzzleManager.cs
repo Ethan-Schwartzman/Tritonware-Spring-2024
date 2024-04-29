@@ -21,7 +21,7 @@ public class PuzzleManager : MonoBehaviour
 
     public Puzzle[] puzzleTemplates;
 
-    [SerializeField] private float puzzleChancePerDamage = 0.1f;
+    //private float puzzleChancePerDamage = 0.04f;
     private int maxDifficulty;
     [SerializeField]  private int baseMaxDifficulty = 12;
 
@@ -108,16 +108,24 @@ public class PuzzleManager : MonoBehaviour
 
     public void RollForPuzzleDamage(int damage)
     {
+        ShaderManager.Instance.HitEffect();
+
         if (GetTotalDifficulty() >= maxDifficulty - 1) return;
         float roll = Random.value;
         if (puzzleCount >= 3) roll *= 2;
-        if (roll < damage * puzzleChancePerDamage)
+
+        // puzzle chance
+        int chanceIndex = StageManager.Instance.GetStage();
+        if(chanceIndex > StageManager.Instance.PuzzleChances.Length) {
+            chanceIndex = StageManager.Instance.PuzzleChances.Length-1;
+        }
+        float chance = StageManager.Instance.PuzzleChances[chanceIndex];
+
+        if (roll < damage * chance)
         {
             SpawnPuzzle();
             PlayerUI.Instance.PopupText("SYSTEM DAMAGE");
-            ShaderManager.Instance.HitEffect();
         }
-
     }
 
     public void RollForPuzzleRandom()

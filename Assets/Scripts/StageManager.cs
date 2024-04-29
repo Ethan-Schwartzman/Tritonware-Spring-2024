@@ -16,6 +16,8 @@ public class StageManager : MonoBehaviour
     public float[] enemySpawnCooldown;
     public float[] pursuitRates;
     public int[] bossHealths;
+    public float[] AsteroidSpeedMultiplier;
+    public float[] PuzzleChances;
 
     void Start() {
         if(Instance == null) {
