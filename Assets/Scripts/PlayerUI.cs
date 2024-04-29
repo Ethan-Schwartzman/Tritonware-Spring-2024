@@ -10,9 +10,9 @@ public class PlayerUI : MonoBehaviour
     public static PlayerUI Instance;
     [SerializeField] TMP_Text health, maxHealth, speed,
         missileWarning,
-        powerup, popupText;
+        popupText;
     [SerializeField] ProgressBar powerupDuration, playerProgress, enemyProgress;
-    [SerializeField] Image segment;
+    [SerializeField] Image segment, powerupIcon, powerupActivateIndicator;
 
 
     Coroutine currentPopup;
@@ -33,10 +33,16 @@ public class PlayerUI : MonoBehaviour
         if (pow != null)
         {
             float percent = ((pow.GetDuration() - pow.activatedDuration) / pow.GetDuration()) / (float)pow.maxCharges
-                + (float)(pow.charges-1) / (float)pow.maxCharges;
+                + (float)(pow.charges - 1) / (float)pow.maxCharges;
             powerupDuration.SetLevel(percent);
+            if (pow.isActive) powerupActivateIndicator.color = Color.yellow;
+            else powerupActivateIndicator.color = Color.black;
         }
-        else powerupDuration.SetLevel(0);
+        else
+        {
+            powerupDuration.SetLevel(0);
+            powerupActivateIndicator.color = Color.black;
+        }
         
     }
 
@@ -44,8 +50,12 @@ public class PlayerUI : MonoBehaviour
     {
         health.text = PlayerShip.Instance.GetHealth().ToString();
         maxHealth.text = PlayerShip.Instance.GetMaxHealth().ToString();
-        if (PlayerShip.Instance.currentPowerup == null) powerup.text = "";
-        else powerup.text = PlayerShip.Instance.currentPowerup.GetName();
+        if (PlayerShip.Instance.currentPowerup == null) powerupIcon.enabled = false;
+        else
+        {
+            powerupIcon.enabled = true;
+            powerupIcon.sprite = PlayerShip.Instance.currentPowerup.iconSprite;
+        }
     }
 
     public void SetPowerupCharges(int charges)

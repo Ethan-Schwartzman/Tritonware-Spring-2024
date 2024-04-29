@@ -15,9 +15,11 @@ public abstract class Powerup: MonoBehaviour
     public int charges;
     protected bool overrideFinish = false;
 
+    public Sprite iconSprite;
+
     float spawnTime;
     Rigidbody2D rb;
-    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] SpriteRenderer[] spriteRenderers;
 
 
     protected virtual void Awake()
@@ -64,7 +66,11 @@ public abstract class Powerup: MonoBehaviour
     public void Collect()
     {
         charges = maxCharges;
-        spriteRenderer.enabled = false;
+        foreach (SpriteRenderer sr in spriteRenderers)
+        {
+            sr.enabled = false;
+        }
+
         transform.SetParent(PlayerShip.Instance.transform,false);
         PlayerShip.Instance.SetPowerup(this);
         collected = true;
