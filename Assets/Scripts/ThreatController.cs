@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,8 +21,8 @@ public class ThreatController : MonoBehaviour
     const float MIN_DISTANCE = 40f;
     const float MAX_DISTANCE = 80f;
 
-    const float MIN_SPAWN_COOLDOWN = 5f;
-    const float MAX_SPAWN_COOLDOWN = 10f;
+    const float SPAWN_COOLDOWN_RANGE = 3f;
+    [HideInInspector] public float spawnCooldownAverage = 7f;
 
     const int MAX_GROUP_SIZE = 4;
     const int MAX_ACTIVE_ENEMIES = 10;
@@ -37,13 +38,15 @@ public class ThreatController : MonoBehaviour
     float eliteGroupSpawnTime = 0;
 
     float pursuitProgress;
-    public float pursuitProgressSpeed = 0.7f;
+    [HideInInspector] public float pursuitProgressSpeed = 2.2f;
     public float pursuitStartTimer = 10f;
     bool pursuitStarted = false;
+    float stageStartTime = 0f;
 
     public EnemyShip eliteShipTemplate;
 
     public EnemyShip[] enemyShipPool;
+    public EnemyShip[] addedShipPerStage;
 
     public BossEnemy BossShipTemplate;
 
@@ -51,13 +54,6 @@ public class ThreatController : MonoBehaviour
 
     private void Awake()
     {
-        PlayerTransform = PlayerShip.Instance.transform;
-        eliteGroupSpawnTime = eliteGroupSpawnInterval - 0.1f;
-
-    }
-    void Start()
-    {
-
         if (Instance == null)
         {
             Instance = this;
@@ -67,9 +63,16 @@ public class ThreatController : MonoBehaviour
             Debug.LogWarning("Tried to create more than one instance of ThreatController");
             Destroy(this);
         }
+        PlayerTransform = PlayerShip.Instance.transform;
+        eliteGroupSpawnTime = eliteGroupSpawnInterval - 0.1f;
+
+    }
+    void Start()
+    {
 
         ResetSpawnTimer();
         if(Settings.Instance.SpawnBossAtStart) SpawnBoss();
+        stageStartTime = Time.time;
     }
 
     // Create the ship
@@ -85,6 +88,10 @@ public class ThreatController : MonoBehaviour
         else if (newShip.enemyType == EnemyType.beam)
         {
             newShip.SetHealth(BeamShipHealth);
+        }
+        else if (newShip.enemyType == EnemyType.elite)
+        {
+            newShip.SetHealth(EliteHealth);
         }
         
         // Spawn ship in the general direction player is facing
@@ -106,6 +113,7 @@ public class ThreatController : MonoBehaviour
 
     public void SpawnEliteGroup()
     {
+
         for (int i = 0; i < 3; i++)
         {
             activeEnemyCount++;
@@ -140,7 +148,7 @@ public class ThreatController : MonoBehaviour
     private void ResetSpawnTimer()
     {
         lastSpawnTime = Time.time;
-        spawnCooldown = Random.Range(MIN_SPAWN_COOLDOWN, MAX_SPAWN_COOLDOWN);
+        spawnCooldown = Random.Range(spawnCooldownAverage-SPAWN_COOLDOWN_RANGE, spawnCooldownAverage+SPAWN_COOLDOWN_RANGE);
     }
 
     // Update is called once per frame
@@ -160,12 +168,11 @@ public class ThreatController : MonoBehaviour
             }
         }
 
-        if (!pursuitStarted && Time.time > pursuitStartTimer) pursuitStarted = true;
+        if (!pursuitStarted && Time.time - stageStartTime > pursuitStartTimer) pursuitStarted = true;
         if (pursuitStarted)
         {
             pursuitProgress += pursuitProgressSpeed * Time.deltaTime;
         }
-
         if (pursuitStarted && GetPlayerProgress() < GetEnemyProgress())
         {
             eliteGroupSpawnTime += Time.deltaTime;
@@ -200,5 +207,30 @@ public class ThreatController : MonoBehaviour
         return missileCooldown - 5f * Mathf.Clamp01(1-((GetPlayerProgress() - GetEnemyProgress()) / 30)) + Random.Range(-2f,2f);
     }
 
+    public void AddShipToPool(int stage)
+    {
+        if (stage < addedShipPerStage.Length)
+        {
+            if (addedShipPerStage[stage] != null)
+            {
+                List<EnemyShip> ships = enemyShipPool.ToList();
+                ships.Add(addedShipPerStage[stage]);
+                enemyShipPool = ships.ToArray();
+                
+            }
+        }
+    }
+
+    public void StopPursuit()
+    {
+        pursuitStarted = false;
+        stageStartTime = float.MaxValue;
+    }
+    public void ResetPursuit()
+    {
+        pursuitProgress = 0;
+        pursuitStarted = false;
+        stageStartTime = Time.time;
+    }
 }
 

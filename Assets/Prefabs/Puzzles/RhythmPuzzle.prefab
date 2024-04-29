@@ -61,7 +61,7 @@ MonoBehaviour:
   LTileTemplate: {fileID: 566720273098502142, guid: 5d8eb01d5e128804fa8a3fffc4b049c3, type: 3}
   RTileTemplate: {fileID: 8558649288295258445, guid: fdb69cc40e568534fbca7d685c57f079, type: 3}
   line: {fileID: 8803355431176482124}
-  speed: 850
+  speed: 700
 --- !u!1 &3463357907389385423
 GameObject:
   m_ObjectHideFlags: 0

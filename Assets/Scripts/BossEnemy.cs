@@ -17,7 +17,7 @@ public class BossEnemy : EnemyShip
     override protected void Awake() {
         healthbar = ThreatController.Instance.BossHealthbar;
         base.Awake();
-        shipMovement.CombatDistance = new Vector3(30f, 0);
+        shipMovement.CombatDistance = new Vector2(35f, 0);
     }
 
     override public void SetHealth(int hp) {
@@ -66,8 +66,10 @@ public class BossEnemy : EnemyShip
         foreach(EnemyShip minion in minions) {
             if(minion != null) minion.TriggerDeath();
         }
+        PlayerShip.Instance.Heal(9999);
         StageManager.Instance.AdvanceStage();
         healthbar.gameObject.SetActive(false);
+        PuzzleManager.Instance.ClearPuzzles();
         base.TriggerDeath();
     }
 }

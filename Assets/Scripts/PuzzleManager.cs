@@ -195,6 +195,7 @@ public class PuzzleManager : MonoBehaviour
     {
         for (int i = 0; i < puzzles.Length; i++)
         {
+            if (puzzles[i] != null)
             Destroy(puzzles[i].gameObject);
             puzzles[i] = null;
         }

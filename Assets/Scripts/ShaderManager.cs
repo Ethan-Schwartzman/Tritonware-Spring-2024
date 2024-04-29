@@ -78,8 +78,9 @@ public class ShaderManager : MonoBehaviour
 
             if (Time.time - startTime > duration * 0.5f && !playerReset) {
                 PlayerTransform.position = new Vector3(-80, 0, 0);
+                ThreatController.Instance.ResetPursuit();
                 playerReset = true;
-                Debug.Log("beepboop done");
+                //Debug.Log("beepboop done");
             }
         }
 

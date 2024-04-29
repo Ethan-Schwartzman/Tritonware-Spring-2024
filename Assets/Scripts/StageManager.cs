@@ -13,6 +13,10 @@ public class StageManager : MonoBehaviour
 
     private int stage;
 
+    public float[] enemySpawnCooldown;
+    public float[] pursuitRates;
+    public int[] bossHealths;
+
     void Start() {
         if(Instance == null) {
             Instance = this;
@@ -26,8 +30,11 @@ public class StageManager : MonoBehaviour
             GameLogic.EnablePuzzles = true;
             GameLogic.EnableDeath = true;
             GameLogic.EnableAsteroids = true;
-            GameLogic.EnableEnemies = false;
+            GameLogic.EnableEnemies = true;
             GameLogic.EnableMissiles = false;
+            ThreatController.Instance.spawnCooldownAverage = StageStat(enemySpawnCooldown, 1);
+            ThreatController.Instance.pursuitProgressSpeed = StageStat(pursuitRates, 1);
+            ThreatController.BossHealth = StageStat(bossHealths, 1);
         }
         
         ActiveBossFight = false;
@@ -38,15 +45,13 @@ public class StageManager : MonoBehaviour
         ActiveBossFight = true;
         GameLogic.EnableEnemies = false;
         GameLogic.EnableAsteroids = false;
-        GameLogic.EnableMissiles = false;
+        //GameLogic.EnableMissiles = false;
         ThreatController.Instance.SpawnBoss();
+        ThreatController.Instance.StopPursuit();
     }
 
     public void DeactivateBossFight() {
         ActiveBossFight = false;
-        GameLogic.EnableEnemies = true;
-        GameLogic.EnableAsteroids = true;
-        GameLogic.EnableMissiles = true;
     }
 
     public void AdvanceStage() {
@@ -83,8 +88,33 @@ public class StageManager : MonoBehaviour
                     GameLogic.EnableMissiles = true;
                     break;
             }
+            ThreatController.Instance.AddShipToPool(stage);
+            ThreatController.Instance.spawnCooldownAverage = StageStat(enemySpawnCooldown, stage);
+            ThreatController.Instance.pursuitProgressSpeed = StageStat(pursuitRates, stage);
+            ThreatController.BossHealth = StageStat(bossHealths, stage);
         }
         ScoreManager.Instance.NextStage();
         DeactivateBossFight();
+        
+
+        /*
+        Debug.Log("New stats: ");
+        Debug.Log("ennemy spawn cd: " + ThreatController.Instance.spawnCooldownAverage);
+        Debug.Log("pursuit speed: " + ThreatController.Instance.pursuitProgressSpeed);
+        Debug.Log("boss health: " + ThreatController.BossHealth);
+        */
+    }
+
+    private float StageStat(float[] arr, int stage)
+    {
+        stage -= 1;
+        if (stage < arr.Length) return (arr[stage]);
+        return arr[arr.Length - 1];
+    }
+    private int StageStat(int[] arr, int stage)
+    {
+        stage -= 1;
+        if (stage < arr.Length) return (arr[stage]);
+        return arr[arr.Length - 1];
     }
 }

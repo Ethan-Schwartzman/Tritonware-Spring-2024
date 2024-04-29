@@ -1017,17 +1017,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0abe955f90e22f4abbe4857378d50ba, type: 3}
---- !u!114 &362604772 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5411602702644741812, guid: d0abe955f90e22f4abbe4857378d50ba, type: 3}
-  m_PrefabInstance: {fileID: 362604771}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &381216209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,6 +1185,69 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &394127917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 394127918}
+  - component: {fileID: 394127919}
+  m_Layer: 10
+  m_Name: Collision sound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &394127918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394127917}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1249115234}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &394127919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394127917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1529908495
+      Data2: 1126751702
+      Data3: -1330796113
+      Data4: -826513827
+    Path: event:/asteroid-crash
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &430362981
 GameObject:
   m_ObjectHideFlags: 0
@@ -4041,13 +4093,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BossHealthbar: {fileID: 299468592}
   activeEnemyCount: 0
+  spawnCooldownAverage: 7
   eliteGroupSpawnInterval: 20
   pursuitProgressSpeed: 2.2
   pursuitStartTimer: 10
   eliteShipTemplate: {fileID: 1223434973920203208, guid: ab24ff1e824fb634ea8c6726c10e7fe1, type: 3}
   enemyShipPool:
   - {fileID: 1223434973920203208, guid: 3d52946616a630342b412a7b3546c61b, type: 3}
+  addedShipPerStage:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 1223434973920203208, guid: f294c369d2781414581f19d41364ee0d, type: 3}
+  - {fileID: 0}
+  - {fileID: 1223434973920203208, guid: ab24ff1e824fb634ea8c6726c10e7fe1, type: 3}
   BossShipTemplate: {fileID: 8640589398246766048, guid: 99a21947c9f593d4fb8cce6cdd3dc274, type: 3}
   missileCooldown: 10
 --- !u!4 &1075298643
@@ -4095,14 +4153,14 @@ MonoBehaviour:
   AsteroidCollisionDamage: 4
   ShipCollisionDamage: 4
   powerupDropChance: 0.25
-  sectorDistance: 300
-  EnableAsteroids: 0
-  EnableEnemies: 0
-  EnablePuzzles: 0
+  sectorDistance: 50
+  EnableAsteroids: 1
+  EnableEnemies: 1
+  EnablePuzzles: 1
   EnableDeath: 1
-  EnableMissiles: 0
-  SpawnBossAtStart: 1
-  OverideStageSettings: 1
+  EnableMissiles: 1
+  SpawnBossAtStart: 0
+  OverideStageSettings: 0
 --- !u!114 &1075298646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4133,8 +4191,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameLogic: {fileID: 1075298645}
   HyperspaceParticles: {fileID: 1927146094}
-  HyperspaceSound: {fileID: 362604772}
+  HyperspaceSound: {fileID: 2045251175}
   ActiveBossFight: 0
+  enemySpawnCooldown:
+  - 13
+  - 10
+  - 7
+  - 6
+  - 5
+  pursuitRates:
+  - 2.05
+  - 2.1
+  - 2.2
+  - 2.3
+  - 2.4
+  bossHealths: 32000000af000000c8000000
 --- !u!1001 &1079306393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4414,7 +4485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beamDuration: 0
-  beamInterval: 0.1
+  beamInterval: 0.06
   beamDamage: 1
   overheatDuration: 0
   heatCapacity: 2.5
@@ -4692,6 +4763,7 @@ Transform:
   - {fileID: 1515896658}
   - {fileID: 1829268171}
   - {fileID: 1143644464}
+  - {fileID: 394127918}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!114 &1249115235
@@ -4774,6 +4846,7 @@ MonoBehaviour:
   isAlive: 1
   trailColor: {r: 0, g: 0.97032166, b: 1, a: 1}
   driftTrailColor: {r: 1, g: 0, b: 0, a: 1}
+  collisionSound: {fileID: 394127919}
 --- !u!114 &1249115240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6976,6 +7049,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1934072764}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2045251175 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5411602702644741812, guid: d0abe955f90e22f4abbe4857378d50ba, type: 3}
+  m_PrefabInstance: {fileID: 362604771}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2058964431
 GameObject:
   m_ObjectHideFlags: 0

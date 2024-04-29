@@ -18,6 +18,7 @@ public class RhythmPuzzle : Puzzle
     public float speed;
 
     bool failed;
+    bool completed;
 
     List<Image> LTiles, RTiles;
     Collider2D col;
@@ -104,8 +105,9 @@ public class RhythmPuzzle : Puzzle
                 failed = false;
                 successCount = 0;
             }
-            else
+            else if (!completed)
             {
+                completed = true;
                 StartCoroutine(Complete());
             }
         }
