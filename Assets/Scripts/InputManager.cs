@@ -44,7 +44,7 @@ public class InputManager : MonoBehaviour
         if(Input.GetButtonDown("Powerup")) {
             PlayerShip.Instance.ActivatePowerup();
         }
-        if (Input.GetKeyDown(KeyCode.Return) && canReset) {
+        if (Input.GetButtonDown("Menu") && canReset) {
             // reload scene
             string currentSceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(currentSceneName);
@@ -71,6 +71,7 @@ public class InputManager : MonoBehaviour
 
     public void EnableReset() {
         canReset = true;
+        ResetText.text = "Score: " + ScoreManager.Instance.score + "\nPress Enter to Restart";
         ResetText.gameObject.SetActive(true);
     }
 }

@@ -18,7 +18,12 @@ public class MainMenu : MonoBehaviour{
                MenuCanvas.GetChild(i).gameObject.SetActive(false);
           }
           MenuCanvas.GetChild(4).gameObject.SetActive(true);
-          yield return new WaitForSeconds((float) MenuCanvas.GetChild(4).GetComponent<VideoPlayer>().clip.length);
+          float startTime = Time.deltaTime;
+          float duration = (float) MenuCanvas.GetChild(4).GetComponent<VideoPlayer>().clip.length;
+          while(Time.time - startTime < duration) {
+               if(Input.GetButtonDown("Menu")) break;
+               yield return null;
+          }
           SceneManager.LoadSceneAsync("SampleScene");
      }
      public void QuitGame()
