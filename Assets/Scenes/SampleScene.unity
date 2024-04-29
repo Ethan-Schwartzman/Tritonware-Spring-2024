@@ -4085,12 +4085,12 @@ MonoBehaviour:
   ShipCollisionDamage: 4
   powerupDropChance: 0.25
   sectorDistance: 300
-  EnableAsteroids: 1
+  EnableAsteroids: 0
   EnableEnemies: 0
   EnablePuzzles: 0
   EnableDeath: 1
   EnableMissiles: 0
-  SpawnBossAtStart: 0
+  SpawnBossAtStart: 1
   OverideStageSettings: 1
 --- !u!114 &1075298646
 MonoBehaviour:

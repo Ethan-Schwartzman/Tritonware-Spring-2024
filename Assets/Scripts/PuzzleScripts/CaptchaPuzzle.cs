@@ -65,7 +65,7 @@ public class CaptchaPuzzle : Puzzle
                 }
             }
             Images[selected].GetChild(0).gameObject.SetActive(toggle[selected]);
-            Debug.Log("# of Correct: " + correct);
+            //Debug.Log("# of Correct: " + correct);
             if (correct == 3){
                 PuzzleManager.Instance.CompletePuzzle(index);
             }

@@ -25,6 +25,8 @@ public class StageManager : MonoBehaviour
             GameLogic.EnablePuzzles = true;
             GameLogic.EnableDeath = true;
             GameLogic.EnableAsteroids = true;
+            GameLogic.EnableEnemies = false;
+            GameLogic.EnableMissiles = false;
         }
         
         ActiveBossFight = false;

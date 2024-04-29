@@ -146,16 +146,18 @@ public class ThreatController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!Settings.Instance.EnableEnemies) return;
-        if (Time.time - lastSpawnTime >= spawnCooldown && activeEnemyCount < MAX_ACTIVE_ENEMIES)
+        if (Settings.Instance.EnableEnemies)
         {
-            int spawnCount = Random.Range(1, MAX_GROUP_SIZE);
-            for (int i = 0; i < spawnCount; i++)
+            if (Time.time - lastSpawnTime >= spawnCooldown && activeEnemyCount < MAX_ACTIVE_ENEMIES)
             {
-                SpawnEnemyShip();
-                
+                int spawnCount = Random.Range(1, MAX_GROUP_SIZE);
+                for (int i = 0; i < spawnCount; i++)
+                {
+                    SpawnEnemyShip();
+
+                }
+                ResetSpawnTimer();
             }
-            ResetSpawnTimer();
         }
 
         if (!pursuitStarted && Time.time > pursuitStartTimer) pursuitStarted = true;

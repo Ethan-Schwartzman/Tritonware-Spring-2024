@@ -45,6 +45,9 @@ public class Missile : Projectile
 
         rb.AddForce(dt * trackingForce * (targetPos - transform.position));
         */
+
+        transform.right = (vRel.normalized 
+            + (PlayerShip.Instance.transform.position - transform.position).normalized).normalized;
     }
 
     protected override void Update()

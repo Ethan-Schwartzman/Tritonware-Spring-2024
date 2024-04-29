@@ -8,7 +8,7 @@ public class ScoreManager : MonoBehaviour {
 
     public int score = 0;
     private int stageModifier = 0;
-    private const int STAGE_BONUS = 50;
+
 
     public static ScoreManager Instance;
 
@@ -26,8 +26,8 @@ public class ScoreManager : MonoBehaviour {
     void Update() {
         if (!PlayerShip.Instance.isAlive) return;
         int tmpScore = (int)ThreatController.Instance.GetPlayerProgress();
-        if(tmpScore > STAGE_BONUS) {
-            tmpScore = STAGE_BONUS;
+        if(tmpScore > Settings.Instance.sectorDistance) {
+            tmpScore = Mathf.RoundToInt(Settings.Instance.sectorDistance);
             if(!StageManager.Instance.ActiveBossFight) {
                 StageManager.Instance.ActivateBossFight();
             }
@@ -42,6 +42,6 @@ public class ScoreManager : MonoBehaviour {
     }
 
     public void NextStage() {
-        stageModifier += STAGE_BONUS;
+        stageModifier += (int)Settings.Instance.sectorDistance;
     }
 }

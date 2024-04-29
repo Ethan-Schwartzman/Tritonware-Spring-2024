@@ -144,7 +144,6 @@ public class RhythmPuzzle : Puzzle
                 if (trackSide[i] && tile.enabled)
                 {
                     successCount++;
-                    Debug.Log(successCount);
                     tile.enabled = false;
                 }
                 else
@@ -166,7 +165,7 @@ public class RhythmPuzzle : Puzzle
 
     public override int GetDifficulty()
     {
-        return 4;
+        return 6;
     }
 
 }
