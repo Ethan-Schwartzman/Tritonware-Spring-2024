@@ -4030,7 +4030,8 @@ MonoBehaviour:
   pursuitProgressSpeed: 2.2
   pursuitStartTimer: 10
   eliteShipTemplate: {fileID: 1223434973920203208, guid: ab24ff1e824fb634ea8c6726c10e7fe1, type: 3}
-  enemyShipPool: []
+  enemyShipPool:
+  - {fileID: 1223434973920203208, guid: 3d52946616a630342b412a7b3546c61b, type: 3}
   BossShipTemplate: {fileID: 8640589398246766048, guid: 99a21947c9f593d4fb8cce6cdd3dc274, type: 3}
   missileCooldown: 10
 --- !u!4 &1075298643
