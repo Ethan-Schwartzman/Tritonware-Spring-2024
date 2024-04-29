@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: df50c30acfb0d464b8833be52b9f3015, type: 3}
-  m_Color: {r: 0.745283, g: 0.14160872, b: 0.08085619, a: 1}
+  m_Sprite: {fileID: 21300000, guid: e3ed491703dfc4264aeee24bc7fa9e1e, type: 3}
+  m_Color: {r: 0.5566038, g: 0.02179355, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -94,9 +94,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6067354897625392967}
   - component: {fileID: 1584021927180267719}
-  - component: {fileID: 1648390744357750050}
   - component: {fileID: 5319544260072768743}
   - component: {fileID: 8640589398246766048}
+  - component: {fileID: 186609728926348362}
   m_Layer: 6
   m_Name: Boss Ship
   m_TagString: Untagged
@@ -149,41 +149,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &1648390744357750050
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2140317385887574823}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: bd51762169dd01446a9734717a8e6821, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 3.6607676e-15, y: 0.13260362}
-  m_Size: {x: 0.99999654, y: 3.0534468}
-  m_Direction: 0
 --- !u!114 &5319544260072768743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +197,63 @@ MonoBehaviour:
   defaultColor: {r: 0.74509805, g: 0.14117648, b: 0.08235294, a: 0}
   Bullets: {fileID: 4246975409640877268}
   Missiles: {fileID: 9086091539062680775}
+--- !u!60 &186609728926348362
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140317385887574823}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.109282725, y: 2.1861687}
+      - {x: -0.19007768, y: 3.0866537}
+      - {x: -0.3253648, y: 3.0872488}
+      - {x: -0.33102095, y: 2.0770373}
+      - {x: -0.79239136, y: 1.3598032}
+      - {x: -1.017513, y: -2.6261506}
+      - {x: -0.32685882, y: -2.68832}
+      - {x: 0.36064368, y: -0.0048140883}
+      - {x: 1.24557, y: -0.16973972}
+      - {x: 1.238378, y: 0.28750703}
+      - {x: 0.43036628, y: 0.6678086}
+      - {x: 0.41696662, y: 1.6043384}
+  m_UseDelaunayMesh: 0
 --- !u!1 &3857748587443420494
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,14 +278,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3857748587443420494}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5752725287791498172}
   m_Father: {fileID: 6067354897625392967}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &7718439484155818847
 GameObject:
   m_ObjectHideFlags: 0
