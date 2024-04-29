@@ -132,8 +132,9 @@ MonoBehaviour:
   beamDuration: 0
   beamInterval: 0.2
   beamDamage: 1
+  overheatDuration: 4
   heatCapacity: 0.9
-  overheated: 0
+  overheated: 1
   overheatPenalty: 5
   radius: 0.1
   collideEnemies: 0
@@ -307,7 +308,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &1648390744357750050
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -386,7 +387,7 @@ MonoBehaviour:
   state: 0
   Particles: {fileID: 1222855035342946810, guid: 14fc8ccbeb49e744f94224bfc9f086bb, type: 3}
   weaponCooldown: 2
-  bulletSpread: 0.01
+  bulletSpread: 0.005
   asteroidImmune: 1
   defaultColor: {r: 1, g: 0.597088, b: 0, a: 1}
 --- !u!114 &9006830265826053269

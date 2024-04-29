@@ -3326,6 +3326,7 @@ MonoBehaviour:
   - {fileID: 1085407465457882604, guid: 4d6b298a3ef9f1047b2fddee4862309e, type: 3}
   - {fileID: 2287134039445927511, guid: 01285ddba87dd4aeeb5bb7faf871ce16, type: 3}
   - {fileID: 4350463066376799008, guid: 86eca557421614548b56d82565594e8e, type: 3}
+  - {fileID: 2832785029875447492, guid: b8aba598ca2cb83409fc0111654369ab, type: 3}
   puzzleChancePerDamage: 0.075
   baseMaxDifficulty: 10
   healPerPuzzle: 3
@@ -4399,8 +4400,10 @@ MonoBehaviour:
   beamDuration: 0
   beamInterval: 0.1
   beamDamage: 1
+  overheatDuration: 0
   heatCapacity: 2.5
   overheated: 0
+  overheatPenalty: 0
   radius: 1
   collideEnemies: 1
   beamColor: {r: 0.16557169, g: 1, b: 0, a: 1}

@@ -42,7 +42,7 @@ public class InputManager : MonoBehaviour
         // Debugging
         // if (Input.GetKeyDown(KeyCode.G)) PlayerShip.Instance.ToggleDrift(true);
         // if (Input.GetKeyDown(KeyCode.H)) PlayerShip.Instance.ToggleDrift(false);
-        // if (Input.GetKeyDown(KeyCode.F)) PuzzleManager.Instance.SpawnPuzzle(true);
+        if (Input.GetKeyDown(KeyCode.F)) PuzzleManager.Instance.SpawnPuzzle(true);
 
     }
 

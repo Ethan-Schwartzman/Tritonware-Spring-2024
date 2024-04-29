@@ -13,7 +13,7 @@ public class BeamWeapon : MonoBehaviour, IWeapon
     public float beamInterval = 0.5f;
     public int beamDamage = 1;
 
-    float overheatDuration = 0f;
+    public float overheatDuration = 0f;
     public float heatCapacity = 2f;
     public bool overheated = false;
     public float overheatPenalty = 0f;
