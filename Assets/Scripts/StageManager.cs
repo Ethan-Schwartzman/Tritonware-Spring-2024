@@ -8,6 +8,7 @@ public class StageManager : MonoBehaviour
  
     public Settings GameLogic;
     public ParticleSystem HyperspaceParticles;
+    public FMODUnity.StudioEventEmitter HyperspaceSound; 
     [HideInInspector] public bool ActiveBossFight;
 
     private int stage;
@@ -58,7 +59,9 @@ public class StageManager : MonoBehaviour
     }
 
     private IEnumerator AdvanceStageCoroutine() {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.5f);
+        HyperspaceSound.Play();
+        yield return new WaitForSeconds(0.5f);
         yield return StartCoroutine(EffectController.Instance.Hyperspace(HyperspaceParticles));
         if(!GameLogic.OverideStageSettings) {
             switch(stage) {
