@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Asteroid : DynamicEntity, IDamagable
 {
@@ -12,6 +13,7 @@ public class Asteroid : DynamicEntity, IDamagable
     private SpriteRenderer sr;
 
     public HealthTracker healthTracker;
+    public ObjectPool<Asteroid> ParentPool;
 
     public Team GetTeam()
     {
@@ -64,7 +66,7 @@ public class Asteroid : DynamicEntity, IDamagable
     public void TriggerDeath()
     {
         EffectController.Instance.SpawnParticles(Particles, transform);
-        if (isActiveAndEnabled) AsteroidGenerator.Instance.AsteroidPool.Release(this);
+        if (isActiveAndEnabled) ParentPool.Release(this);
     }
 
     void Awake()
@@ -82,7 +84,7 @@ public class Asteroid : DynamicEntity, IDamagable
     void Update()
     {
         if(Vector3.Distance(PlayerTransform.position, this.transform.position) > MAX_DISTANCE) {
-            AsteroidGenerator.Instance.AsteroidPool.Release(this);
+            ParentPool.Release(this);
         }
     }
 

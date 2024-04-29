@@ -29,12 +29,13 @@ public class AsteroidGenerator : MonoBehaviour
     public static AsteroidGenerator Instance;
 
     public Transform PlayerTransform;
-    public Sprite[] AsteroidSprites;
-    public Asteroid AsteroidPrefab;
-    public ObjectPool<Asteroid> AsteroidPool;
+    //public Sprite[] AsteroidSprites;
+    public Asteroid[] AsteroidPrefabs;
+    public ObjectPool<Asteroid>[] AsteroidPools;
 
     private float spawnCooldown;
     private float lastSpawnTime;
+    private int asteroidType = 0;
 
 
     private void Awake()
@@ -51,21 +52,25 @@ public class AsteroidGenerator : MonoBehaviour
             Destroy(this);
         }        
 
-        AsteroidPool = new ObjectPool<Asteroid>
-        (
-            CreateAsteroid,
-            OnTakeFromPool, 
-            OnReleaseAsteroid, 
-            OnDestroyAsteroid, 
-            true, POOL_DEFAUlT, POOL_MAX
-        );
-
+        AsteroidPools = new ObjectPool<Asteroid>[AsteroidPrefabs.Length];
+        for(int i = 0; i <AsteroidPools.Length; i++) {
+            AsteroidPools[i] = new ObjectPool<Asteroid>
+            (
+                CreateAsteroid,
+                OnTakeFromPool, 
+                OnReleaseAsteroid, 
+                OnDestroyAsteroid, 
+                true, POOL_DEFAUlT, POOL_MAX
+            );
+        }
+        
         ResetSpawnTimer();
     }
 
     // Create the asteroid
     private Asteroid CreateAsteroid() {
-        Asteroid asteroid = Instantiate(AsteroidPrefab, Vector3.zero, Quaternion.identity);
+        Asteroid asteroid = Instantiate(AsteroidPrefabs[asteroidType], Vector3.zero, Quaternion.identity);
+        asteroid.ParentPool = AsteroidPools[asteroidType];
         asteroid.transform.SetParent(this.transform);
         asteroid.gameObject.SetActive(false);
         return asteroid;
@@ -73,10 +78,6 @@ public class AsteroidGenerator : MonoBehaviour
 
     // Spawn the asteroid
     private void OnTakeFromPool(Asteroid asteroid) {
-        // Set sprite
-        if(AsteroidSprites.Length != 0) {
-            asteroid.SetSprite(AsteroidSprites[Random.Range(0, AsteroidSprites.Length)]);
-        }
 
         // Set asteroid scale
         float skew = Random.Range(-MAX_SKEW, MAX_SKEW);
@@ -105,8 +106,6 @@ public class AsteroidGenerator : MonoBehaviour
         asteroid.gameObject.SetActive(true);
 
         // Set asteroid rigidbody properties
-
-
         asteroid.SetMass(MIN_MASS * Mathf.Pow(scale,3));
 
         asteroid.SetVelocity(new Vector2(
@@ -141,8 +140,11 @@ public class AsteroidGenerator : MonoBehaviour
     {
         if (!Settings.Instance.EnableAsteroids) return;
         if(Time.time - lastSpawnTime >= spawnCooldown) {
-            if(AsteroidPool.CountActive <= MAX_ACTIVE) {
-                Asteroid asteroid = AsteroidPool.Get();
+            int randomAsteroid = Random.Range(0, AsteroidPrefabs.Length);
+            if(AsteroidPools[randomAsteroid].CountActive <= MAX_ACTIVE) {
+                // Spawn an asteroid
+                asteroidType = randomAsteroid;
+                Asteroid asteroid = AsteroidPools[randomAsteroid].Get();
             }
             ResetSpawnTimer();
         }
