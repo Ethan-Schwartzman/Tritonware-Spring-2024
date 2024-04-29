@@ -59,9 +59,9 @@ public class StageManager : MonoBehaviour
     }
 
     private IEnumerator AdvanceStageCoroutine() {
-        yield return new WaitForSeconds(1.5f);
-        HyperspaceSound.Play();
         yield return new WaitForSeconds(0.5f);
+        HyperspaceSound.Play();
+        yield return new WaitForSeconds(1.5f);
         yield return StartCoroutine(EffectController.Instance.Hyperspace(HyperspaceParticles));
         if(!GameLogic.OverideStageSettings) {
             switch(stage) {
