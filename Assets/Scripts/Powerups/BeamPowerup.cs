@@ -20,6 +20,7 @@ public class BeamPowerup : Powerup, IWeaponContainer
     public override void Activate()
     {
         base.Activate();
+        transform.position = PlayerShip.Instance.transform.position;
     }
 
     protected override void Update()

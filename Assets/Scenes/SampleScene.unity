@@ -3325,6 +3325,7 @@ MonoBehaviour:
   - {fileID: 5228105164526541812, guid: 67ba791bc6fc94ffbafc4065254f0d90, type: 3}
   - {fileID: 1085407465457882604, guid: 4d6b298a3ef9f1047b2fddee4862309e, type: 3}
   - {fileID: 2287134039445927511, guid: 01285ddba87dd4aeeb5bb7faf871ce16, type: 3}
+  - {fileID: 4350463066376799008, guid: 86eca557421614548b56d82565594e8e, type: 3}
   puzzleChancePerDamage: 0.075
   baseMaxDifficulty: 10
   healPerPuzzle: 3
@@ -4027,8 +4028,10 @@ MonoBehaviour:
   eliteGroupSpawnInterval: 20
   pursuitProgressSpeed: 2.2
   pursuitStartTimer: 10
-  enemyShipTemplate: {fileID: 1223434973920203208, guid: 3d52946616a630342b412a7b3546c61b, type: 3}
   eliteShipTemplate: {fileID: 1223434973920203208, guid: ab24ff1e824fb634ea8c6726c10e7fe1, type: 3}
+  enemyShipPool:
+  - {fileID: 1223434973920203208, guid: 3d52946616a630342b412a7b3546c61b, type: 3}
+  - {fileID: 1223434973920203208, guid: f294c369d2781414581f19d41364ee0d, type: 3}
   BossShipTemplate: {fileID: 8640589398246766048, guid: 99a21947c9f593d4fb8cce6cdd3dc274, type: 3}
   missileCooldown: 10
 --- !u!4 &1075298643
@@ -4075,11 +4078,11 @@ MonoBehaviour:
   PlayerMaxHealth: 100
   AsteroidCollisionDamage: 4
   ShipCollisionDamage: 4
-  powerupDropChance: 0.2
+  powerupDropChance: 0.25
   sectorDistance: 300
-  EnableAsteroids: 1
+  EnableAsteroids: 0
   EnableEnemies: 1
-  EnablePuzzles: 1
+  EnablePuzzles: 0
   EnableDeath: 1
   EnableMissiles: 1
   SpawnBossAtStart: 0
@@ -4097,9 +4100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerupPool:
+  - {fileID: 5593386999385966854, guid: ae17d5b6f90c1da4b84d0df31857b2de, type: 3}
   - {fileID: 6533215733496329639, guid: e13904b88c14cff47af4a0e413073452, type: 3}
   - {fileID: 4259623209548231981, guid: 652637873a8716c469be4f88fc33bc26, type: 3}
-  - {fileID: 5593386999385966854, guid: ae17d5b6f90c1da4b84d0df31857b2de, type: 3}
 --- !u!114 &1075298647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7316,6 +7319,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1789493605386292430, guid: ae17d5b6f90c1da4b84d0df31857b2de, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 5871067287867406867, guid: ae17d5b6f90c1da4b84d0df31857b2de, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7363,6 +7370,10 @@ PrefabInstance:
     - target: {fileID: 6431343007974450358, guid: ae17d5b6f90c1da4b84d0df31857b2de, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8675310266136823694, guid: ae17d5b6f90c1da4b84d0df31857b2de, type: 3}
+      propertyPath: heatCapacity
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

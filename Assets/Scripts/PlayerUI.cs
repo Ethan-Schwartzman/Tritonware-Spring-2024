@@ -26,8 +26,8 @@ public class PlayerUI : MonoBehaviour
     private void Update()
     {
         speed.text = Mathf.RoundToInt(PlayerShip.Instance.GetVelocity().magnitude).ToString();
-        playerProgress.SetLevel(ThreatController.Instance.GetPlayerProgress() / Settings.Instance.sectorDistance);
-        enemyProgress.SetLevel(ThreatController.Instance.GetEnemyProgress() / Settings.Instance.sectorDistance);
+        playerProgress.SetLevel(Mathf.Clamp01(ThreatController.Instance.GetPlayerProgress() / Settings.Instance.sectorDistance));
+        enemyProgress.SetLevel(Mathf.Clamp01(ThreatController.Instance.GetEnemyProgress() / Settings.Instance.sectorDistance));
 
         Powerup pow = PlayerShip.Instance.currentPowerup;
         if (pow != null)

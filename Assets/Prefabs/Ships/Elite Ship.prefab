@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91601de6997bf9d48a9f034c4cc92960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 2
   state: 0
   Particles: {fileID: 1222855035342946810, guid: 14fc8ccbeb49e744f94224bfc9f086bb, type: 3}
   weaponCooldown: 0.8
@@ -338,3 +339,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   templateBullet: {fileID: 5659163448690783328, guid: c1cbd18b7d0944b40a7ba91e1950840a, type: 3}
   SoundEffect: {fileID: 9006830265826053269}
+  FireInterval: 1

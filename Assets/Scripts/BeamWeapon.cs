@@ -16,6 +16,7 @@ public class BeamWeapon : MonoBehaviour, IWeapon
     float overheatDuration = 0f;
     public float heatCapacity = 2f;
     public bool overheated = false;
+    public float overheatPenalty = 0f;
 
     public float radius = 1f;
 
@@ -86,7 +87,13 @@ public class BeamWeapon : MonoBehaviour, IWeapon
 
         if (overheatDuration > heatCapacity)
         {
-            overheated = true;
+            if (!overheated)
+            {
+                overheated = true;
+                overheatDuration += overheatPenalty;
+            }
+            
+            
         }
 
         lineRenderer.startColor = Color.Lerp(beamColor, overheatColor, overheatDuration/heatCapacity);
@@ -132,6 +139,7 @@ public class BeamWeapon : MonoBehaviour, IWeapon
         beamEnabled = false;
         overheated = false;
         overheatDuration = 0;
+        beamDuration = 0;
     }
 }
 

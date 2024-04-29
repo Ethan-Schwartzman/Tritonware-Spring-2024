@@ -48,7 +48,7 @@ MonoBehaviour:
   beamDuration: 0
   beamInterval: 0.05
   beamDamage: 2
-  heatCapacity: 5
+  heatCapacity: 3.5
   overheated: 0
   radius: 1
   collideEnemies: 1
@@ -101,7 +101,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.2
+    widthMultiplier: 0.4
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 0
   activatedDuration: 0
-  maxCharges: 2
+  maxCharges: 1
   charges: 0
   spriteRenderer: {fileID: 4976054997042742583}
 --- !u!212 &4976054997042742583

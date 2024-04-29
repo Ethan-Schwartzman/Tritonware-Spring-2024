@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.iOS;
 
+public enum EnemyType
+{
+    normal, beam, elite, boss
+}
 
 public enum ActivationState
 {
@@ -10,7 +14,7 @@ public enum ActivationState
 }
 public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamagable
 {
-
+    public EnemyType enemyType = EnemyType.normal;
     public ActivationState state;
     public ParticleSystem Particles;
     Collider2D col;

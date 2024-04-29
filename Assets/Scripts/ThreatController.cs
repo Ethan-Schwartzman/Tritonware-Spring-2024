@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ThreatController : MonoBehaviour
 {
     public static int EnemyHealth = 10;
+    public static int BeamShipHealth = 6;
     public static int BossHealth = 200;
     public static int EliteHealth = 25;
     public static int AsteroidHealth = 6;
@@ -40,7 +41,10 @@ public class ThreatController : MonoBehaviour
     public float pursuitStartTimer = 10f;
     bool pursuitStarted = false;
 
-    public EnemyShip enemyShipTemplate, eliteShipTemplate;
+    public EnemyShip eliteShipTemplate;
+
+    public EnemyShip[] enemyShipPool;
+
     public BossEnemy BossShipTemplate;
 
     public float missileCooldown = 10f;
@@ -72,8 +76,17 @@ public class ThreatController : MonoBehaviour
     public EnemyShip SpawnEnemyShip()
     {
         activeEnemyCount++;
-        EnemyShip newShip = Instantiate(enemyShipTemplate);
-        newShip.SetHealth(EnemyHealth);
+        int type = Random.Range(0,enemyShipPool.Length);
+        EnemyShip newShip = Instantiate(enemyShipPool[type]);
+        if (newShip.enemyType == EnemyType.normal)
+        {
+            newShip.SetHealth(EnemyHealth);
+        }
+        else if (newShip.enemyType == EnemyType.beam)
+        {
+            newShip.SetHealth(BeamShipHealth);
+        }
+        
         // Spawn ship in the general direction player is facing
         float rotationAmount = Random.Range(-MAX_ANGLE, MAX_ANGLE);
         Vector3 spawnDirection = Quaternion.AngleAxis(rotationAmount, Vector3.forward) * PlayerTransform.up;

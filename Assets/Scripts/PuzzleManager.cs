@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -188,6 +189,18 @@ public class PuzzleManager : MonoBehaviour
         puzzles[index] = null;
         puzzleCount--;
         PlayerShip.Instance.Heal(healPerPuzzle);
+    }
+
+    public void ClearPuzzles()
+    {
+        for (int i = 0; i < puzzles.Length; i++)
+        {
+            Destroy(puzzles[i].gameObject);
+            puzzles[i] = null;
+        }
+
+
+        puzzleCount = 0;
     }
 
     int GetTotalDifficulty()
