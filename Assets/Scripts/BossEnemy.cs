@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class BossEnemy : EnemyShip
 {
-    public ProjectileSpawner Bullets;
+    public ProjectileSpawner normalBullets;
+    public ProjectileSpawner rapidBullets;
     public ProjectileSpawner Missiles;
     private float bossWeaponCooldown = 5f;
     private bool halfHealth = false;
@@ -27,6 +28,7 @@ public class BossEnemy : EnemyShip
     }
 
     protected override void Combat() {
+        if (normalBullets.CanFire()) normalBullets.Fire();
         if (currentWeaponCooldown >= 0) currentWeaponCooldown -= Time.deltaTime;
         healthbar.value = (float)healthTracker.health/healthTracker.maxHealth;
         if (currentWeaponCooldown <= 0)
@@ -43,7 +45,7 @@ public class BossEnemy : EnemyShip
             int weapon = Random.Range(0, 2);
             // bullets
             if(weapon == 0) {
-                StartCoroutine(RapidFire(Bullets, 5, 0.1f));
+                StartCoroutine(RapidFire(rapidBullets, 10, 0.07f));
             }
             // missiles
             else if (weapon == 1) {

@@ -119,6 +119,7 @@ Transform:
   m_Children:
   - {fileID: 5932085823314275337}
   - {fileID: 9000942073752727074}
+  - {fileID: 7362066199148644666}
   - {fileID: 772857294288490820}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -195,7 +196,8 @@ MonoBehaviour:
   bulletSpread: 0.2
   asteroidImmune: 0
   defaultColor: {r: 0.74509805, g: 0.14117648, b: 0.08235294, a: 0}
-  Bullets: {fileID: 4246975409640877268}
+  normalBullets: {fileID: 7933989728869637172}
+  rapidBullets: {fileID: 4246975409640877268}
   Missiles: {fileID: 9086091539062680775}
 --- !u!60 &186609728926348362
 PolygonCollider2D:
@@ -286,6 +288,85 @@ Transform:
   - {fileID: 5752725287791498172}
   m_Father: {fileID: 6067354897625392967}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!1 &4813550831413299954
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7362066199148644666}
+  - component: {fileID: 7933989728869637172}
+  - component: {fileID: 7802825918757323774}
+  m_Layer: 0
+  m_Name: BulletSpawner (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7362066199148644666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813550831413299954}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1.77, z: 0}
+  m_LocalScale: {x: 0.99999976, y: 0.99999976, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6067354897625392967}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7933989728869637172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813550831413299954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ee7309b438a5be4da40556e305fe27b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  templateBullet: {fileID: 5659163448690783328, guid: c1cbd18b7d0944b40a7ba91e1950840a, type: 3}
+  SoundEffect: {fileID: 7802825918757323774}
+  FireInterval: 0.3
+--- !u!114 &7802825918757323774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813550831413299954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1559811537
+      Data2: 1206476423
+      Data3: 1065292170
+      Data4: -1578652796
+    Path: event:/enemy-laser
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &7718439484155818847
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +379,7 @@ GameObject:
   - component: {fileID: 4246975409640877268}
   - component: {fileID: 904849176550534201}
   m_Layer: 0
-  m_Name: BulletSpawner
+  m_Name: RapidBulletSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

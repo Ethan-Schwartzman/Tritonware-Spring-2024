@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5282028507754259066}
   - component: {fileID: 5659163448690783328}
   m_Layer: 0
-  m_Name: BossBullet
+  m_Name: Bullet 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,4 +137,3 @@ MonoBehaviour:
   damage: 1
   bulletRadius: 0.5
   collideAsteroids: 1
-  trailRenderer: {fileID: 0}
