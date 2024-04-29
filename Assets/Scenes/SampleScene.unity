@@ -672,6 +672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChromaticAberration: {fileID: 2100000, guid: 088f1876d02193045ac071846a3965e3, type: 2}
   CameraTransform: {fileID: 519420032}
+  PlayerTransform: {fileID: 1249115234}
 --- !u!4 &229823555
 Transform:
   m_ObjectHideFlags: 0
