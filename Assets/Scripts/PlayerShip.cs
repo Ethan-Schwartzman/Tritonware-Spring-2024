@@ -115,11 +115,12 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     public void TriggerDeath()
     {
         if (!Settings.Instance.EnableDeath) return;
+        if(isAlive) HighscoreManager.Instance.GameOver();
         isAlive = false;
         PlayerShipMovement.Instance.Shutdown();
         PuzzleManager.Instance.gameObject.SetActive(false);
         InputManager.Instance.EnableReset();
-        HighscoreManager.Instance.GameOver();
+        
         //trailRenderer.startColor = driftTrailColor;
 
     }

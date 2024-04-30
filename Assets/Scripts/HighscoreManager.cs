@@ -6,7 +6,14 @@ using UnityEngine;
 
 public class HighscoreManager : MonoBehaviour
 {
+    private const string COLOR_START_TAG = "<color=\"red\">";
+    private const string COLOR_END_TAG = "</color>";
+
     private List<KeyValuePair<int, string>> leaderboard;
+    private List<string> colorText;
+    private int leaderboardPos;
+    private int charIndex = 0;
+    private char[] initials = {'A', 'A', 'A'};
 
     public TextMeshProUGUI ResetText;
     public GameObject HighscoreObject;
@@ -17,6 +24,7 @@ public class HighscoreManager : MonoBehaviour
     public static HighscoreManager Instance;
 
     void Start() {
+        //PlayerPrefs.DeleteAll();
         if(Instance == null) {
             Instance = this;
         }
@@ -41,8 +49,8 @@ public class HighscoreManager : MonoBehaviour
 
         leaderboard = new List<KeyValuePair<int, string>> {leaderboard1, leaderboard2, leaderboard3};
 
-        int score = ScoreManager.Instance.score;
-        int leaderboardPos = 3;
+        int score = ScoreManager.Instance.GetTotalScore();
+        leaderboardPos = 3;
         if(score > highscore1) {
             leaderboardPos = 0;
         }
@@ -57,9 +65,10 @@ public class HighscoreManager : MonoBehaviour
 
         // Blink
 
-        //A<color="red">A</color>A
+        colorText = new List<string> {leaderboard[0].Value, leaderboard[1].Value, leaderboard[2].Value};
+        if(leaderboardPos != 3) colorText[leaderboardPos] = COLOR_START_TAG + "A" + COLOR_END_TAG + "AA";
 
-        ResetText.text = "Score: " + ScoreManager.Instance.score + "\nPress Enter to Restart";
+        ResetText.text = "Score: " + ScoreManager.Instance.GetTotalScore() + "\nPress Enter to Restart";
         HighscoreObject.SetActive(true);
 
         UpdateText(0);
@@ -72,9 +81,38 @@ public class HighscoreManager : MonoBehaviour
         PlayerPrefs.SetInt("Highscore2", leaderboard[1].Key);
         PlayerPrefs.SetInt("Highscore3", leaderboard[2].Key);
 
-        PlayerPrefs.SetString("Highscore1", leaderboard[0].Value);
-        PlayerPrefs.SetString("Highscore2", leaderboard[1].Value);
-        PlayerPrefs.SetString("Highscore3", leaderboard[2].Value);
+        PlayerPrefs.SetString("Initials1", leaderboard[0].Value);
+        PlayerPrefs.SetString("Initials2", leaderboard[1].Value);
+        PlayerPrefs.SetString("Initials3", leaderboard[2].Value);
+    }
+
+    public void SelectLetter(bool facingRight) {
+        if(leaderboardPos != 3) {
+            if(facingRight) charIndex++;
+            else charIndex--;
+
+            if(charIndex < 0) charIndex = 2;
+            else if(charIndex > 2) charIndex = 0;
+
+            SetColorText();
+
+            UpdateText(leaderboardPos);
+        }
+    }
+
+    public void ModifyLetter(bool increment) {
+        if(leaderboardPos != 3) {
+            if(increment) initials[charIndex]++;
+            else initials[charIndex]--;
+        
+            if(initials[charIndex] < 'A') initials[charIndex] = 'Z'; 
+            else if(initials[charIndex] > 'Z') initials[charIndex] = 'A';
+
+            string newInitials = initials[0].ToString() + initials[1].ToString() + initials[2].ToString();
+            leaderboard[leaderboardPos] = new KeyValuePair<int, string>(leaderboard[leaderboardPos].Key, newInitials);
+            SetColorText();
+            UpdateText(leaderboardPos);
+        }
     }
 
     private void UpdateText(int spot) {
@@ -83,6 +121,19 @@ public class HighscoreManager : MonoBehaviour
         else if(spot == 1) scoreText = Highscore2Text;
         else scoreText = Highscore3Text;
 
-        scoreText.text = (spot+1) + ".\t" + leaderboard[spot].Value + " - " + leaderboard[spot].Key;
+        int num = spot+1;
+        scoreText.text = num + ".\t" + colorText[spot] + " - " + leaderboard[spot].Key;
+    }
+
+    private void SetColorText() {
+        if(charIndex == 0) {
+            colorText[leaderboardPos] = COLOR_START_TAG + initials[0] + COLOR_END_TAG + initials[1] + initials[2];
+        }
+        else if(charIndex == 1) {
+            colorText[leaderboardPos] = initials[0] + COLOR_START_TAG + initials[1] + COLOR_END_TAG + initials[2];
+        }
+        else if(charIndex == 2) {
+            colorText[leaderboardPos] = initials[0] + (initials[1] + COLOR_START_TAG) + initials[2] + COLOR_END_TAG;
+        }
     }
 }

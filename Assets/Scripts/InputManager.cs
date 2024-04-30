@@ -27,8 +27,24 @@ public class InputManager : MonoBehaviour
         // float horizontal = Input.GetAxis("Horizontal");
         // float vertical = Input.GetAxis("Vertical");
 
-        if (Input.GetButton("Left")) PlayerShipMovement.Instance.Rotate(1);
-        if (Input.GetButton("Right")) PlayerShipMovement.Instance.Rotate(-1);
+        if (Input.GetButton("Left")) {
+            PlayerShipMovement.Instance.Rotate(1);
+        }
+        if(Input.GetButtonDown("Left")) {
+            if(canReset) HighscoreManager.Instance.SelectLetter(false);
+        }
+        if (Input.GetButton("Right")) {
+            PlayerShipMovement.Instance.Rotate(-1);
+        }
+        if(Input.GetButtonDown("Right")) {
+            if(canReset) HighscoreManager.Instance.SelectLetter(true);
+        }
+        if(Input.GetButtonDown("Up")) {
+            if(canReset) HighscoreManager.Instance.ModifyLetter(true);
+        }
+        if(Input.GetButtonDown("Down")) {
+            if(canReset) HighscoreManager.Instance.ModifyLetter(false);
+        }
         if (!Input.GetButton("Left") && !Input.GetButton("Right")) PlayerShipMovement.Instance.Rotate(0);
 
         if(Input.GetButtonDown("Puzzle1")) {

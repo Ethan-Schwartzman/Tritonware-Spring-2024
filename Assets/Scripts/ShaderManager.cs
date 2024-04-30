@@ -32,6 +32,7 @@ public class ShaderManager : MonoBehaviour
     }
 
     public void HitEffect() {
+        if(!PlayerShip.Instance.isAlive) return;
         if(hitEffect != null) StopCoroutine(hitEffect);
         hitEffect = StartCoroutine(HitCoroutine()); 
     }
