@@ -11,7 +11,7 @@ public class Settings : MonoBehaviour
         Instance = this;
     }
 
-    public int PlayerMaxHealth = 100;
+    //public int PlayerMaxHealth = 100;
     public int AsteroidCollisionDamage = 4;
     public int ShipCollisionDamage = 4;
 

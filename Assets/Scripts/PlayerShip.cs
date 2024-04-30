@@ -24,6 +24,8 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 
     public bool isAlive = true;
 
+    public int maxHealth = 100;
+
 
     public Color trailColor, driftTrailColor;
 
@@ -35,7 +37,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
             Instance = this;
         }
         shipMovement = GetComponent<PlayerShipMovement>();
-        healthTracker = new HealthTracker(this, Settings.Instance.PlayerMaxHealth);
+        healthTracker = new HealthTracker(this, maxHealth);
         bulletSpawner = GetComponentsInChildren<IWeapon>();
         trailRenderer = GetComponentInChildren<TrailRenderer>();
 

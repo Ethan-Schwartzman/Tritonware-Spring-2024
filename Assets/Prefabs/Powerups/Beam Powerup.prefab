@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beamDuration: 0
-  beamInterval: 0.05
-  beamDamage: 2
+  beamInterval: 0.04
+  beamDamage: 1
   overheatDuration: 0
-  heatCapacity: 3.5
+  heatCapacity: 3
   overheated: 0
   overheatPenalty: 0
   radius: 1

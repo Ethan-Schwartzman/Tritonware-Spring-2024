@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c7957e94a7de6d4aa3848f350940bbf, type: 3}
+  m_Name: Hard Difficulty
+  m_EditorClassIdentifier: 
+  enemySpawnCooldown:
+  - 12
+  - 9
+  - 6
+  - 5
+  - 4
+  pursuitRates:
+  - 2.15
+  - 2.2
+  - 2.25
+  - 2.3
+  - 2.4
+  bossHealths: c8000000e1000000fa000000
+  AsteroidSpeedMultiplier:
+  - 0.6
+  - 0.8
+  - 1
+  - 1.2
+  AsteroidHealths:
+  - 3.5
+  - 4.5
+  - 5
+  PuzzleChances:
+  - 0.05
+  - 0.06
+  - 0.07
+  - 0.08
+  BossBulletBarrageCount: 090000000a0000000c0000000e000000
+  BossMissileBarrageCount: 0300000004000000040000000500000005000000
+  StageMissiles: 000101
+  EnemyHealth: 14
+  BeamEnemyHealth: 8

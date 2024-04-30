@@ -15,6 +15,9 @@ public class BossEnemy : EnemyShip
     private Slider healthbar;
     private EnemyShip[] minions = new EnemyShip[3];
 
+    public static int BossBulletBarrageCount = 10;
+    public static int BossMissileBarrageCount = 3;
+
     override protected void Awake() {
         healthbar = ThreatController.Instance.BossHealthbar;
         base.Awake();
@@ -45,11 +48,11 @@ public class BossEnemy : EnemyShip
             int weapon = Random.Range(0, 2);
             // bullets
             if(weapon == 0) {
-                StartCoroutine(RapidFire(rapidBullets, 10, 0.07f));
+                StartCoroutine(RapidFire(rapidBullets, BossBulletBarrageCount, 0.07f));
             }
             // missiles
             else if (weapon == 1) {
-                StartCoroutine(RapidFire(Missiles, 3, 0.25f));
+                StartCoroutine(RapidFire(Missiles, BossMissileBarrageCount, 0.25f));
             }
             currentWeaponCooldown = bossWeaponCooldown;
         }
