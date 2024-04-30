@@ -15,6 +15,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     TrailRenderer trailRenderer;
 
     public Powerup currentPowerup;
+    public GameObject breakdownEffect;
 
     //float currentWeaponCooldown;
     //public float weaponCooldown;
@@ -54,6 +55,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     private void Start()
     {
         PlayerUI.Instance.UpdateUI();
+        breakdownEffect.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -115,7 +117,10 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     public void TriggerDeath()
     {
         if (!Settings.Instance.EnableDeath) return;
-        if(isAlive) HighscoreManager.Instance.GameOver();
+        if(isAlive) {
+            HighscoreManager.Instance.GameOver();
+            breakdownEffect.gameObject.SetActive(true);
+        }
         isAlive = false;
         PlayerShipMovement.Instance.Shutdown();
         PuzzleManager.Instance.gameObject.SetActive(false);
