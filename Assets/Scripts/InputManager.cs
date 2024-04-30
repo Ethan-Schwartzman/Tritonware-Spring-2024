@@ -48,7 +48,7 @@ public class InputManager : MonoBehaviour
 
             // reload scene
             string currentSceneName = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene(currentSceneName);
+            SceneManager.LoadScene("GameSetupScene");
         }
         if (Input.GetKeyDown(KeyCode.Escape)) {
             if(canReset) HighscoreManager.Instance.SaveHighscore();
