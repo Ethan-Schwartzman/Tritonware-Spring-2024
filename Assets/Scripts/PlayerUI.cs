@@ -8,10 +8,10 @@ public class PlayerUI : MonoBehaviour
 {
 
     public static PlayerUI Instance;
-    [SerializeField] TMP_Text health, maxHealth, speed,
+    [SerializeField] TMP_Text
         missileWarning,
         popupText;
-    [SerializeField] ProgressBar powerupDuration, playerProgress, enemyProgress;
+    [SerializeField] ProgressBar powerupDuration, playerProgress, enemyProgress, healthBar;
     [SerializeField] Image segment, powerupIcon, powerupActivateIndicator;
 
 
@@ -25,7 +25,6 @@ public class PlayerUI : MonoBehaviour
 
     private void Update()
     {
-        speed.text = Mathf.RoundToInt(PlayerShip.Instance.GetVelocity().magnitude).ToString();
         playerProgress.SetLevel(Mathf.Clamp01(ThreatController.Instance.GetPlayerProgress() / Settings.Instance.sectorDistance));
         enemyProgress.SetLevel(Mathf.Clamp01(ThreatController.Instance.GetEnemyProgress() / Settings.Instance.sectorDistance));
 
@@ -48,8 +47,7 @@ public class PlayerUI : MonoBehaviour
 
     public void UpdateUI()
     {
-        health.text = PlayerShip.Instance.GetHealth().ToString();
-        maxHealth.text = PlayerShip.Instance.GetMaxHealth().ToString();
+        healthBar.SetLevel((float)PlayerShip.Instance.GetHealth() / (float)PlayerShip.Instance.GetMaxHealth());
         if (PlayerShip.Instance.currentPowerup == null) powerupIcon.enabled = false;
         else
         {
