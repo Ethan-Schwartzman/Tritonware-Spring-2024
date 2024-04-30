@@ -115,16 +115,19 @@ public class PuzzleManager : MonoBehaviour
 
         if (GetTotalDifficulty() >= maxDifficulty - 1) return;
         float roll = Random.value;
-        if (puzzleCount >= 3) roll *= 2;
+
 
         // puzzle chance
+        // handled in stage manager
+        /*
         int chanceIndex = StageManager.Instance.GetStage();
         if(chanceIndex > StageManager.Instance.PuzzleChances.Length) {
             chanceIndex = StageManager.Instance.PuzzleChances.Length-1;
         }
         float chance = StageManager.Instance.PuzzleChances[chanceIndex];
+        */
 
-        if (roll < damage * chance)
+        if (roll < damage * puzzleChancePerDamage * GetPuzzleChanceAdjustment())
         {
             SpawnPuzzle();
             PlayerUI.Instance.PopupText("SYSTEM DAMAGE");
@@ -135,10 +138,8 @@ public class PuzzleManager : MonoBehaviour
     {
         if (GetTotalDifficulty() >= maxDifficulty - 1) return;
         float roll = Random.value;
-        if (puzzleCount >= 3) roll *= 2;
 
-
-        if (roll < currentRandomPuzzleChance)
+        if (roll < currentRandomPuzzleChance * GetPuzzleChanceAdjustment())
         {
             SpawnPuzzle();
             currentRandomPuzzleChance = BASE_RANDOM_PUZZLE_CHANCE;
@@ -233,6 +234,25 @@ public class PuzzleManager : MonoBehaviour
             if (puzzle != null) count++;
         }
         return count;
+    }
+
+    float GetPuzzleChanceAdjustment()
+    {
+        switch (puzzleCount)
+        {
+            case 0:
+                return 1;
+            case 1:
+                return 0.9f;
+            case 2:
+                return 0.7f;
+            case 3:
+                return 0.4f;
+            case 4:
+                return 0.3f;
+            default:
+                return 0.2f;
+        }
     }
 
 }
