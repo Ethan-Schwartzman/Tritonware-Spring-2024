@@ -64,6 +64,7 @@ public class StageManager : MonoBehaviour
     }
 
     private IEnumerator AdvanceStageCoroutine() {
+        PlayerUI.Instance.PopupText("PREPARE FOR HYPERSPACE");
         yield return new WaitForSeconds(0.5f);
         HyperspaceSound.Play();
         yield return new WaitForSeconds(1.5f);
