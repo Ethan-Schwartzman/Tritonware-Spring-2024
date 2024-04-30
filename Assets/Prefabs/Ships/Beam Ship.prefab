@@ -385,7 +385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 1
   state: 0
-  Particles: {fileID: 1222855035342946810, guid: 14fc8ccbeb49e744f94224bfc9f086bb, type: 3}
+  Particles: {fileID: 1222855035342946810, guid: a18af02dcbbf50b46be0728d3bd87ae0, type: 3}
   weaponCooldown: 2
   bulletSpread: 0.005
   asteroidImmune: 1

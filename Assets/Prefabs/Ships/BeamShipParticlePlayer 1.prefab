@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1222855035342946810}
   - component: {fileID: 2068729286197641991}
   m_Layer: 0
-  m_Name: ShipParticlePlayer
+  m_Name: BeamShipParticlePlayer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 0.59607846, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -740,7 +740,7 @@ ParticleSystem:
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 0
-    m_Texture: {fileID: 2800000, guid: 367043a6621af13408a5b20e2b96e609, type: 3}
+    m_Texture: {fileID: 2800000, guid: ac54bfd11bcf64c7ab8f1e9eb4953dc6, type: 3}
     m_TextureClipChannel: 3
     m_TextureClipThreshold: 0
     m_TextureUVChannel: 0

@@ -139,7 +139,7 @@ MonoBehaviour:
   damage: 2
   bulletRadius: 1
   collideAsteroids: 1
-  trailRenderer: {fileID: 0}
+  trailRenderer: {fileID: 6629679949955928867}
   trackingForce: 3
   missileSpeed: 60
   maxTime: 5

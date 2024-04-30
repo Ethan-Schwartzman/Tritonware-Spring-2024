@@ -104,7 +104,8 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
 
     public virtual void TriggerDeath()
     {
-        EffectController.Instance.SpawnParticles(Particles, transform);
+        ParticleSystem ps = Instantiate(Particles);
+        EffectController.Instance.SpawnParticles(ps, transform, spriteRenderer);
         if (Random.value < Settings.Instance.powerupDropChance)
         {
             Powerup pow = PowerupManager.SpawnPowerup();

@@ -18,11 +18,10 @@ public class EffectController : MonoBehaviour
         }
     }
 
-    public void SpawnParticles(ParticleSystem particles, Transform t) {
-        ParticleSystem ps = Instantiate(particles);
-        ps.transform.position = t.position;
-        ps.transform.localScale = t.localScale;
-        StartCoroutine(this.ParticleCoroutine(ps));
+    public void SpawnParticles(ParticleSystem particles, Transform t, SpriteRenderer sr) {
+        particles.transform.position = t.position;
+        particles.transform.localScale = t.localScale;
+        StartCoroutine(this.ParticleCoroutine(particles));
     }
 
     public IEnumerator Hyperspace(ParticleSystem ps) {

@@ -229,7 +229,7 @@ MonoBehaviour:
   weaponCooldown: 2
   bulletSpread: 0.2
   asteroidImmune: 0
-  defaultColor: {r: 1, g: 0.5943396, b: 0.5943396, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &9006830265826053269
 MonoBehaviour:
   m_ObjectHideFlags: 0

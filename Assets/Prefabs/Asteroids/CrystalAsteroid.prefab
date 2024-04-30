@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerTransform: {fileID: 0}
-  Particles: {fileID: 1222855035342946810, guid: 81b50c909a8475f43bb3af1aae11f878, type: 3}
+  Particles: {fileID: 1222855035342946810, guid: 0616ab8d3a6b7dd42b24c069cf0b0ea7, type: 3}
 --- !u!50 &4616357629914034599
 Rigidbody2D:
   serializedVersion: 4

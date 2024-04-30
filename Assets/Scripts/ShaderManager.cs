@@ -18,8 +18,6 @@ public class ShaderManager : MonoBehaviour
 
     private Coroutine hitEffect;
 
-    public Transform PlayerTransform;
-
     void Start()
     {
         if(Instance == null) {
@@ -77,7 +75,7 @@ public class ShaderManager : MonoBehaviour
             yield return null;
 
             if (Time.time - startTime > duration * 0.5f && !playerReset) {
-                PlayerTransform.position = new Vector3(-80, 0, 0);
+                PlayerShip.Instance.transform.position = new Vector3(-80, 0, 0);
                 ThreatController.Instance.ResetPursuit();
                 playerReset = true;
                 //Debug.Log("beepboop done");
