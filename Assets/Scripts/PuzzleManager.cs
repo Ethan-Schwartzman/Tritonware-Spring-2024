@@ -34,6 +34,9 @@ public class PuzzleManager : MonoBehaviour
     const float RANDOM_PUZZLE_CHANCE_TICK = 0.03f;
     float currentRandomPuzzleChance;
 
+    public float puzzleChancePerDamage = 0.075f;
+
+
     [SerializeField] int healPerPuzzle = 3;
 
     // Start is called before the first frame update
