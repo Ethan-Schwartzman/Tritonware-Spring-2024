@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance;
-    public TextMeshProUGUI ResetText;
     private bool canReset;
 
 
@@ -45,9 +44,15 @@ public class InputManager : MonoBehaviour
             PlayerShip.Instance.ActivatePowerup();
         }
         if (Input.GetButtonDown("Menu") && canReset) {
+            HighscoreManager.Instance.SaveHighscore();
+
             // reload scene
             string currentSceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(currentSceneName);
+        }
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if(canReset) HighscoreManager.Instance.SaveHighscore();
+            Application.Quit();
         }
 
         // Debugging
@@ -71,7 +76,5 @@ public class InputManager : MonoBehaviour
 
     public void EnableReset() {
         canReset = true;
-        ResetText.text = "Score: " + ScoreManager.Instance.score + "\nPress Enter to Restart";
-        ResetText.gameObject.SetActive(true);
     }
 }

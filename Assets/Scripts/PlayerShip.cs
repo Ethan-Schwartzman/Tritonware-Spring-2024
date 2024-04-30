@@ -119,6 +119,7 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
         PlayerShipMovement.Instance.Shutdown();
         PuzzleManager.Instance.gameObject.SetActive(false);
         InputManager.Instance.EnableReset();
+        HighscoreManager.Instance.GameOver();
         //trailRenderer.startColor = driftTrailColor;
 
     }
