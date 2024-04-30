@@ -43,4 +43,4 @@ MonoBehaviour:
   BossMissileBarrageCount: 0300000004000000040000000500000005000000
   StageMissiles: 000101
   EnemyHealth: 14
-  BeamEnemyHealth: 8
+  BeamEnemyHealth: 11
