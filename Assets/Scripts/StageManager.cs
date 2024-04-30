@@ -13,7 +13,8 @@ public class StageManager : MonoBehaviour
 
     private int stage;
 
-    public DifficultyData difficultyData;
+    public DifficultyData normalDifficulty, hardDifficulty;
+    DifficultyData setDifficultyData;
     /*
     public float[] enemySpawnCooldown;
     public float[] pursuitRates;
@@ -25,6 +26,21 @@ public class StageManager : MonoBehaviour
     public int[] BossMissileBarrageCount;
     public bool[] StageMissiles;
     */
+
+    private void Awake()
+    {
+        if (GameSetup.selectedDifficulty == 1)
+        {
+            setDifficultyData = normalDifficulty;
+            Debug.Log("normal");
+        }
+
+        if (GameSetup.selectedDifficulty == 2)
+        {
+            setDifficultyData = hardDifficulty;
+            Debug.Log("hard");
+        }
+    }
 
     void Start() {
         if(Instance == null) {
@@ -43,8 +59,8 @@ public class StageManager : MonoBehaviour
             SetStageDifficulty(1);
         }
 
-        ThreatController.EnemyHealth = difficultyData.EnemyHealth;
-        ThreatController.BeamShipHealth = difficultyData.BeamEnemyHealth;
+        ThreatController.EnemyHealth = setDifficultyData.EnemyHealth;
+        ThreatController.BeamShipHealth = setDifficultyData.BeamEnemyHealth;
         ActiveBossFight = false;
         stage = 1;
     }
@@ -135,14 +151,14 @@ public class StageManager : MonoBehaviour
     // 1-indexed
     public void SetStageDifficulty(int stage)
     {
-        ThreatController.Instance.spawnCooldownAverage = StageStat(difficultyData.enemySpawnCooldown, stage);
-        ThreatController.Instance.pursuitProgressSpeed = StageStat(difficultyData.pursuitRates, stage);
-        ThreatController.BossHealth = StageStat(difficultyData.bossHealths, stage);
-        PuzzleManager.Instance.puzzleChancePerDamage = StageStat(difficultyData.PuzzleChances, stage);
-        AsteroidGenerator.Instance.stageVelocity = StageStat(difficultyData.AsteroidSpeedMultiplier, stage);
-        ThreatController.AsteroidHealth = StageStat(difficultyData.AsteroidHealths, stage);
-        BossEnemy.BossBulletBarrageCount = StageStat(difficultyData.BossBulletBarrageCount, stage);
-        BossEnemy.BossMissileBarrageCount = StageStat(difficultyData.BossMissileBarrageCount,stage);
-        GameLogic.EnableMissiles = StageStat(difficultyData.StageMissiles, stage);
+        ThreatController.Instance.spawnCooldownAverage = StageStat(setDifficultyData.enemySpawnCooldown, stage);
+        ThreatController.Instance.pursuitProgressSpeed = StageStat(setDifficultyData.pursuitRates, stage);
+        ThreatController.BossHealth = StageStat(setDifficultyData.bossHealths, stage);
+        PuzzleManager.Instance.puzzleChancePerDamage = StageStat(setDifficultyData.PuzzleChances, stage);
+        AsteroidGenerator.Instance.stageVelocity = StageStat(setDifficultyData.AsteroidSpeedMultiplier, stage);
+        ThreatController.AsteroidHealth = StageStat(setDifficultyData.AsteroidHealths, stage);
+        BossEnemy.BossBulletBarrageCount = StageStat(setDifficultyData.BossBulletBarrageCount, stage);
+        BossEnemy.BossMissileBarrageCount = StageStat(setDifficultyData.BossMissileBarrageCount,stage);
+        GameLogic.EnableMissiles = StageStat(setDifficultyData.StageMissiles, stage);
     }
 }

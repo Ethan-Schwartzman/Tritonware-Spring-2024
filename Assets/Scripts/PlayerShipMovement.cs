@@ -65,6 +65,7 @@ public class PlayerShipMovement : MonoBehaviour {
 
         rb = GetComponent<Rigidbody2D>();
 
+        /*
         if (Instance == null) {
             Instance = this;
         }
@@ -72,6 +73,7 @@ public class PlayerShipMovement : MonoBehaviour {
             Destroy(this);
             Debug.LogWarning("Tried to create more than one instance of InputManager");
         }
+        */
     }
 
     

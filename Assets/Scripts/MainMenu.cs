@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour{
                if(Input.GetButtonDown("Menu")) break;
                yield return null;
           }
-          SceneManager.LoadSceneAsync("SampleScene");
+          SceneManager.LoadSceneAsync("GameSetupScene");
      }
      public void QuitGame()
      {

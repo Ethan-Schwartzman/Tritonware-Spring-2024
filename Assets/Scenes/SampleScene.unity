@@ -2858,6 +2858,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Beam Powerup
       objectReference: {fileID: 0}
+    - target: {fileID: 6431343007974450358, guid: ae17d5b6f90c1da4b84d0df31857b2de, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4420,7 +4424,8 @@ MonoBehaviour:
   HyperspaceParticles: {fileID: 1927146094}
   HyperspaceSound: {fileID: 2045251175}
   ActiveBossFight: 0
-  difficultyData: {fileID: 11400000, guid: 19ba414f6f291344682376d69ca1705f, type: 2}
+  normalDifficulty: {fileID: 11400000, guid: 4dad5b5b7b16caa41bf8a5bef1b49122, type: 2}
+  hardDifficulty: {fileID: 11400000, guid: 19ba414f6f291344682376d69ca1705f, type: 2}
 --- !u!1 &1083953288
 GameObject:
   m_ObjectHideFlags: 0
@@ -4869,7 +4874,7 @@ GameObject:
   - component: {fileID: 1249115239}
   - component: {fileID: 1249115240}
   m_Layer: 10
-  m_Name: Ship
+  m_Name: Beam Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4998,6 +5003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f5d7b4081fcd74e842936864e43bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShipID: 2
   currentPowerup: {fileID: 0}
   controlLossTime: 2
   isAlive: 1
@@ -5841,12 +5847,12 @@ GameObject:
   - component: {fileID: 1463517960}
   - component: {fileID: 1463517959}
   m_Layer: 10
-  m_Name: Ship (1)
+  m_Name: Bullet Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1463517959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5890,6 +5896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f5d7b4081fcd74e842936864e43bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShipID: 1
   currentPowerup: {fileID: 0}
   controlLossTime: 2.5
   isAlive: 1

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
 {
+    public int ShipID = 1;
     public static PlayerShip Instance;
     public static PlayerShipMovement shipMovement;
     public static HealthTracker healthTracker;
@@ -32,11 +33,17 @@ public class PlayerShip : DynamicEntity, IDamagable, IWeaponContainer
     protected void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        if (Instance == null)
+        if (GameSetup.selectedShip == ShipID)
         {
             Instance = this;
         }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
         shipMovement = GetComponent<PlayerShipMovement>();
+        PlayerShipMovement.Instance = shipMovement;
         healthTracker = new HealthTracker(this, maxHealth);
         bulletSpawner = GetComponentsInChildren<IWeapon>();
         trailRenderer = GetComponentInChildren<TrailRenderer>();
