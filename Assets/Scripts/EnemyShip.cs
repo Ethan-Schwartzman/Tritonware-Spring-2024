@@ -96,7 +96,7 @@ public class EnemyShip : MonoBehaviour, IDynamicEntity, IWeaponContainer, IDamag
         return healthTracker.health;
     }
 
-    public void DealDamage(int damage)
+    public virtual void DealDamage(int damage)
     {
         healthTracker.TakeDamage(damage);
         StartCoroutine(EffectController.DamageEffect(spriteRenderer));

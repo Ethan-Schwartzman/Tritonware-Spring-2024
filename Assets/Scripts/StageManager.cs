@@ -29,27 +29,31 @@ public class StageManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("Tried to create more than one instance of StageManager");
+            Destroy(this);
+        }
         if (GameSetup.selectedDifficulty == 1)
         {
             setDifficultyData = normalDifficulty;
-            Debug.Log("normal");
+            ScoreManager.difficultyMultiplier = 1;
         }
 
         if (GameSetup.selectedDifficulty == 2)
         {
             setDifficultyData = hardDifficulty;
-            Debug.Log("hard");
+            ScoreManager.difficultyMultiplier = 1.5f;
         }
     }
 
     void Start() {
-        if(Instance == null) {
-            Instance = this;
-        }
-        else {
-            Debug.LogWarning("Tried to create more than one instance of StageManager");
-            Destroy(this);
-        }
+
+        
 
         if(!GameLogic.OverideStageSettings) {
             GameLogic.EnablePuzzles = true;

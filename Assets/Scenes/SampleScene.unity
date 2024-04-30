@@ -4092,7 +4092,7 @@ MonoBehaviour:
   - {fileID: 2287134039445927511, guid: 01285ddba87dd4aeeb5bb7faf871ce16, type: 3}
   - {fileID: 4350463066376799008, guid: 86eca557421614548b56d82565594e8e, type: 3}
   - {fileID: 2832785029875447492, guid: b8aba598ca2cb83409fc0111654369ab, type: 3}
-  baseMaxDifficulty: 10
+  baseMaxDifficulty: 8
   puzzleChancePerDamage: 0.075
   healPerPuzzle: 3
 --- !u!1 &914578300
@@ -4921,6 +4921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 444601281}
   score: 0
+  combatScore: 0
 --- !u!114 &1075298645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4933,7 +4934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b3b111517bafee4c8d031a5043293df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AsteroidCollisionDamage: 4
+  AsteroidCollisionDamage: 2
   ShipCollisionDamage: 4
   powerupDropChance: 0.25
   sectorDistance: 300

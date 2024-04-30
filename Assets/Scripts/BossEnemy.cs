@@ -77,4 +77,12 @@ public class BossEnemy : EnemyShip
         PuzzleManager.Instance.ClearPuzzles();
         base.TriggerDeath();
     }
+
+    public override void DealDamage(int damage)
+    {
+        ScoreManager.Instance.combatScore += damage;
+        if (damage > healthTracker.health) ScoreManager.Instance.combatScore -= (damage - healthTracker.health);
+        base.DealDamage(damage);
+        
+    }
 }

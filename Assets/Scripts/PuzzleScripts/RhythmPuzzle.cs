@@ -166,7 +166,7 @@ public class RhythmPuzzle : Puzzle
 
     public override int GetDifficulty()
     {
-        return 6;
+        return 7;
     }
 
 }

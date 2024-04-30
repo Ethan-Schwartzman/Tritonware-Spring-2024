@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab7b359cac5fe34bb9e0423fe077f9c, type: 3}
   m_Name: RhythmPuzzleTrack 2
   m_EditorClassIdentifier: 
-  trackL: 01010101010001000100010100
-  trackR: 01010101000100010000000001
+  trackL: 010001000100010000010100
+  trackR: 010001000001000100000001

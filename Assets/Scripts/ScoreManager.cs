@@ -8,7 +8,9 @@ public class ScoreManager : MonoBehaviour {
 
     public int score = 0;
     private int stageModifier = 0;
+    public int combatScore = 0;
 
+    public static float difficultyMultiplier = 1;
 
     public static ScoreManager Instance;
 
@@ -36,9 +38,14 @@ public class ScoreManager : MonoBehaviour {
         if (tmpScore > score)
         {
             score = tmpScore;
-            scoreText.text = score.ToString();
+            
         }
+        scoreText.text = GetTotalScore().ToString();
+    }
 
+    public int GetTotalScore()
+    {
+        return Mathf.RoundToInt((score + combatScore) * difficultyMultiplier);
     }
 
     public void NextStage() {
