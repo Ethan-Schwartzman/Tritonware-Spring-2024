@@ -23,6 +23,7 @@ MonoBehaviour:
   - 2.1
   - 2.2
   - 2.3
+  - 2.35
   - 2.4
   bossHealths: 96000000af000000c8000000
   AsteroidSpeedMultiplier:
@@ -35,6 +36,8 @@ MonoBehaviour:
   - 1.7
   - 1.8
   - 2
+  - 3
+  - 4
   PuzzleChances:
   - 0.025
   - 0.04
