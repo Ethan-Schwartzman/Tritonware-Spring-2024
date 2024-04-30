@@ -37,20 +37,24 @@ public class AsteroidGenerator : MonoBehaviour
     private float lastSpawnTime;
     private int asteroidType = 0;
 
+    public float stageVelocity;
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("Tried to create more than one instance of AstroidGenerator");
+            Destroy(this);
+        }
         PlayerTransform = PlayerShip.Instance.transform;
     }
     void Start() {
         
-        if(Instance == null) {
-            Instance = this;
-        }
-        else {
-            Debug.LogWarning("Tried to create more than one instance of AstroidGenerator");
-            Destroy(this);
-        }        
+
 
         AsteroidPools = new ObjectPool<Asteroid>[AsteroidPrefabs.Length];
         for(int i = 0; i <AsteroidPools.Length; i++) {
@@ -108,12 +112,16 @@ public class AsteroidGenerator : MonoBehaviour
         // Set asteroid rigidbody properties
         asteroid.SetMass(MIN_MASS * Mathf.Pow(scale,3));
 
+        /*
+         Handled in StageManager
+          
         int multiplierIndex = StageManager.Instance.GetStage();
         if(multiplierIndex > StageManager.Instance.AsteroidSpeedMultiplier.Length) {
             multiplierIndex = StageManager.Instance.AsteroidSpeedMultiplier.Length-1;
         }
         float multiplier = StageManager.Instance.AsteroidSpeedMultiplier[multiplierIndex];
-        float velocityRange = MAX_VELOCITY * multiplier;
+        */
+        float velocityRange = MAX_VELOCITY * stageVelocity;
         asteroid.SetVelocity(new Vector2(
             Random.Range(-velocityRange, velocityRange),
             Random.Range(-velocityRange, velocityRange)

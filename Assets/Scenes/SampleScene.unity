@@ -3322,6 +3322,7 @@ MonoBehaviour:
   - {fileID: 4350463066376799008, guid: 86eca557421614548b56d82565594e8e, type: 3}
   - {fileID: 2832785029875447492, guid: b8aba598ca2cb83409fc0111654369ab, type: 3}
   baseMaxDifficulty: 10
+  puzzleChancePerDamage: 0.075
   healPerPuzzle: 3
 --- !u!1 &914578300
 GameObject:
@@ -3493,6 +3494,7 @@ MonoBehaviour:
   - {fileID: 4859769394530275188, guid: e5e37ad69aa7d5540b604f2396cd6663, type: 3}
   - {fileID: 4859769394530275188, guid: 552f232148429ea4c99368ac014bdb97, type: 3}
   - {fileID: 4859769394530275188, guid: a81e0ef24d4b1c44b834318ec72ef479, type: 3}
+  stageVelocity: 0
 --- !u!4 &959442848
 Transform:
   m_ObjectHideFlags: 0
@@ -3953,7 +3955,7 @@ MonoBehaviour:
   EnableDeath: 1
   EnableMissiles: 1
   SpawnBossAtStart: 0
-  OverideStageSettings: 0
+  OverideStageSettings: 1
 --- !u!114 &1075298646
 MonoBehaviour:
   m_ObjectHideFlags: 0
