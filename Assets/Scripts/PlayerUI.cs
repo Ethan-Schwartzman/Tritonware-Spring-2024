@@ -11,9 +11,10 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] TMP_Text
         missileWarning,
         popupText;
-    [SerializeField] ProgressBar powerupDuration, playerProgress, enemyProgress, healthBar;
+    [SerializeField] ProgressBar powerupDuration, healthBar;
     [SerializeField] Image segment, powerupIcon, powerupActivateIndicator;
-
+    public Slider PlayerProgress;
+    public Slider EnemyProgress;
 
     Coroutine currentPopup;
 
@@ -25,8 +26,8 @@ public class PlayerUI : MonoBehaviour
 
     private void Update()
     {
-        playerProgress.SetLevel(Mathf.Clamp01(ThreatController.Instance.GetPlayerProgress() / Settings.Instance.sectorDistance));
-        enemyProgress.SetLevel(Mathf.Clamp01(ThreatController.Instance.GetEnemyProgress() / Settings.Instance.sectorDistance));
+        PlayerProgress.value = (Mathf.Clamp01(ThreatController.Instance.GetPlayerProgress() / Settings.Instance.sectorDistance));
+        EnemyProgress.value = (Mathf.Clamp01(ThreatController.Instance.GetEnemyProgress() / Settings.Instance.sectorDistance));
 
         Powerup pow = PlayerShip.Instance.currentPowerup;
         if (pow != null)

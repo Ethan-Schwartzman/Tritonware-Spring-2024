@@ -25,8 +25,8 @@ public class MainMenu : MonoBehaviour{
           Video.gameObject.SetActive(true);
           BackgroundImage.SetActive(false);
           GL.Clear(true, true, Color.black);
-          float startTime = Time.deltaTime;
-          float duration = 58.5f;
+          float startTime = Time.time;
+          float duration = (float) Video.length;
           while(Time.time - startTime < duration) {
                if(Input.GetButtonDown("Menu")) break;
                yield return null;

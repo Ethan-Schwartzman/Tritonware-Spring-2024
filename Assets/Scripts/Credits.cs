@@ -15,8 +15,8 @@ public class Credits : MonoBehaviour
     }
 
     private IEnumerator CreditsCoroutine() {
-        float startTime = Time.deltaTime;
-        float duration = 18.5f;
+        float startTime = Time.time;
+        float duration = (float) Video.length;
         while(Time.time - startTime < duration) {
             if(Input.GetButtonDown("Menu")) break;
             yield return null;
