@@ -19,15 +19,17 @@ public class CodePuzzle : Puzzle
     int selectedKey = 0;
     int currentInputLength = 0;
 
-    const int CODE_LENGTH = 3;
-    char[] correctCode = new char[CODE_LENGTH];
-    char[] currentGuess = new char[CODE_LENGTH];
+    int codeLength;
 
     bool isComplete = false;
-    
-
+    char[] correctCode;
+    char[] currentGuess;
     public override void InitPuzzle(float difficulty)
     {
+        codeLength = 3 + Random.Range(0,2);
+        correctCode = new char[codeLength];
+        currentGuess = new char[codeLength];
+
         codeChars = new List<char>();
         for (int i = 0; i < 6; i++)
         {
@@ -40,7 +42,7 @@ public class CodePuzzle : Puzzle
             codeKeys[i].text = c.ToString();
         }
 
-        for (int i = 0; i < CODE_LENGTH; i++)
+        for (int i = 0; i < codeLength; i++)
         {
             correctCode[i] = codeChars[Random.Range(0, 6)];
         }
@@ -63,7 +65,7 @@ public class CodePuzzle : Puzzle
             return;
         }
         currentInputLength++;
-        if (currentInputLength == CODE_LENGTH)
+        if (currentInputLength == codeLength)
         {
             isComplete = true;
             StartCoroutine(Complete());
@@ -115,7 +117,7 @@ public class CodePuzzle : Puzzle
 
     void Clear()
     {
-        for (int i = 0;i < CODE_LENGTH;i++)
+        for (int i = 0;i < codeLength;i++)
         {
             currentGuess[i] = '\0';
         }
