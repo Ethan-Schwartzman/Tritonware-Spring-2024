@@ -585,7 +585,7 @@ GameObject:
   m_Component:
   - component: {fileID: 410535655}
   m_Layer: 5
-  m_Name: Ship 1 (1)
+  m_Name: raven
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -718,7 +718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6771511077743928852, guid: 5f14801c155678247a2383767359e0df, type: 3}
       propertyPath: m_Name
-      value: Button (2)
+      value: start
       objectReference: {fileID: 0}
     - target: {fileID: 8240259794227380055, guid: 5f14801c155678247a2383767359e0df, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -755,7 +755,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6010004573650097948, guid: 5f14801c155678247a2383767359e0df, type: 3}
   m_PrefabInstance: {fileID: 1823501361}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 917135978}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -1409,6 +1409,11 @@ RectTransform:
   m_AnchoredPosition: {x: -407.3, y: -163}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &917135978 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6771511077743928852, guid: 5f14801c155678247a2383767359e0df, type: 3}
+  m_PrefabInstance: {fileID: 1823501361}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &928491116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1501,6 +1506,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Select
       objectReference: {fileID: 0}
+    - target: {fileID: 6771511077743928852, guid: 5f14801c155678247a2383767359e0df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8240259794227380055, guid: 5f14801c155678247a2383767359e0df, type: 3}
       propertyPath: m_Transition
       value: 1
@@ -1511,7 +1520,7 @@ PrefabInstance:
       objectReference: {fileID: 928491121}
     - target: {fileID: 8240259794227380055, guid: 5f14801c155678247a2383767359e0df, type: 3}
       propertyPath: m_Navigation.m_Mode
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8240259794227380055, guid: 5f14801c155678247a2383767359e0df, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
@@ -1760,7 +1769,7 @@ MonoBehaviour:
   m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
+  m_SubmitButton: Menu
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
@@ -1777,7 +1786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 917135978}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1194822628
@@ -1897,7 +1906,7 @@ PrefabInstance:
       objectReference: {fileID: 1245975730}
     - target: {fileID: 8240259794227380055, guid: 5f14801c155678247a2383767359e0df, type: 3}
       propertyPath: m_Navigation.m_Mode
-      value: 6
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8240259794227380055, guid: 5f14801c155678247a2383767359e0df, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
@@ -2666,7 +2675,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1657590494}
   m_Layer: 5
-  m_Name: Ship 1
+  m_Name: falcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2787,7 +2796,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6771511077743928852, guid: 5f14801c155678247a2383767359e0df, type: 3}
       propertyPath: m_Name
-      value: Button
+      value: normal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6771511077743928852, guid: 5f14801c155678247a2383767359e0df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8203223655139967067, guid: 5f14801c155678247a2383767359e0df, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8240259794227380055, guid: 5f14801c155678247a2383767359e0df, type: 3}
       propertyPath: m_Transition
@@ -2795,7 +2812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8240259794227380055, guid: 5f14801c155678247a2383767359e0df, type: 3}
       propertyPath: m_Navigation.m_Mode
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8240259794227380055, guid: 5f14801c155678247a2383767359e0df, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
@@ -3078,7 +3095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6771511077743928852, guid: 5f14801c155678247a2383767359e0df, type: 3}
       propertyPath: m_Name
-      value: Button (1)
+      value: hard
       objectReference: {fileID: 0}
     - target: {fileID: 8240259794227380055, guid: 5f14801c155678247a2383767359e0df, type: 3}
       propertyPath: m_Transition
@@ -3090,7 +3107,7 @@ PrefabInstance:
       objectReference: {fileID: 1969757998}
     - target: {fileID: 8240259794227380055, guid: 5f14801c155678247a2383767359e0df, type: 3}
       propertyPath: m_Navigation.m_Mode
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8240259794227380055, guid: 5f14801c155678247a2383767359e0df, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
