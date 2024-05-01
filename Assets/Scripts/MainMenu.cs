@@ -9,8 +9,11 @@ public class MainMenu : MonoBehaviour{
      public Transform MenuCanvas;
      public GameObject BackgroundImage;
      public VideoPlayer Video;
+
+     public GameObject music;
      public void PlayGame()
      {
+          music.SetActive(false);
           StartCoroutine(LoadGame());
      }
      IEnumerator LoadGame()
@@ -23,12 +26,12 @@ public class MainMenu : MonoBehaviour{
           BackgroundImage.SetActive(false);
           GL.Clear(true, true, Color.black);
           float startTime = Time.deltaTime;
-          float duration = (float) Video.clip.length + 1.5f;
+          float duration = 58.5f;
           while(Time.time - startTime < duration) {
                if(Input.GetButtonDown("Menu")) break;
                yield return null;
           }
-          SceneManager.LoadSceneAsync("GameSetupScene");
+          SceneManager.LoadScene("GameSetupScene");
      }
      public void QuitGame()
      {
@@ -37,5 +40,9 @@ public class MainMenu : MonoBehaviour{
      public void testing()
      {
           Debug.Log("You Click Me!");
+     }
+
+     public void LoadCredits() {
+          SceneManager.LoadScene("Credits");
      }
 }
