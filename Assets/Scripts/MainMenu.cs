@@ -22,11 +22,13 @@ public class MainMenu : MonoBehaviour{
           //{
           //     MenuCanvas.GetChild(i).gameObject.SetActive(false);
           //}
+          Video.url = System.IO.Path.Combine(Application.streamingAssetsPath, "intro-cutscene.mov"); 
           Video.gameObject.SetActive(true);
           BackgroundImage.SetActive(false);
           GL.Clear(true, true, Color.black);
           float startTime = Time.time;
-          float duration = (float) Video.length;
+          //float duration = (float) Video.length;
+          float duration = 56f;
           while(Time.time - startTime < duration) {
                if(Input.GetButtonDown("Menu")) break;
                yield return null;

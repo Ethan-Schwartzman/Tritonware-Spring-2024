@@ -15,8 +15,10 @@ public class Credits : MonoBehaviour
     }
 
     private IEnumerator CreditsCoroutine() {
+        Video.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Credits_Scroll.mov"); 
         float startTime = Time.time;
-        float duration = (float) Video.length;
+        //float duration = (float) Video.length;
+        float duration = 18f;
         while(Time.time - startTime < duration) {
             if(Input.GetButtonDown("Menu")) break;
             yield return null;

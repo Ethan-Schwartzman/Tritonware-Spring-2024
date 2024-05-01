@@ -163,7 +163,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317228223}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 0acd8bac43f3866459666649fa81de18, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: f6e05c75d897725488e0c2f5a938ffbd, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 1563063973}
@@ -173,7 +173,7 @@ VideoPlayer:
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 1
   m_AspectRatio: 3
-  m_DataSource: 0
+  m_DataSource: 1
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
@@ -181,7 +181,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: 
+  m_Url: file://C:/Users/ethan/Documents/Unity/Tritonware-Spring-2024-Web-Build/StreamingAssets/Credits_Scroll.mov
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 01
   m_ControlledAudioTrackCount: 1

@@ -1412,7 +1412,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080305395}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 15a81e1f2edd7174bb78e87050b120ee, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: a1d50945d577ec8448d2141a92b62723, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 788784539}
@@ -1422,7 +1422,7 @@ VideoPlayer:
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 1
   m_AspectRatio: 3
-  m_DataSource: 0
+  m_DataSource: 1
   m_TimeUpdateMode: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
@@ -1430,7 +1430,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: 
+  m_Url: file://C:/Users/ethan/Documents/Unity/Tritonware-Spring-2024-Web-Build/StreamingAssets/intro-cutscene.mov
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 01
   m_ControlledAudioTrackCount: 1
