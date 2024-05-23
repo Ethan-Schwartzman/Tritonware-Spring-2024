@@ -6,45 +6,13 @@ InputManager:
   serializedVersion: 2
   m_Axes:
   - serializedVersion: 3
-    m_Name: Left
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: left
-    altNegativeButton: 
-    altPositiveButton: a
-    gravity: 1000
-    dead: 0.001
-    sensitivity: 1000
-    snap: 1
-    invert: 0
-    type: 0
-    axis: 0
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: Right
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: right
-    altNegativeButton: 
-    altPositiveButton: d
-    gravity: 1000
-    dead: 0.001
-    sensitivity: 1000
-    snap: 1
-    invert: 0
-    type: 0
-    axis: 0
-    joyNum: 0
-  - serializedVersion: 3
     m_Name: Menu
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: return
+    positiveButton: joystick button 1
     altNegativeButton: 
-    altPositiveButton: space
+    altPositiveButton: joystick button 10
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -58,7 +26,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: x
+    positiveButton: joystick button 0
     altNegativeButton: 
     altPositiveButton: mouse 0
     gravity: 1000
@@ -74,7 +42,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: c
+    positiveButton: joystick button 3
     altNegativeButton: 
     altPositiveButton: mouse 1
     gravity: 1000
@@ -157,9 +125,9 @@ InputManager:
     positiveButton: a
     altNegativeButton: right
     altPositiveButton: left
-    gravity: 0
+    gravity: 3
     dead: 0.19
-    sensitivity: 1
+    sensitivity: 2
     snap: 0
     invert: 0
     type: 2
@@ -173,9 +141,9 @@ InputManager:
     positiveButton: w
     altNegativeButton: down
     altPositiveButton: up
-    gravity: 0
+    gravity: 3
     dead: 0.19
-    sensitivity: 1
+    sensitivity: 2
     snap: 0
     invert: 1
     type: 2
@@ -194,8 +162,8 @@ InputManager:
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 0
-    axis: 0
+    type: 2
+    axis: 1
     joyNum: 0
   - serializedVersion: 3
     m_Name: Down
@@ -210,8 +178,8 @@ InputManager:
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 0
-    axis: 0
+    type: 2
+    axis: 1
     joyNum: 0
   - serializedVersion: 3
     m_Name: Fire3

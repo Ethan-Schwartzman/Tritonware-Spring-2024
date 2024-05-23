@@ -11,8 +11,14 @@ public class MainMenu : MonoBehaviour{
      public VideoPlayer Video;
 
      public GameObject music;
+     private bool skip = false;
+
      public void PlayGame()
      {
+          if(skip) {
+               SceneManager.LoadScene("GameSetupScene");
+          }
+          skip = true;
           music.SetActive(false);
           StartCoroutine(LoadGame());
      }

@@ -8,7 +8,13 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance;
     private bool canReset;
-
+    //private float flickThreshold = 0.6f;
+    private float prevVertical;
+    private float prevHorizontal;
+    float horizontal;
+    float vertical;
+    //float horizontalSpeed;
+    //float verticalSpeed;
 
     void Start() {
         if(Instance == null) {
@@ -23,11 +29,41 @@ public class InputManager : MonoBehaviour
     }
 
     void Update() {
-        // Depreciated
-        // float horizontal = Input.GetAxis("Horizontal");
-        // float vertical = Input.GetAxis("Vertical");
+        prevHorizontal = horizontal;
+        prevVertical = vertical;
 
-        if (Input.GetButton("Left")) {
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
+
+        //horizontalSpeed = horizontal - prevHorizontal;
+        //verticalSpeed = vertical - prevVertical;
+
+        if(Mathf.Abs(horizontal) > 0.01f) {
+            PlayerShipMovement.Instance.Rotate(horizontal);
+        }
+        else {
+            PlayerShipMovement.Instance.Rotate(0);            
+        }
+
+        if(canReset) {                
+            if(vertical == 1 && prevVertical == 0)
+            {
+                HighscoreManager.Instance.ModifyLetter(true);
+            }
+            else if(vertical == -1 && prevVertical == 0) {
+                HighscoreManager.Instance.ModifyLetter(false);
+            }
+
+            if(horizontal == 1 && prevHorizontal == 0) {
+                HighscoreManager.Instance.SelectLetter(true);
+            }
+            else if(horizontal == -1 && prevHorizontal == 0) {
+                HighscoreManager.Instance.SelectLetter(false);                    
+            }
+        }
+
+        // pc input code
+        /* if (Input.GetButton("Left")) {
             PlayerShipMovement.Instance.Rotate(1);
         }
         if(Input.GetButtonDown("Left")) {
@@ -46,6 +82,7 @@ public class InputManager : MonoBehaviour
             if(canReset) HighscoreManager.Instance.ModifyLetter(false);
         }
         if (!Input.GetButton("Left") && !Input.GetButton("Right")) PlayerShipMovement.Instance.Rotate(0);
+        */
 
         if(Input.GetButtonDown("Puzzle1")) {
             Puzzle1();
