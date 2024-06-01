@@ -39,7 +39,7 @@ public class InputManager : MonoBehaviour
         //verticalSpeed = vertical - prevVertical;
 
         if(Mathf.Abs(horizontal) > 0.01f) {
-            PlayerShipMovement.Instance.Rotate(horizontal);
+            PlayerShipMovement.Instance.Rotate(-horizontal);
         }
         else {
             PlayerShipMovement.Instance.Rotate(0);            
@@ -103,7 +103,7 @@ public class InputManager : MonoBehaviour
             string currentSceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene("GameSetupScene");
         }
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape) || (Input.GetButton("Exit 1") && Input.GetButton("Exit 2"))) {
             if(canReset) HighscoreManager.Instance.SaveHighscore();
             Application.Quit();
         }

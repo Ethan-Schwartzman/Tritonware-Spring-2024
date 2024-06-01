@@ -422,7 +422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5910499695958095290, guid: 07ebe58be733f06458f07eebfd17a2a1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 5910499695958095290, guid: 07ebe58be733f06458f07eebfd17a2a1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1663,7 +1663,7 @@ MonoBehaviour:
   m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
+  m_SubmitButton: Menu
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
@@ -2409,7 +2409,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 45}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &530139913
@@ -4809,7 +4809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1002771818
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8169,7 +8169,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press Enter to Restart
+  m_text: Press <color="green">Green</color> to Restart
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a3a12558f28e5f46add6c6e55e95d51, type: 2}
   m_sharedMaterial: {fileID: -1098722548405338204, guid: 8a3a12558f28e5f46add6c6e55e95d51, type: 2}

@@ -456,6 +456,7 @@ GameObject:
   - component: {fileID: 788784538}
   - component: {fileID: 788784541}
   - component: {fileID: 788784542}
+  - component: {fileID: 788784543}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -598,6 +599,18 @@ MonoBehaviour:
   BackgroundImage: {fileID: 2073775901}
   Video: {fileID: 2080305396}
   music: {fileID: 1450932959}
+--- !u!114 &788784543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788784537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f93a6fa18e2677d4f86ac23dde7737db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &865753880
 GameObject:
   m_ObjectHideFlags: 0
@@ -973,7 +986,7 @@ MonoBehaviour:
   m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
+  m_SubmitButton: Menu
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5

@@ -24,6 +24,7 @@ public class MainMenu : MonoBehaviour{
      }
      IEnumerator LoadGame()
      {
+          Debug.Log("here");
           //for (int i = 0; i < 4; i++)
           //{
           //     MenuCanvas.GetChild(i).gameObject.SetActive(false);
@@ -35,6 +36,9 @@ public class MainMenu : MonoBehaviour{
           float startTime = Time.time;
           //float duration = (float) Video.length;
           float duration = 56f;
+          for(int i = 0; i < 3; i++) { // cutscene gets skipped without this
+               yield return null;
+          }
           while(Time.time - startTime < duration) {
                if(Input.GetButtonDown("Menu")) break;
                yield return null;

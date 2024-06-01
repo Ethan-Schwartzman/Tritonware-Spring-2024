@@ -68,7 +68,7 @@ public class HighscoreManager : MonoBehaviour
         colorText = new List<string> {leaderboard[0].Value, leaderboard[1].Value, leaderboard[2].Value};
         if(leaderboardPos != 3) colorText[leaderboardPos] = COLOR_START_TAG + "A" + COLOR_END_TAG + "AA";
 
-        ResetText.text = "Score: " + ScoreManager.Instance.GetTotalScore() + "\nPress Enter to Restart";
+        ResetText.text = "Score: " + ScoreManager.Instance.GetTotalScore() + "\nPress <color=\"green\">Green</color> to Restart";
         HighscoreObject.SetActive(true);
 
         UpdateText(0);
